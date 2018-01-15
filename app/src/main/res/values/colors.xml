@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#B0B0B0</color>
+    <color name="colorPrimaryDark">#de000000</color>
+    <color name="colorAccent">#1B6294</color>
+    <color name="barGrey">#f4f4f4</color>
+    <color name="textGray">#414141</color>
+    <color name="gray">#1b000000</color>
+    <color name="textCustom">#24253D</color>
+    <color name="textHead">#de000000</color>
+    <color name="textSubtitle">#89000000</color>
+    <color name="textLabel">#61000000</color>
+</resources>
