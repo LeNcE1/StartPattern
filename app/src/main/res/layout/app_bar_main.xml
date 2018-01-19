@@ -36,6 +36,7 @@
                     android:text="TextTextTextText"
                     android:textColor="@color/textCustom"
                     android:textSize="17dp"
+                    android:id="@+id/label"
                     android:textStyle="bold" />
 
             </LinearLayout>
