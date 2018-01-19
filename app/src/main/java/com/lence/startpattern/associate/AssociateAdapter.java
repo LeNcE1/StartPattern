@@ -33,8 +33,9 @@ public class AssociateAdapter extends RecyclerView.Adapter<AssociateAdapter.Ribo
     String pod;
     String m;
 
-    public AssociateAdapter(List<String> posts) {
+    public AssociateAdapter(List<String> posts, AssociatePresenter presenter) {
         mRibots = posts;
+        pr = presenter;
     }
 
 //    public AssociateAdapter(List<News> posts, NewsPresentr pr, SharedPreferences user, String pod, String m) {
@@ -103,6 +104,13 @@ public class AssociateAdapter extends RecyclerView.Adapter<AssociateAdapter.Ribo
             holder.ratingBar.setRating(position);
         }
 
+        holder.mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pr.startProcedure();
+            }
+        });
+
 
     }
 
@@ -129,6 +137,9 @@ public class AssociateAdapter extends RecyclerView.Adapter<AssociateAdapter.Ribo
         ImageView arrowNext;
         @BindView(R.id.ratingBar)
         RatingBar ratingBar;
+
+        @BindView(R.id.view)
+        View mView;
 
 
         public RibotViewHolder(View itemView) {

@@ -6,4 +6,8 @@ public class AssociatePresenter {
     public AssociatePresenter(AssociateMvp mvp) {
         mMvp = mvp;
     }
+
+    void startProcedure() {
+        mMvp.startProcedure();
+    }
 }

@@ -10,7 +10,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:id="@+id/view">
 
         <ImageView
             android:id="@+id/avatar"
@@ -54,11 +55,12 @@
 
                 <RatingBar
                     android:id="@+id/ratingBar"
-                    style="?android:attr/ratingBarStyleSmall"
+                    style="@style/MyRatingBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:numStars="5"
+
+                    android:isIndicator="true"
                      />
 
                 <TextView

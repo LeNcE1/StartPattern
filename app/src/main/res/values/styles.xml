@@ -19,7 +19,9 @@
 
     <style name="MyRatingBar" parent="Theme.AppCompat">
 
-        <item name="colorControlActivated">@color/yellow</item>
+            <item name="android:progressDrawable">@drawable/ratingstars</item>
+            <item name="android:minHeight">22dip</item>
+            <item name="android:maxHeight">22dip</item>
 
     </style>
 
