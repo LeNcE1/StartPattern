@@ -18,6 +18,7 @@ import com.lence.startpattern.R;
 import com.lence.startpattern.associate.AssociateAdapter;
 import com.lence.startpattern.associate.AssociateListFragment;
 import com.lence.startpattern.associate.AssociatePresenter;
+import com.lence.startpattern.dateSelection.DateSelectionFragment;
 import com.lence.startpattern.service.ServiceAdapter;
 import com.lence.startpattern.service.ServicePresenter;
 
@@ -61,4 +62,13 @@ ProcedurePresenter pr;
     }
 
 
+    @Override
+    public void startDateSelection() {
+        DateSelectionFragment dateSelectionFragment = new DateSelectionFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()          // получаем экземпляр FragmentTransaction
+                .replace(R.id.content, dateSelectionFragment)
+                .addToBackStack("myStack")
+                .commit();
+    }
 }

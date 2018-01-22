@@ -4,6 +4,7 @@ import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.lence.startpattern.service.ServiceFragment;
 
@@ -27,7 +29,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("");
-       // toolbar.setLogo(R.drawable.logo);
+        // toolbar.setLogo(R.drawable.logo);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -41,20 +43,35 @@ public class MainActivity extends AppCompatActivity
 
         ServiceFragment serviceFragment = new ServiceFragment();
         FragmentManager fragmentManager = getFragmentManager();
+        //Log.e("BackStackEntryCount", String.valueOf(fragmentManager.getBackStackEntryCount()));
         fragmentManager.beginTransaction()          // получаем экземпляр FragmentTransaction
                 .replace(R.id.content, serviceFragment)
                 .addToBackStack("myStack")
                 .commit();
 
+        ImageView arrowBack = findViewById(R.id.arrowBack);
+        arrowBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+
     }
+
 
     @Override
     public void onBackPressed() {
+        FragmentManager fragmentManager = getFragmentManager();
+       // Log.e("BackStackEntryCount", String.valueOf(fragmentManager.getBackStackEntryCount()));
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            if (fragmentManager.getBackStackEntryCount() > 1) {
+                super.onBackPressed();
+            }
         }
     }
 

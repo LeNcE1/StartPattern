@@ -8,4 +8,8 @@ public class ProcedurePresenter {
     public ProcedurePresenter(ProcedureMvp mvp) {
         mMvp = mvp;
     }
+
+    public void startProcedure() {
+        mMvp.startDateSelection();
+    }
 }
