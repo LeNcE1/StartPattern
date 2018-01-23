@@ -30,6 +30,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:gravity="center_horizontal"
                 android:text="vahn" />
 
@@ -43,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    app:srcCompat="@drawable/ic_keyboard_arrow_left_black_24dp" />
+                    app:srcCompat="@drawable/arrow_left" />
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv"
@@ -63,13 +64,14 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp" />
+                    app:srcCompat="@drawable/arrow_right" />
 
             </RelativeLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:gravity="center_horizontal"
                 android:text="gn" />
         </LinearLayout>

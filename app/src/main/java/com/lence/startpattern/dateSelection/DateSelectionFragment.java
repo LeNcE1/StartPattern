@@ -2,6 +2,7 @@ package com.lence.startpattern.dateSelection;
 
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lence.startpattern.R;
+import com.lence.startpattern.onlineRecord.OnlineRecordFragment;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -69,6 +71,8 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
         mContext = view.getContext();
         presenter = new DateSelectionPresenter(this);
         ButterKnife.bind(this, view);
+        TextView label = (TextView) getActivity().findViewById(R.id.label);
+        label.setText("Выбор даты");
         Calendar today = Calendar.getInstance();
         Calendar future = Calendar.getInstance();
         future.setTimeInMillis(today.getTimeInMillis());
@@ -85,15 +89,21 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
 
 //        Log.e("future", "future");
         PickerLayoutManager pickerLayoutManager = new PickerLayoutManager(view.getContext(), PickerLayoutManager.HORIZONTAL, false);
-//        pickerLayoutManager.setChangeAlpha(true);
+//        pickerLayoutManager.setChangeAlpha(false);
 //        pickerLayoutManager.setScaleDownBy(0.99f);
-//        pickerLayoutManager.setScaleDownDistance(0.8f);
+//        pickerLayoutManager.setScaleDownDistance(0.6f);
 
         adapter = new PickerAdapter(view.getContext(), presenter.getData(31), rv);
         SnapHelper snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(rv);
         rv.setLayoutManager(pickerLayoutManager);
         rv.setAdapter(adapter);
+        mTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCalendar();
+            }
+        });
 // TODO: 22.01.2018 change count day of month in adapter
 
         mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -105,7 +115,8 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
 
                 if (year == 2018 && month == 0 && dayOfMonth == 24) {
 
-                    rv.scrollToPosition(mDayOfMonth + 1);
+                    rv.scrollToPosition(mDayOfMonth);
+                    rv.scrollBy(62,0);
                     mTime.setVisibility(View.VISIBLE);
                     mCalendarView.setVisibility(View.GONE);
                     mStatus.setVisibility(View.GONE);
@@ -121,7 +132,8 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
         return view;
     }
 
-    private void showFreeTime(Context context, int year, int month, int dayOfMonth) {
+    @Override
+    public void showFreeTime(Context context, int year, int month, int dayOfMonth) {
 //        LinearLayoutManager horizontalLayoutManagaer
 //                = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         mRvDay.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
@@ -143,6 +155,16 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
 
     }
 
+    @Override
+    public void startOnlineRecord() {
+        OnlineRecordFragment fragment = new OnlineRecordFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()          // получаем экземпляр FragmentTransaction
+                .replace(R.id.content, fragment)
+                .addToBackStack("myStack")
+                .commit();
+    }
+
 
     @OnClick(R.id.status)
     public void onViewClicked() {
@@ -160,7 +182,6 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
     }
 
 
-
     @OnClick(R.id.leftArrow)
     public void onMLeftArrowClicked() {
         // TODO: 22.01.2018 scroll 
@@ -168,5 +189,14 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
 
     @OnClick(R.id.rightArrow)
     public void onMRightArrowClicked() {
+    }
+
+
+    @Override
+    public void showCalendar() {
+        mTime.setVisibility(View.GONE);
+        mCalendarView.setVisibility(View.VISIBLE);
+        mStatus.setVisibility(View.VISIBLE);
+        mFreeTime.setVisibility(View.GONE);
     }
 }

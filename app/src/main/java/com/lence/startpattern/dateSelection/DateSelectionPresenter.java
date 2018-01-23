@@ -13,9 +13,13 @@ public class DateSelectionPresenter {
 
     public List<Integer> getData(int count) {
         List<Integer> data = new ArrayList<>();
-        for (int i = -3; i < count+5; i++) {
+        for (int i = -2; i < count+4; i++) {
             data.add(i);
         }
         return data;
+    }
+
+    public void startOnlineRecord(){
+        mMvp.startOnlineRecord();
     }
 }
