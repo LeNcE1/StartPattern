@@ -6,13 +6,23 @@
     android:padding="16dp"
     tools:context="com.lence.startpattern.dateSelection.DateSelectionFragment">
 
-    <CalendarView
+    <com.applandeo.materialcalendarview.CalendarView
         android:id="@+id/calendarView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/status"
         android:layout_alignParentTop="true"
-        android:elevation="4dp" />
+        android:elevation="4dp"
+        app:daysLabelsColor="@color/blue"
+        app:forwardButtonSrc="@drawable/arrow_right"
+        app:headerColor="@color/white"
+        app:headerLabelColor="@color/textHead"
+        app:selectionColor="@color/blue"
+        app:selectionLabelColor="@color/white"
+        app:todayLabelColor="@color/colorAccent"
+        app:pagesColor="@color/white"
+        app:previousButtonSrc="@drawable/arrow_left"
+        app:type="one_day_picker" />
 
     <android.support.v7.widget.CardView
         android:id="@+id/time"

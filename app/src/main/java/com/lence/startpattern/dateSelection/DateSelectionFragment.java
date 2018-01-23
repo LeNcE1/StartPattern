@@ -20,11 +20,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.applandeo.materialcalendarview.EventDay;
+import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.lence.startpattern.R;
-import com.lence.startpattern.onlineRecord.OnlineRecordFragment;
+import com.lence.startpattern.createRecord.CreateRecordFragment;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,13 +43,10 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
     @BindView(R.id.rv)
     RecyclerView rv;
     PickerAdapter adapter;
-    @BindView(R.id.calendarView)
-    CalendarView mCalendarView;
+
     @BindView(R.id.time)
     CardView mTime;
-    int mYear;
-    int mMonth;
-    int mDayOfMonth;
+
 
     RecyclerView mRvMorning;
     RecyclerView mRvDay;
@@ -58,6 +58,9 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
     ImageView mLeftArrow;
     @BindView(R.id.rightArrow)
     ImageView mRightArrow;
+    @BindView(R.id.calendarView)
+    com.applandeo.materialcalendarview.CalendarView mCalendarView;
+    private Calendar thisDay;
 
     public DateSelectionFragment() {
         // Required empty public constructor
@@ -74,12 +77,18 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
         TextView label = (TextView) getActivity().findViewById(R.id.label);
         label.setText("Выбор даты");
         Calendar today = Calendar.getInstance();
+today.set(today.get(Calendar.YEAR),today.get(Calendar.MONTH),today.get(Calendar.DATE)-1);
         Calendar future = Calendar.getInstance();
-        future.setTimeInMillis(today.getTimeInMillis());
-        future.add(Calendar.MONTH, 5);
+        future.set(today.get(Calendar.YEAR),today.get(Calendar.MONTH)+5,31);
 
-        mCalendarView.setMinDate(today.getTimeInMillis());
-        mCalendarView.setMaxDate(future.getTimeInMillis());
+
+        mCalendarView.setMinimumDate(today);
+        mCalendarView.setMaximumDate(future);
+        List<Calendar> calendars = new ArrayList<>();
+        Calendar disableDay = Calendar.getInstance();
+        disableDay.set(2018,0,28);
+        calendars.add(disableDay);
+        mCalendarView.setDisabledDays(calendars);
 
         Log.e("future", String.valueOf(future.get(Calendar.MONTH)));
 
@@ -106,34 +115,33 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
         });
 // TODO: 22.01.2018 change count day of month in adapter
 
-        mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+        mCalendarView.setOnDayClickListener(new OnDayClickListener() {
             @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                mYear = year;
-                mMonth = month;
-                mDayOfMonth = dayOfMonth;
+            public void onDayClick(EventDay eventDay) {
+                thisDay = eventDay.getCalendar();
 
-                if (year == 2018 && month == 0 && dayOfMonth == 24) {
+                if (thisDay.get(Calendar.YEAR) == 2018 && thisDay.get(Calendar.MONTH) == 0 && thisDay.get(Calendar.DATE) == 24) {
 
-                    rv.scrollToPosition(mDayOfMonth);
-                    rv.scrollBy(62,0);
+                    rv.scrollToPosition(thisDay.get(Calendar.DATE));
+                    rv.scrollBy(62, 0);
                     mTime.setVisibility(View.VISIBLE);
                     mCalendarView.setVisibility(View.GONE);
                     mStatus.setVisibility(View.GONE);
                     mFreeTime.setVisibility(View.VISIBLE);
-                    showFreeTime(mContext, year, month, dayOfMonth);
+                    showFreeTime(mContext, thisDay);
                 } else {
                     mStatus.setText("Нет записи");
 
 
                 }
             }
+
         });
         return view;
     }
 
     @Override
-    public void showFreeTime(Context context, int year, int month, int dayOfMonth) {
+    public void showFreeTime(Context context, Calendar thisDay) {
 //        LinearLayoutManager horizontalLayoutManagaer
 //                = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         mRvDay.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
@@ -157,7 +165,7 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
 
     @Override
     public void startOnlineRecord() {
-        OnlineRecordFragment fragment = new OnlineRecordFragment();
+        CreateRecordFragment fragment = new CreateRecordFragment();
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()          // получаем экземпляр FragmentTransaction
                 .replace(R.id.content, fragment)
@@ -199,4 +207,6 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
         mStatus.setVisibility(View.VISIBLE);
         mFreeTime.setVisibility(View.GONE);
     }
+
+
 }

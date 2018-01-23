@@ -6,6 +6,28 @@
 
     <string name="action_settings">Settings</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="material_calendar_monday"> ПН </string>
+    <string name="material_calendar_tuesday"> ВТ </string>
+    <string name="material_calendar_wednesday"> СР </string>
+    <string name="material_calendar_thursday"> ЧТ </string>
+    <string name="material_calendar_friday"> ПТ </string>
+    <string name="material_calendar_saturday"> СБ </string>
+    <string name="material_calendar_sunday"> ВС </string>
+
+    <array name="material_calendar_months_array">
+        <item>Январь</item>
+        <item>Февраль</item>
+        <item>March</item>
+        <item>Апрель</item>
+        <item>May</item>
+        <item>Июнь</item>
+        <item>Июль</item>
+        <item>Август</item>
+        <item>Сентябрь</item>
+        <item>Октябрь</item>
+        <item>Ноябрь</item>
+        <item>Декабрь</item>
+    </array>
 </resources>
