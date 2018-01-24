@@ -7,6 +7,7 @@
     tools:context="com.lence.startpattern.MainActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -24,11 +25,13 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/logo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/logo" />
 
                 <TextView
+                    android:id="@+id/label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -36,7 +39,6 @@
                     android:text="TextTextTextText"
                     android:textColor="@color/textCustom"
                     android:textSize="17dp"
-                    android:id="@+id/label"
                     android:textStyle="bold" />
 
             </LinearLayout>

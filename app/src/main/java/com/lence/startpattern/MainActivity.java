@@ -4,6 +4,7 @@ import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -15,7 +16,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.lence.startpattern.doctor.DoctorFragment;
 import com.lence.startpattern.service.ServiceFragment;
 
 import java.security.Provider;
@@ -41,13 +44,12 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ServiceFragment serviceFragment = new ServiceFragment();
-        FragmentManager fragmentManager = getFragmentManager();
-        //Log.e("BackStackEntryCount", String.valueOf(fragmentManager.getBackStackEntryCount()));
-        fragmentManager.beginTransaction()          // получаем экземпляр FragmentTransaction
-                .replace(R.id.content, serviceFragment)
-                .addToBackStack("myStack")
-                .commit();
+        ServiceFragment fragment = new ServiceFragment();
+        android.support.v4.app.FragmentTransaction ft = this.getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content, fragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        ft.addToBackStack("stack");
+        ft.commit();
 
         ImageView arrowBack = findViewById(R.id.arrowBack);
         arrowBack.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +65,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        FragmentManager fragmentManager = getFragmentManager();
+        android.support.v4.app.FragmentManager fragmentManager = this.getSupportFragmentManager();
         // Log.e("BackStackEntryCount", String.valueOf(fragmentManager.getBackStackEntryCount()));
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -102,10 +104,43 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+// TODO: 24.01.2018 fix backstack 
         if (id == R.id.online_record) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+            if (!this.getClass().equals(ServiceFragment.class)) {
+                TextView label = (TextView) findViewById(R.id.label);
+                label.setVisibility(View.VISIBLE);
+                View appBarLayout = findViewById(R.id.appBar);
+                appBarLayout.setBackgroundResource(R.color.white);
+                ImageView logo = findViewById(R.id.logo);
+                logo.setVisibility(View.VISIBLE);
+                ImageView arrowBack = findViewById(R.id.arrowBack);
+                arrowBack.setColorFilter(getResources().getColor(R.color.colorAccent));
+                View toolbar = findViewById(R.id.toolbar);
+                toolbar.setBackgroundResource(R.color.white);
+                ServiceFragment fragment = new ServiceFragment();
+                android.support.v4.app.FragmentTransaction ft = this.getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content, fragment);
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                ft.addToBackStack("stack");
+                ft.commit();
+            }
+        } else if (id == R.id.doctor) {
+            TextView label = (TextView) findViewById(R.id.label);
+            label.setVisibility(View.GONE);
+            View appBarLayout = findViewById(R.id.appBar);
+            appBarLayout.setBackgroundResource(R.color.blue);
+            ImageView logo = findViewById(R.id.logo);
+            logo.setVisibility(View.GONE);
+            ImageView arrowBack = findViewById(R.id.arrowBack);
+            arrowBack.setColorFilter(getResources().getColor(R.color.white));
+            View toolbar = findViewById(R.id.toolbar);
+            toolbar.setBackgroundResource(R.color.blue);
+            DoctorFragment fragment = new DoctorFragment();
+            android.support.v4.app.FragmentTransaction ft = this.getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content, fragment);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            ft.addToBackStack("stack");
+            ft.commit();
 
         } else if (id == R.id.nav_slideshow) {
 

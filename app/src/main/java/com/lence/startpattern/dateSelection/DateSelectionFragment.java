@@ -1,11 +1,12 @@
 package com.lence.startpattern.dateSelection;
 
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
@@ -166,11 +167,11 @@ today.set(today.get(Calendar.YEAR),today.get(Calendar.MONTH),today.get(Calendar.
     @Override
     public void startOnlineRecord() {
         CreateRecordFragment fragment = new CreateRecordFragment();
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()          // получаем экземпляр FragmentTransaction
-                .replace(R.id.content, fragment)
-                .addToBackStack("myStack")
-                .commit();
+        android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content, fragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.addToBackStack("stack");
+        ft.commit();
     }
 
 

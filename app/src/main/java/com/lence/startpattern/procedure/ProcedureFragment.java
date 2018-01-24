@@ -1,10 +1,11 @@
 package com.lence.startpattern.procedure;
 
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -64,11 +65,11 @@ ProcedurePresenter pr;
 
     @Override
     public void startDateSelection() {
-        DateSelectionFragment dateSelectionFragment = new DateSelectionFragment();
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()          // получаем экземпляр FragmentTransaction
-                .replace(R.id.content, dateSelectionFragment)
-                .addToBackStack("myStack")
-                .commit();
+        DateSelectionFragment fragment = new DateSelectionFragment();
+        android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content, fragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.addToBackStack("stack");
+        ft.commit();
     }
 }

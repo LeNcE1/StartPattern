@@ -1,9 +1,10 @@
 package com.lence.startpattern.createRecord;
 
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,11 +47,11 @@ public class CreateRecordFragment extends Fragment implements CreateRecordMvp {
     @OnClick(R.id.enter)
     public void onViewClicked() {
         OnlineRecordFragment fragment = new OnlineRecordFragment();
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()          // получаем экземпляр FragmentTransaction
-                .replace(R.id.content, fragment)
-                .addToBackStack("myStack")
-                .commit();
+        android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content, fragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.addToBackStack("stack");
+        ft.commit();
 
     }
 }

@@ -15,4 +15,5 @@
     <color name="textHead">#de000000</color>
     <color name="textSubtitle">#89000000</color>
     <color name="textLabel">#61000000</color>
+    <color name="transparent">#00000000</color>
 </resources>

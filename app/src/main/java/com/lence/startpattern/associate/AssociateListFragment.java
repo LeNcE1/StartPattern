@@ -1,10 +1,11 @@
 package com.lence.startpattern.associate;
 
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -55,11 +56,11 @@ public class AssociateListFragment extends Fragment implements AssociateMvp {
 
     @Override
     public void startProcedure() {
-        ProcedureFragment procedureFragment = new ProcedureFragment();
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()          // получаем экземпляр FragmentTransaction
-                .replace(R.id.content, procedureFragment)
-                .addToBackStack("myStack")
-                .commit();
+        ProcedureFragment fragment = new ProcedureFragment();
+        android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content, fragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.addToBackStack("stack");
+        ft.commit();
     }
 }

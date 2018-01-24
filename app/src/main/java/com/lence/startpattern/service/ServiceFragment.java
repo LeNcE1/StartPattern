@@ -3,7 +3,8 @@ package com.lence.startpattern.service;
 
 import android.app.FragmentManager;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,12 +47,12 @@ public class ServiceFragment extends Fragment implements ServiceMvp {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AssociateListFragment associateListFragment =new AssociateListFragment();
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction()          // получаем экземпляр FragmentTransaction
-                        .replace(R.id.content, associateListFragment)
-                        .addToBackStack("myStack")
-                        .commit();
+                AssociateListFragment fragment =new AssociateListFragment();
+                android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content, fragment);
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.addToBackStack("stack");
+                ft.commit();
             }
         });
 
