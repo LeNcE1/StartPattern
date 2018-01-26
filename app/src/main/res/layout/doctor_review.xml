@@ -5,7 +5,7 @@
     android:paddingTop="16dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    tools:context="com.lence.startpattern.doctor.review.DoctorReviewFragment">
+    tools:context=".ui.doctor.review.DoctorReviewFragment">
 
     <Button
         android:id="@+id/createReview"

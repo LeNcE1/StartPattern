@@ -2,14 +2,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.lence.startpattern.doctor.DoctorFragment">
+    tools:context=".ui.doctor.DoctorFragment">
+
+
 
     <RelativeLayout
         android:id="@+id/head"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginTop="-56dp"
-        android:background="@color/blue">
+        android:background="@color/blue"
+        android:elevation="0dp">
 
         <ImageView
             android:id="@+id/avatar"
@@ -47,7 +50,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/head"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:elevation="4dp">
 
 
     </android.support.design.widget.TabLayout>
@@ -56,6 +60,8 @@
         android:id="@+id/vp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tab" />
+        android:layout_below="@id/tab" >
+
+    </android.support.v4.view.ViewPager>
 
 </RelativeLayout>

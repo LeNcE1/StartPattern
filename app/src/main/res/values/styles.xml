@@ -14,7 +14,7 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="Base.ThemeOverlay.AppCompat.ActionBar" >
-        <item name="colorControlNormal">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/white</item>
     </style>
 
     <style name="AppTheme.Doctor" parent="Base.ThemeOverlay.AppCompat.ActionBar" >
