@@ -14,7 +14,9 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.lence.startpattern.ui.doctor.DoctorFragment;
+import com.lence.startpattern.ui.selectionScreen.SelectionScreenFragment;
 import com.lence.startpattern.ui.service.ServiceFragment;
+import com.lence.startpattern.utils.BackStackTools;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ServiceFragment fragment = new ServiceFragment();
+        SelectionScreenFragment fragment = new SelectionScreenFragment();
         android.support.v4.app.FragmentTransaction ft = this.getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-
+// TODO: 29.01.2018 синглтон для хранения выборов
     }
 
 
@@ -100,9 +102,11 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.online_record) {
             if (!this.getClass().equals(ServiceFragment.class)) {
-                clearStack();
-                ServiceFragment fragment = new ServiceFragment();
-                FragmentTransaction ft = this.getSupportFragmentManager().beginTransaction();
+
+                SelectionScreenFragment fragment = new SelectionScreenFragment();
+                FragmentManager fm = getSupportFragmentManager();
+                BackStackTools.clearStack(fm);
+                FragmentTransaction ft = fm.beginTransaction();
 
                 ft.replace(R.id.content, fragment);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
@@ -110,9 +114,10 @@ public class MainActivity extends AppCompatActivity
                 ft.commit();
             }
         } else if (id == R.id.doctor) {
-            clearStack();
+            FragmentManager fm = getSupportFragmentManager();
+            BackStackTools.clearStack(fm);
             DoctorFragment fragment = new DoctorFragment();
-            FragmentTransaction ft = this.getSupportFragmentManager().beginTransaction();
+            FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.content, fragment);
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             ft.addToBackStack("stack");
@@ -129,12 +134,5 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void clearStack() {
-        FragmentManager fm = getSupportFragmentManager();
-        int count = fm.getBackStackEntryCount();
-        while (count > 0) {
-            fm.popBackStack();
-            count--;
-        }
-    }
+
 }

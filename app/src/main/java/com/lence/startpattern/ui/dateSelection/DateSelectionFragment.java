@@ -1,9 +1,9 @@
 package com.lence.startpattern.ui.dateSelection;
 
 
-import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,7 +21,8 @@ import android.widget.TextView;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.lence.startpattern.R;
-import com.lence.startpattern.ui.createRecord.CreateRecordFragment;
+import com.lence.startpattern.ui.selectionScreen.SelectionScreenFragment;
+import com.lence.startpattern.utils.ChangeStyle;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -69,22 +70,25 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.date_selection, container, false);
+
+        ChangeStyle.whiteColor(getActivity());
+
         mContext = view.getContext();
         presenter = new DateSelectionPresenter(this);
         ButterKnife.bind(this, view);
         TextView label = (TextView) getActivity().findViewById(R.id.label);
         label.setText("Выбор даты");
         Calendar today = Calendar.getInstance();
-today.set(today.get(Calendar.YEAR),today.get(Calendar.MONTH),today.get(Calendar.DATE)-1);
+        today.set(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DATE) - 1);
         Calendar future = Calendar.getInstance();
-        future.set(today.get(Calendar.YEAR),today.get(Calendar.MONTH)+5,31);
+        future.set(today.get(Calendar.YEAR), today.get(Calendar.MONTH) + 5, 31);
 
 
         mCalendarView.setMinimumDate(today);
         mCalendarView.setMaximumDate(future);
         List<Calendar> calendars = new ArrayList<>();
         Calendar disableDay = Calendar.getInstance();
-        disableDay.set(2018,0,28);
+        disableDay.set(2018, 1, 1);
         calendars.add(disableDay);
         mCalendarView.setDisabledDays(calendars);
 
@@ -163,7 +167,8 @@ today.set(today.get(Calendar.YEAR),today.get(Calendar.MONTH),today.get(Calendar.
 
     @Override
     public void startOnlineRecord() {
-        CreateRecordFragment fragment = new CreateRecordFragment();
+        SelectionScreenFragment fragment = new SelectionScreenFragment();
+        // TODO: 29.01.2018 add date bundle 
         android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);

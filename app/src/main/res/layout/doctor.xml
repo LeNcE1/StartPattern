@@ -44,12 +44,22 @@
             android:textColor="@color/white" />
 
     </RelativeLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue"
+        android:layout_below="@id/head"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:id="@+id/nextStep"
+        android:text="Записаться на прием"
+        android:textColor="@color/white" />
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/head"
+        android:layout_below="@id/nextStep"
         android:background="@color/white"
         android:elevation="4dp">
 

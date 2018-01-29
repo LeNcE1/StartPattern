@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
     tools:context=".ui.createRecord.CreateRecordFragment">
 
     <ScrollView
@@ -27,7 +28,7 @@
                     android:id="@+id/procedure"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Bolezn"
+                    android:text="Услуга"
                     android:textColor="@color/textHead"
                     android:textSize="16dp"
                     android:textStyle="bold" />
@@ -40,8 +41,9 @@
                     android:gravity="center"
                     android:text="здесь будет карта" />
 
+
                 <RelativeLayout
-                    android:id="@+id/view"
+                    android:id="@+id/doctorSelect"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="16dp"
@@ -113,7 +115,9 @@
 
                 </RelativeLayout>
 
+
                 <RelativeLayout
+                    android:id="@+id/timeSelect"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -162,7 +166,7 @@
                     android:layout_marginTop="16dp"
                     android:text="Ленина 40, оф.6"
                     android:textColor="@color/textHead"
-                    android:textSize="18dp"/>
+                    android:textSize="18dp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -170,8 +174,8 @@
                     android:layout_marginTop="4dp"
                     android:text="+7 (3012) 55-33-77"
                     android:textColor="@color/textHead"
-                    android:textStyle="bold"
-                    android:textSize="18dp"/>
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/enter"

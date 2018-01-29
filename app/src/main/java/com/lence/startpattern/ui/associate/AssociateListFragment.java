@@ -1,9 +1,8 @@
 package com.lence.startpattern.ui.associate;
 
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.lence.startpattern.R;
-import com.lence.startpattern.ui.procedure.ProcedureFragment;
+import com.lence.startpattern.ui.selectionScreen.SelectionScreenFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,11 +54,12 @@ public class AssociateListFragment extends Fragment implements AssociateMvp {
 
     @Override
     public void startProcedure() {
-        ProcedureFragment fragment = new ProcedureFragment();
+        SelectionScreenFragment fragment = new SelectionScreenFragment();
+        // TODO: 29.01.2018 add associate bundle
         android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        ft.addToBackStack("stack");
+        //ft.addToBackStack("stack");
         ft.commit();
     }
 }

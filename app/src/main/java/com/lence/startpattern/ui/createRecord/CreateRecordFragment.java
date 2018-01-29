@@ -1,13 +1,16 @@
 package com.lence.startpattern.ui.createRecord;
 
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lence.startpattern.R;
@@ -22,6 +25,26 @@ public class CreateRecordFragment extends Fragment implements CreateRecordMvp {
     CreateRecordPresenter mPresenter;
     @BindView(R.id.enter)
     Button mEnter;
+    @BindView(R.id.procedure)
+    TextView mProcedure;
+    @BindView(R.id.avatar)
+    ImageView mAvatar;
+    @BindView(R.id.name)
+    TextView mName;
+    @BindView(R.id.spec)
+    TextView mSpec;
+    @BindView(R.id.ratingBar)
+    RatingBar mRatingBar;
+    @BindView(R.id.count_review)
+    TextView mCountReview;
+    @BindView(R.id.doctorSelect)
+    RelativeLayout mDoctorSelect;
+    @BindView(R.id.date)
+    TextView mDate;
+    @BindView(R.id.time)
+    TextView mTime;
+    @BindView(R.id.timeSelect)
+    RelativeLayout mTimeSelect;
 
     public CreateRecordFragment() {
         // Required empty public constructor
@@ -42,15 +65,19 @@ public class CreateRecordFragment extends Fragment implements CreateRecordMvp {
     }
 
 
-
     @OnClick(R.id.enter)
     public void onViewClicked() {
         OnlineRecordFragment fragment = new OnlineRecordFragment();
-        android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.addToBackStack("stack");
         ft.commit();
 
     }
+
+
+
+
+
 }

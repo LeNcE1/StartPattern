@@ -1,9 +1,8 @@
 package com.lence.startpattern.ui.procedure;
 
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.lence.startpattern.R;
-import com.lence.startpattern.ui.dateSelection.DateSelectionFragment;
+import com.lence.startpattern.ui.selectionScreen.SelectionScreenFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +54,7 @@ ProcedurePresenter pr;
 
     @Override
     public void startDateSelection() {
-        DateSelectionFragment fragment = new DateSelectionFragment();
+        SelectionScreenFragment fragment = new SelectionScreenFragment();
         android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);

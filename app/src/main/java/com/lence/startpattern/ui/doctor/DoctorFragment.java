@@ -1,24 +1,26 @@
 package com.lence.startpattern.ui.doctor;
 
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lence.startpattern.R;
-import com.lence.startpattern.utils.ToolbarColorizeHelper;
+import com.lence.startpattern.ui.dateSelection.DateSelectionFragment;
+import com.lence.startpattern.utils.ChangeStyle;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class DoctorFragment extends Fragment implements DoctorMvp {
@@ -33,6 +35,8 @@ public class DoctorFragment extends Fragment implements DoctorMvp {
     TabLayout mTab;
     @BindView(R.id.vp)
     ViewPager mVp;
+    @BindView(R.id.nextStep)
+    Button mNextStep;
 
     public DoctorFragment() {
 
@@ -44,28 +48,14 @@ public class DoctorFragment extends Fragment implements DoctorMvp {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.doctor, container, false);
-        TextView label = (TextView) getActivity().findViewById(R.id.label);
-        label.setVisibility(View.GONE);
-        View appBarLayout = getActivity().findViewById(R.id.appBar);
-        appBarLayout.setBackgroundResource(R.color.blue);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            appBarLayout.setElevation(0);
-        }
-        ImageView logo = getActivity().findViewById(R.id.logo);
-        logo.setVisibility(View.GONE);
-        ImageView arrowBack = getActivity().findViewById(R.id.arrowBack);
-        arrowBack.setColorFilter(getResources().getColor(R.color.white));
-        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
-        toolbar.setBackgroundResource(R.color.blue);
-        ToolbarColorizeHelper.colorizeToolbar(toolbar,getResources().getColor(R.color.white),getActivity());
+
+        ChangeStyle.blueColor(getActivity());
 
         ButterKnife.bind(this, view);
         mPresenter = new DoctorPresenter(this);
 
 
 
-
-// TODO: 24.01.2018 change toolbar вставить автарку и текст в бар и гонить на выборе услуги
 
 
         PagerAdapter adapter = new PagerAdapter(getContext(), getFragmentManager());
@@ -75,5 +65,13 @@ public class DoctorFragment extends Fragment implements DoctorMvp {
         return view;
     }
 
-
+    @OnClick(R.id.nextStep)
+    public void onViewClicked() {
+        DateSelectionFragment fragment = new DateSelectionFragment();
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content, fragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.addToBackStack("stack");
+        ft.commit();
+    }
 }
