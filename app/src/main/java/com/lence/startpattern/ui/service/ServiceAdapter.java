@@ -9,14 +9,15 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.lence.startpattern.R;
+import com.lence.startpattern.model.SectionsModel;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ServiceAdapter extends BaseAdapter {
     private Context mContext;
-ArrayList<String> mList;
+    List<SectionsModel> mList;
 
-    public ServiceAdapter(Context c,ArrayList<String> list) {
+    public ServiceAdapter(Context c,List<SectionsModel> list) {
         mContext = c;
         mList=list;
 
@@ -50,9 +51,11 @@ ArrayList<String> mList;
         }
 
         //ImageView imageView = (ImageView) grid.findViewById(R.id.imagepart);
-        TextView textView = (TextView) grid.findViewById(R.id.serviceTitle);
+        TextView serviceTitle = (TextView) grid.findViewById(R.id.serviceTitle);
        // imageView.setImageResource(mThumbIds[position]);
-        textView.setText(mList.get(position));
+        serviceTitle.setText(mList.get(position).getName());
+        TextView serviceCount = grid.findViewById(R.id.serviceCount);
+        serviceCount.setText(String.valueOf(mList.get(position).getChildrens().size()));
 
         return grid;
     }

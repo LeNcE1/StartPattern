@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.lence.startpattern.R;
+import com.lence.startpattern.SingletonStorage;
+import com.lence.startpattern.model.ServicesModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,14 +21,14 @@ import butterknife.ButterKnife;
 public class ProcedureAdapter extends RecyclerView.Adapter<ProcedureAdapter.RibotViewHolder> {
 
 
-    private List<String> mRibots = new ArrayList<>();
+    private List<ServicesModel> mRibots = new ArrayList<>();
     ProcedurePresenter pr;
     SharedPreferences user;
     int pag = 20;
     String pod;
     String m;
 
-    public ProcedureAdapter(List<String> posts, ProcedurePresenter presenter) {
+    public ProcedureAdapter(List<ServicesModel> posts, ProcedurePresenter presenter) {
         mRibots = posts;
         pr = presenter;
     }
@@ -55,25 +57,19 @@ public class ProcedureAdapter extends RecyclerView.Adapter<ProcedureAdapter.Ribo
     }
 
 
-
-
     @Override
     public void onBindViewHolder(final RibotViewHolder holder, final int position) {
-
-
-
-        final String example = mRibots.get(position);
-        holder.name.setText(example);
-
+        holder.name.setText(mRibots.get(position).getName());
+        holder.price.setText(mRibots.get(position).getPrice().toString());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SingletonStorage.getInstance().setServicesId(mRibots.get(position).getId());
+                SingletonStorage.getInstance().setServicesDescription(mRibots.get(position).getName());
                 pr.startProcedure();
             }
         });
-
-
     }
 
 
@@ -89,7 +85,7 @@ public class ProcedureAdapter extends RecyclerView.Adapter<ProcedureAdapter.Ribo
         @BindView(R.id.type)
         TextView name;
         @BindView(R.id.price)
-        TextView spec;
+        TextView price;
 
         @BindView(R.id.view)
         View mView;

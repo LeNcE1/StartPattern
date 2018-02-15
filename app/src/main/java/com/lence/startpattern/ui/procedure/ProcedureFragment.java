@@ -12,9 +12,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.lence.startpattern.R;
+import com.lence.startpattern.SingletonStorage;
+import com.lence.startpattern.model.ServicesModel;
 import com.lence.startpattern.ui.selectionScreen.SelectionScreenFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -23,7 +24,7 @@ ProcedurePresenter pr;
     RecyclerView recyclerView;
     ProcedureAdapter mProcedureAdapter;
 
-    List<String> posts = new ArrayList<>();
+
     public ProcedureFragment() {
         // Required empty public constructor
     }
@@ -37,15 +38,21 @@ ProcedurePresenter pr;
         pr = new ProcedurePresenter(this);
         TextView label = (TextView) getActivity().findViewById(R.id.label);
         label.setText("Процедура");
-        for (int i = 0; i < 10; i++) {
-            posts.add("Процедура " + i);
 
-        }
-        mProcedureAdapter = new ProcedureAdapter(posts,pr);
+        Bundle bundle = getArguments();
+        pr.loadSections(bundle.getInt("id"));
+        SingletonStorage.getInstance().setSectionsId(bundle.getInt("id"));
+        SingletonStorage.getInstance().setAssociateId(0);
+        SingletonStorage.getInstance().setServicesDescription("");
+        SingletonStorage.getInstance().setAssociateName("");
+        SingletonStorage.getInstance().setServicesId(0);
+        SingletonStorage.getInstance().setDate("");
+        SingletonStorage.getInstance().setTime("");
+        //mProcedureAdapter = new ProcedureAdapter(posts,pr);
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(mProcedureAdapter);
-        recyclerView.getAdapter().notifyDataSetChanged();
+        //recyclerView.setAdapter(mProcedureAdapter);
+        //recyclerView.getAdapter().notifyDataSetChanged();
 
 
         return view;
@@ -60,5 +67,12 @@ ProcedurePresenter pr;
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.addToBackStack("stack");
         ft.commit();
+    }
+
+    @Override
+    public void refreshList(List<ServicesModel> body) {
+        mProcedureAdapter = new ProcedureAdapter(body,pr);
+        recyclerView.setAdapter(mProcedureAdapter);
+        recyclerView.getAdapter().notifyDataSetChanged();
     }
 }

@@ -12,9 +12,11 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.lence.startpattern.R;
+import com.lence.startpattern.model.SectionsModel;
 import com.lence.startpattern.ui.procedure.ProcedureFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 
@@ -22,7 +24,8 @@ import butterknife.ButterKnife;
  * A simple {@link Fragment} subclass.
  */
 public class ServiceFragment extends Fragment implements ServiceMvp {
-
+    GridView gridView;
+    ArrayList<SectionsModel> list= new ArrayList<>();
 
     public ServiceFragment() {
         // Required empty public constructor
@@ -39,18 +42,17 @@ public class ServiceFragment extends Fragment implements ServiceMvp {
 
         ServicePresenter presenter = new ServicePresenter(this);
         ButterKnife.bind(this, view);
+        presenter.loadSections();
+        gridView = (GridView) view.findViewById(R.id.gridview);
 
-        GridView gridView = (GridView) view.findViewById(R.id.gridview);
-        ArrayList<String> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            list.add("Услуга " + i);
-        }
-        gridView.setAdapter(new ServiceAdapter(getActivity(), list));
+        // gridView.setAdapter(new ServiceAdapter(getActivity(), list));
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ProcedureFragment fragment = new ProcedureFragment();
-                // TODO: 29.01.2018 add servise bundle
+                Bundle bundle = new Bundle();
+                bundle.putInt("id",list.get(position).getId());
+                fragment.setArguments(bundle);
                 android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content, fragment);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
@@ -63,4 +65,9 @@ public class ServiceFragment extends Fragment implements ServiceMvp {
         return view;
     }
 
+    @Override
+    public void refreshList(List<SectionsModel> body) {
+        list= (ArrayList<SectionsModel>) body;
+                gridView.setAdapter(new ServiceAdapter(getContext(), body));
+    }
 }

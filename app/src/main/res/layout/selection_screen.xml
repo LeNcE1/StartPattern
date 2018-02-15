@@ -59,7 +59,7 @@
                     android:layout_toRightOf="@+id/textView"
                     android:gravity="right"
                     android:paddingBottom="16dp"
-                    android:text="Компьютерная томография(3D снимок) 1 сегмент"
+                    android:text=""
                     android:textColor="@color/textSubtitle"
                     android:textSize="16dp" />
 
@@ -122,7 +122,7 @@
                     android:layout_toRightOf="@+id/textViewAssociate"
                     android:gravity="right"
                     android:paddingBottom="16dp"
-                    android:text="Цыдыпов Андрей Иванович"
+                    android:text=""
                     android:textColor="@color/textSubtitle"
                     android:textSize="16dp" />
 

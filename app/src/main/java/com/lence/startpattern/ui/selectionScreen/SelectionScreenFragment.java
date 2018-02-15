@@ -5,12 +5,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.lence.startpattern.R;
+import com.lence.startpattern.SingletonStorage;
 import com.lence.startpattern.ui.associate.AssociateListFragment;
 import com.lence.startpattern.ui.createRecord.CreateRecordFragment;
 import com.lence.startpattern.ui.dateSelection.DateSelectionFragment;
@@ -34,6 +37,12 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
     CardView mDate;
     @BindView(R.id.nextStep)
     Button mNextStep;
+    @BindView(R.id.textProcedure)
+    TextView mTextProcedure;
+    @BindView(R.id.textAssociate)
+    TextView mTextAssociate;
+    @BindView(R.id.textDate)
+    TextView mTextDate;
 
     public SelectionScreenFragment() {
         // Required empty public constructor
@@ -49,8 +58,17 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
 
         mPresenter = new SelectionScreenPresenter(this);
         ButterKnife.bind(this, view);
+        Log.e("Storage", SingletonStorage.getInstance().getSectionsId() + " "
+                + SingletonStorage.getInstance().getServicesId() + " "
+                + SingletonStorage.getInstance().getServicesDescription() + " "
+                + SingletonStorage.getInstance().getAssociateId() + " "
+                + SingletonStorage.getInstance().getAssociateName() + " "
+                + SingletonStorage.getInstance().getDate() + " "
+                + SingletonStorage.getInstance().getTime());
 
-
+        mTextProcedure.setText(SingletonStorage.getInstance().getServicesDescription().equals("") ? "Выберите услугу" : SingletonStorage.getInstance().getServicesDescription());
+        mTextAssociate.setText(SingletonStorage.getInstance().getAssociateName().equals("") ? "Выберите специалиста" : SingletonStorage.getInstance().getAssociateName());
+        mTextDate.setText(SingletonStorage.getInstance().getDate().equals("") ? "Выберите время" : SingletonStorage.getInstance().getDate()+" "+SingletonStorage.getInstance().getTime());
         return view;
     }
 
@@ -68,8 +86,7 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
     @OnClick(R.id.associate)
     public void onMAssociateClicked() {
         AssociateListFragment fragment = new AssociateListFragment();
-        // TODO: 29.01.2018 add servise bundle
-        android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.addToBackStack("stack");
@@ -80,7 +97,7 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
     public void onMDateClicked() {
         DateSelectionFragment fragment = new DateSelectionFragment();
         // TODO: 29.01.2018 add servise bundle
-        android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.addToBackStack("stack");
@@ -91,10 +108,12 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
     public void onViewClicked() {
         CreateRecordFragment fragment = new CreateRecordFragment();
         // TODO: 29.01.2018 add servise bundle
-        android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.addToBackStack("stack");
         ft.commit();
     }
+
+
 }
