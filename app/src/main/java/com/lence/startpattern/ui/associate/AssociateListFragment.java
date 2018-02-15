@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.lence.startpattern.R;
+import com.lence.startpattern.model.AssociateModel;
 import com.lence.startpattern.ui.selectionScreen.SelectionScreenFragment;
 
 import java.util.ArrayList;
@@ -38,15 +39,11 @@ public class AssociateListFragment extends Fragment implements AssociateMvp {
         pr = new AssociatePresenter(this);
         TextView label = (TextView) getActivity().findViewById(R.id.label);
         label.setText("Сотрудник");
-        for (int i = 0; i < 10; i++) {
-            posts.add("Vrach " + i);
+        pr.loadAssociate();
 
-        }
-        associateAdapter = new AssociateAdapter(posts, pr);
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(associateAdapter);
-        recyclerView.getAdapter().notifyDataSetChanged();
+
 
 
         return view;
@@ -61,5 +58,12 @@ public class AssociateListFragment extends Fragment implements AssociateMvp {
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         //ft.addToBackStack("stack");
         ft.commit();
+    }
+
+    @Override
+    public void refreshList(List<AssociateModel> body) {
+        associateAdapter = new AssociateAdapter(body, pr,getActivity());
+        recyclerView.setAdapter(associateAdapter);
+        recyclerView.getAdapter().notifyDataSetChanged();
     }
 }

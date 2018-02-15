@@ -1,5 +1,7 @@
 package com.lence.startpattern.ui.associate;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,8 +11,10 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-
 import com.lence.startpattern.R;
+import com.lence.startpattern.SingletonStorage;
+import com.lence.startpattern.model.AssociateModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,16 +26,18 @@ import butterknife.ButterKnife;
 public class AssociateAdapter extends RecyclerView.Adapter<AssociateAdapter.RibotViewHolder> {
 
 
-    private List<String> mRibots = new ArrayList<>();
+    private List<AssociateModel> mRibots = new ArrayList<>();
     AssociatePresenter pr;
     SharedPreferences user;
     int pag = 20;
     String pod;
     String m;
+    Context mContext;
 
-    public AssociateAdapter(List<String> posts, AssociatePresenter presenter) {
+    public AssociateAdapter(List<AssociateModel> posts, AssociatePresenter presenter, Context context) {
         mRibots = posts;
         pr = presenter;
+        mContext = context;
     }
 
 //    public AssociateAdapter(List<News> posts, NewsPresentr pr, SharedPreferences user, String pod, String m) {
@@ -60,6 +66,7 @@ public class AssociateAdapter extends RecyclerView.Adapter<AssociateAdapter.Ribo
 
     int doposition = 0;
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(final RibotViewHolder holder, final int position) {
 //        if(position == (pag-6)){
@@ -94,15 +101,19 @@ public class AssociateAdapter extends RecyclerView.Adapter<AssociateAdapter.Ribo
 //        }
 
 
-        final String example = mRibots.get(position);
-        holder.name.setText(example);
-        if (position <= 5) {
-            holder.ratingBar.setRating(position);
-        }
+
+        holder.name.setText(mRibots.get(position).getName()+" "+mRibots.get(position).getSurname()+" "+mRibots.get(position).getSecondname());
+        holder.spec.setText(String.valueOf(mRibots.get(position).getDescription()));
+        Picasso.with(mContext).load(mRibots.get(position).getImage()).into(holder.avatar);
+
+           // holder.ratingBar.setRating(mRibots.get(position).get);
+
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SingletonStorage.getInstance().setAssociateName(mRibots.get(position).getName()+" "+mRibots.get(position).getSurname()+" "+mRibots.get(position).getSecondname());
+                SingletonStorage.getInstance().setAssociateId(mRibots.get(position).getId());
                 pr.startProcedure();
             }
         });
@@ -141,6 +152,7 @@ public class AssociateAdapter extends RecyclerView.Adapter<AssociateAdapter.Ribo
         public RibotViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.lence.startpattern.api;
 
 
+import com.lence.startpattern.model.AssociateModel;
 import com.lence.startpattern.model.SectionsModel;
 import com.lence.startpattern.model.ServicesModel;
 
@@ -27,6 +28,6 @@ public interface Api {
     // TODO: 15.02.2018 уточнить тип city id
 
     @GET("/api/doctors")
-    Call<ResponseBody> getDoctors();
+    Call<List<AssociateModel>> getDoctors();
 
 }
