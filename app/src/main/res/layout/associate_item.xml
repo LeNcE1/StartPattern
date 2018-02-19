@@ -12,15 +12,24 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:id="@+id/view">
-
-        <ImageView
+        <com.pkmmte.view.CircularImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:id="@+id/avatar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:src="@drawable/logo"
+            app:border="false"
+            app:shadow="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="8dp"
-            android:src="@drawable/logo" />
+            android:layout_marginRight="16dp"/>
+        <!--<ImageView-->
+            <!---->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--android:src="@drawable/logo" />-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,7 +51,7 @@
                 android:id="@+id/spec"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="Vrach"
                 android:textColor="@color/textSubtitle"
                 android:textSize="16dp" />
@@ -50,7 +59,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:gravity="center_vertical">
 
                 <RatingBar
@@ -70,6 +79,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_weight="1"
                     android:text="100 отзывов"
+                    android:textSize="12dp"
+
                     android:textColor="@color/blue"
                     android:textStyle="bold" />
             </RelativeLayout>

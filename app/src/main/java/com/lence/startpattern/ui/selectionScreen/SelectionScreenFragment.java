@@ -58,8 +58,7 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
 
         mPresenter = new SelectionScreenPresenter(this);
         ButterKnife.bind(this, view);
-        Log.e("Storage", SingletonStorage.getInstance().getSectionsId() + " "
-                + SingletonStorage.getInstance().getServicesId() + " "
+        Log.e("Storage", SingletonStorage.getInstance().getServicesId() + " "
                 + SingletonStorage.getInstance().getServicesDescription() + " "
                 + SingletonStorage.getInstance().getAssociateId() + " "
                 + SingletonStorage.getInstance().getAssociateName() + " "

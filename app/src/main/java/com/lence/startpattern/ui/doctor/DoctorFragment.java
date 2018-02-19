@@ -15,8 +15,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lence.startpattern.R;
-import com.lence.startpattern.ui.dateSelection.DateSelectionFragment;
+import com.lence.startpattern.ui.procedure.ProcedureFragment;
 import com.lence.startpattern.utils.ChangeStyle;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,6 +38,8 @@ public class DoctorFragment extends Fragment implements DoctorMvp {
     ViewPager mVp;
     @BindView(R.id.nextStep)
     Button mNextStep;
+    @BindView(R.id.spec)
+    TextView mSpec;
 
     public DoctorFragment() {
 
@@ -50,12 +53,18 @@ public class DoctorFragment extends Fragment implements DoctorMvp {
         View view = inflater.inflate(R.layout.doctor, container, false);
 
         ChangeStyle.blueColor(getActivity());
-
+        Bundle bundle = getArguments();
         ButterKnife.bind(this, view);
         mPresenter = new DoctorPresenter(this);
-
-
-
+        if (bundle != null) {
+            mName.setText(bundle.getString("name"));
+            mSpec.setText(bundle.getString("spec"));
+            Picasso.with(getContext())
+                    .load(bundle.getString("image"))
+                    .resize(150, 150)
+                    .centerCrop()
+                    .into(mAvatar);
+        }
 
 
         PagerAdapter adapter = new PagerAdapter(getContext(), getFragmentManager());
@@ -67,11 +76,12 @@ public class DoctorFragment extends Fragment implements DoctorMvp {
 
     @OnClick(R.id.nextStep)
     public void onViewClicked() {
-        DateSelectionFragment fragment = new DateSelectionFragment();
+        ProcedureFragment fragment = new ProcedureFragment();
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.addToBackStack("stack");
         ft.commit();
     }
+
 }

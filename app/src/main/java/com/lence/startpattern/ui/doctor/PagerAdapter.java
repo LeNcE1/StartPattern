@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.lence.startpattern.ui.doctor.info.DoctorInfoFragment;
 import com.lence.startpattern.ui.doctor.review.DoctorReviewFragment;
-import com.lence.startpattern.ui.procedure.ProcedureFragment;
 
 
 public class PagerAdapter extends FragmentPagerAdapter {
@@ -25,17 +24,14 @@ public class PagerAdapter extends FragmentPagerAdapter {
             return new DoctorInfoFragment();
         } else if (position == 1){
             return new DoctorReviewFragment();
-        } else if (position == 2){
-            return new DoctorReviewFragment();
         } else {
-            return new ProcedureFragment();
-       }
-
+            return new DoctorReviewFragment();
+        }
     }
 
     @Override
     public int getCount() {
-        return 4;
+        return 3;
     }
     @Override
     public CharSequence getPageTitle(int position) {
@@ -47,8 +43,6 @@ public class PagerAdapter extends FragmentPagerAdapter {
                 return "Отзывы";
             case 2:
                 return "Расписание";
-            case 3:
-                return "Услуги";
             default:
                 return null;
         }

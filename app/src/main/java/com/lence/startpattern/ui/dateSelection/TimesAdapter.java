@@ -28,7 +28,7 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.RibotViewHol
         pr = presenter;
     }
 
-//    public AssociateAdapter(List<News> posts, NewsPresentr pr, SharedPreferences user, String pod, String m) {
+//    public AssociateAllAdapter(List<News> posts, NewsPresentr pr, SharedPreferences user, String pod, String m) {
 //        this.pod = pod;
 //        this.mRibots = posts;
 //        this.pr = pr;

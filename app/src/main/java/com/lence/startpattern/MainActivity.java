@@ -13,7 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.lence.startpattern.ui.doctor.DoctorFragment;
+import com.lence.startpattern.ui.associateAll.AssociateAllListFragment;
 import com.lence.startpattern.ui.selectionScreen.SelectionScreenFragment;
 import com.lence.startpattern.ui.service.ServiceFragment;
 import com.lence.startpattern.utils.BackStackTools;
@@ -116,18 +116,18 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.doctor) {
             FragmentManager fm = getSupportFragmentManager();
             BackStackTools.clearStack(fm);
-            DoctorFragment fragment = new DoctorFragment();
+            AssociateAllListFragment fragment = new AssociateAllListFragment();
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.content, fragment);
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             ft.addToBackStack("stack");
             ft.commit();
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        }
+//        } else if (id == R.id.nav_slideshow) {
+//
+//        } else if (id == R.id.nav_manage) {
+//
+       }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

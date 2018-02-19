@@ -4,7 +4,6 @@ package com.lence.startpattern;
 import android.util.Log;
 
 public class SingletonStorage {
-    private int sectionsId = 0;
     private int servicesId = 0;
     private String servicesDescription = "";
     private int associateId = 0;
@@ -27,14 +26,6 @@ public class SingletonStorage {
 
     public SingletonStorage() {
 
-    }
-
-    public int getSectionsId() {
-        return sectionsId;
-    }
-
-    public void setSectionsId(int sectionsId) {
-        this.sectionsId = sectionsId;
     }
 
     public int getServicesId() {

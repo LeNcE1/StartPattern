@@ -33,7 +33,7 @@ public class ProcedureAdapter extends RecyclerView.Adapter<ProcedureAdapter.Ribo
         pr = presenter;
     }
 
-//    public AssociateAdapter(List<News> posts, NewsPresentr pr, SharedPreferences user, String pod, String m) {
+//    public AssociateAllAdapter(List<News> posts, NewsPresentr pr, SharedPreferences user, String pod, String m) {
 //        this.pod = pod;
 //        this.mRibots = posts;
 //        this.pr = pr;

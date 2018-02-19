@@ -10,16 +10,9 @@
             android:title="Онлайн-запись" />
         <item
             android:id="@+id/doctor"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="doctor" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:icon="@drawable/assignment_ind"
+            android:title="Сотрудники" />
+
     </group>
 
 

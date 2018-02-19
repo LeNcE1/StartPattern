@@ -40,8 +40,12 @@ ProcedurePresenter pr;
         label.setText("Процедура");
 
         Bundle bundle = getArguments();
-        pr.loadSections(bundle.getInt("id"));
-        SingletonStorage.getInstance().setSectionsId(bundle.getInt("id"));
+        if(bundle.getInt("id")!=0) {
+            pr.loadSections(bundle.getInt("id"));
+        }
+        else {
+            // TODO: 19.02.2018 услуги сотрудника 
+        }
         SingletonStorage.getInstance().setAssociateId(0);
         SingletonStorage.getInstance().setServicesDescription("");
         SingletonStorage.getInstance().setAssociateName("");

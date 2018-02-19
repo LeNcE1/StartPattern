@@ -1,4 +1,4 @@
-package com.lence.startpattern.ui.associate;
+package com.lence.startpattern.ui.associateAll;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,7 +12,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.lence.startpattern.R;
-import com.lence.startpattern.SingletonStorage;
 import com.lence.startpattern.model.AssociateModel;
 import com.squareup.picasso.Picasso;
 
@@ -23,18 +22,18 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class AssociateAdapter extends RecyclerView.Adapter<AssociateAdapter.RibotViewHolder> {
+public class AssociateAllAdapter extends RecyclerView.Adapter<AssociateAllAdapter.RibotViewHolder> {
 
 
     private List<AssociateModel> mRibots = new ArrayList<>();
-    AssociatePresenter pr;
+    AssociateAllPresenter pr;
     SharedPreferences user;
     int pag = 20;
     String pod;
     String m;
     Context mContext;
 
-    public AssociateAdapter(List<AssociateModel> posts, AssociatePresenter presenter, Context context) {
+    public AssociateAllAdapter(List<AssociateModel> posts, AssociateAllPresenter presenter, Context context) {
         mRibots = posts;
         pr = presenter;
         mContext = context;
@@ -69,37 +68,6 @@ public class AssociateAdapter extends RecyclerView.Adapter<AssociateAdapter.Ribo
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(final RibotViewHolder holder, final int position) {
-//        if(position == (pag-6)){
-//            if(pod == null) {
-//                if(m != null){
-//                    Log.e("My post", "my post");
-//                    holder.delete.setVisibility(View.VISIBLE);
-//                    pr.loadNewsMy(user.getString("id", "1"), pag);
-//                }
-//                else {
-//                    pr.loadNews(user.getString("id", "1"), pag);
-//                }
-//            }
-//            else{
-//                pr.loadNewspod(user.getString("id", "1"), pag);
-//            }
-//            pag+=20;
-//        }
-//        else{
-//            if(m != null){
-//                Log.e("My post", "my post");
-//                holder.delete.setVisibility(View.VISIBLE);
-//                holder.delete.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        pr.deletePost(mRibots.get(position).getPostId());
-//                        pr.replase();
-//
-//                    }
-//                });
-//            }
-//        }
-
 
         holder.name.setText(mRibots.get(position).getSurname() + " " + mRibots.get(position).getName() + " " + mRibots.get(position).getSecondname());
         holder.spec.setText(String.valueOf(mRibots.get(position).getDescription()));
@@ -115,9 +83,10 @@ public class AssociateAdapter extends RecyclerView.Adapter<AssociateAdapter.Ribo
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SingletonStorage.getInstance().setAssociateName(mRibots.get(position).getSurname() + " " + mRibots.get(position).getName() + " " + mRibots.get(position).getSecondname());
-                SingletonStorage.getInstance().setAssociateId(mRibots.get(position).getId());
-                pr.startProcedure();
+                pr.startDoctor(mRibots.get(position).getId(),
+                        mRibots.get(position).getSurname() + " " + mRibots.get(position).getName() + " " + mRibots.get(position).getSecondname(),
+                        String.valueOf(mRibots.get(position).getDescription()),
+                        mRibots.get(position).getImage());
             }
         });
 

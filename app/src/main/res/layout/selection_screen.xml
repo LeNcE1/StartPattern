@@ -34,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-                    android:src="@drawable/ic_menu_camera" />
+                    app:srcCompat="@drawable/heartbeat" />
 
                 <TextView
                     android:id="@+id/textView"
@@ -97,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-                    android:src="@drawable/ic_menu_camera" />
+                    android:src="@drawable/avatar" />
 
                 <TextView
                     android:id="@+id/textViewAssociate"
@@ -160,7 +160,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-                    android:src="@drawable/ic_menu_camera" />
+                    android:src="@drawable/clock" />
 
                 <TextView
                     android:id="@+id/textViewDate"
