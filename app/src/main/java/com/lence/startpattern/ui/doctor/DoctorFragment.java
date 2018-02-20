@@ -2,6 +2,8 @@ package com.lence.startpattern.ui.doctor;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -45,9 +47,28 @@ public class DoctorFragment extends Fragment implements DoctorMvp {
 
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
 
     @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
 
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        PagerAdapter adapter = new PagerAdapter(getContext(),getActivity().getSupportFragmentManager());
+        mVp.setAdapter(adapter);
+        mVp.getAdapter().notifyDataSetChanged();
+        mVp.setCurrentItem(1);
+        mTab.setupWithViewPager(mVp);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.doctor, container, false);
@@ -67,8 +88,10 @@ public class DoctorFragment extends Fragment implements DoctorMvp {
         }
 
 
-        PagerAdapter adapter = new PagerAdapter(getContext(), getFragmentManager());
+        PagerAdapter adapter = new PagerAdapter(getContext(),getActivity().getSupportFragmentManager());
         mVp.setAdapter(adapter);
+        mVp.getAdapter().notifyDataSetChanged();
+        mVp.setCurrentItem(1);
         mTab.setupWithViewPager(mVp);
 
         return view;
@@ -77,6 +100,9 @@ public class DoctorFragment extends Fragment implements DoctorMvp {
     @OnClick(R.id.nextStep)
     public void onViewClicked() {
         ProcedureFragment fragment = new ProcedureFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("doctorId",bundle.getInt("id"));
+        fragment.setArguments(bundle);
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);

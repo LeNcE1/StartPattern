@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-// TODO: 29.01.2018 синглтон для хранения выборов
+
     }
 
 

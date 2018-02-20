@@ -1,6 +1,5 @@
 package com.lence.startpattern.ui.doctor.review;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
-
 
 public class DoctorReviewFragment extends Fragment implements DoctorReviewMvp{
     RecyclerView recyclerView;

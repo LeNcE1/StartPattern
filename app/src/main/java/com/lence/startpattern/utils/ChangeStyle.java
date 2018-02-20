@@ -31,6 +31,7 @@ public abstract class ChangeStyle {
 
     public static void blueColor(Activity activity){
         View appBarLayout = activity.findViewById(R.id.appBar);
+        //appBarLayout.setBackgroundResource(Color.alpha(0));
         appBarLayout.setBackgroundResource(R.color.blue);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             appBarLayout.setElevation(0);

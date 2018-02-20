@@ -55,7 +55,7 @@
         android:layout_below="@id/head"
         android:layout_marginBottom="2dp"
         android:layout_marginTop="2dp"
-        android:background="@color/blue"
+        android:background="@drawable/button_background"
         android:text="Записаться на прием"
         android:textColor="@color/white" />
 
@@ -65,6 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/nextStep"
         android:background="@color/white"
+        app:tabMode="fixed"
         android:elevation="4dp">
 
 

@@ -34,7 +34,6 @@ public class AssociateAllListFragment extends Fragment implements AssociateAllMv
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.associate_all, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         pr = new AssociateAllPresenter(this);

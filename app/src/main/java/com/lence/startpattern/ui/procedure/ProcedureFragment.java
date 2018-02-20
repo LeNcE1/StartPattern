@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,11 +41,12 @@ ProcedurePresenter pr;
         label.setText("Процедура");
 
         Bundle bundle = getArguments();
-        if(bundle.getInt("id")!=0) {
+        Log.e("bundle","bundle"+bundle.toString());
+        if(bundle.getInt("id",0) != 0) {
             pr.loadSections(bundle.getInt("id"));
         }
         else {
-            // TODO: 19.02.2018 услуги сотрудника 
+            pr.loadDoctorSections(bundle.getInt("doctorId"));
         }
         SingletonStorage.getInstance().setAssociateId(0);
         SingletonStorage.getInstance().setServicesDescription("");

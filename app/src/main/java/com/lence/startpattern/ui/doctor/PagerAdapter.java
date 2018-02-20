@@ -4,13 +4,13 @@ package com.lence.startpattern.ui.doctor;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.lence.startpattern.ui.doctor.info.DoctorInfoFragment;
 import com.lence.startpattern.ui.doctor.review.DoctorReviewFragment;
 
 
-public class PagerAdapter extends FragmentPagerAdapter {
+public class PagerAdapter extends FragmentStatePagerAdapter {
     private Context mContext;
 
     public PagerAdapter(Context context, FragmentManager fm) {

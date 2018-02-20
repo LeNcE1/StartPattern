@@ -40,4 +40,7 @@ public class ProcedurePresenter {
         });
 
     }
+
+    public void loadDoctorSections(int doctorId) {
+    }
 }
