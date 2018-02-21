@@ -53,7 +53,9 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.selection_screen, container, false);
-
+        TextView label = (TextView) getActivity().findViewById(R.id.label);
+        label.setVisibility(View.VISIBLE);
+        label.setText("Онлайн запись");
         ChangeStyle.whiteColor(getActivity());
 
         mPresenter = new SelectionScreenPresenter(this);
@@ -78,7 +80,7 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        //ft.addToBackStack("stack");
+        ft.addToBackStack("stack");
         ft.commit();
     }
 

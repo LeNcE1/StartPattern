@@ -2,14 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="16dp"
+    android:paddingTop="8dp"
 
     tools:context=".ui.doctor.review.DoctorReviewFragment">
 
     <Button
         android:id="@+id/createReview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="32dp"
         android:layout_marginBottom="2dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"

@@ -72,7 +72,6 @@ public class DoctorFragment extends Fragment implements DoctorMvp {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.doctor, container, false);
-
         ChangeStyle.blueColor(getActivity());
         Bundle bundle = getArguments();
         ButterKnife.bind(this, view);
@@ -82,7 +81,7 @@ public class DoctorFragment extends Fragment implements DoctorMvp {
             mSpec.setText(bundle.getString("spec"));
             Picasso.with(getContext())
                     .load(bundle.getString("image"))
-                    .resize(150, 150)
+                    .resize(200, 200)
                     .centerCrop()
                     .into(mAvatar);
         }

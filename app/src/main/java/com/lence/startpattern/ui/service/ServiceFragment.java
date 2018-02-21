@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
  */
 public class ServiceFragment extends Fragment implements ServiceMvp {
     GridView gridView;
-    ArrayList<SectionsModel> list= new ArrayList<>();
+    ArrayList<SectionsModel> list = new ArrayList<>();
 
     public ServiceFragment() {
         // Required empty public constructor
@@ -39,7 +39,7 @@ public class ServiceFragment extends Fragment implements ServiceMvp {
         TextView label = (TextView) getActivity().findViewById(R.id.label);
         label.setVisibility(View.VISIBLE);
         label.setText("Услуга");
-
+        // ChangeStyle.whiteColor(getActivity());
         ServicePresenter presenter = new ServicePresenter(this);
         ButterKnife.bind(this, view);
         presenter.loadSections();
@@ -51,7 +51,7 @@ public class ServiceFragment extends Fragment implements ServiceMvp {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ProcedureFragment fragment = new ProcedureFragment();
                 Bundle bundle = new Bundle();
-                bundle.putInt("id",list.get(position).getId());
+                bundle.putInt("id", list.get(position).getId());
                 fragment.setArguments(bundle);
                 android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content, fragment);
@@ -67,7 +67,7 @@ public class ServiceFragment extends Fragment implements ServiceMvp {
 
     @Override
     public void refreshList(List<SectionsModel> body) {
-        list= (ArrayList<SectionsModel>) body;
-                gridView.setAdapter(new ServiceAdapter(getContext(), body));
+        list = (ArrayList<SectionsModel>) body;
+        gridView.setAdapter(new ServiceAdapter(getContext(), body));
     }
 }

@@ -16,6 +16,7 @@ import com.lence.startpattern.R;
 import com.lence.startpattern.SingletonStorage;
 import com.lence.startpattern.model.ServicesModel;
 import com.lence.startpattern.ui.selectionScreen.SelectionScreenFragment;
+import com.lence.startpattern.utils.ChangeStyle;
 
 import java.util.List;
 
@@ -35,6 +36,7 @@ ProcedurePresenter pr;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.procedure, container, false);
+        ChangeStyle.whiteColor(getActivity());
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         pr = new ProcedurePresenter(this);
         TextView label = (TextView) getActivity().findViewById(R.id.label);

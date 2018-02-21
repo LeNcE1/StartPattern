@@ -43,6 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="100 отзывов"
+                android:layout_gravity="top"
                 android:textColor="@color/blue"
                 android:textStyle="bold" />
         </LinearLayout>
