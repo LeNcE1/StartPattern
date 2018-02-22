@@ -2,7 +2,6 @@ package com.lence.startpattern;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -61,7 +60,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         android.support.v4.app.FragmentManager fragmentManager = this.getSupportFragmentManager();
-        // Log.e("BackStackEntryCount", String.valueOf(fragmentManager.getBackStackEntryCount()));
+        // Log.e("BackStackEntryCount", String.valueOf());
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity
             if (!this.getClass().equals(ServiceFragment.class)) {
 
                 SelectionScreenFragment fragment = new SelectionScreenFragment();
-                FragmentManager fm = getSupportFragmentManager();
+                android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
                 BackStackTools.clearStack(fm);
                 FragmentTransaction ft = fm.beginTransaction();
 
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity
                 ft.commit();
             }
         } else if (id == R.id.doctor) {
-            FragmentManager fm = getSupportFragmentManager();
+            android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
             BackStackTools.clearStack(fm);
             AssociateAllListFragment fragment = new AssociateAllListFragment();
             FragmentTransaction ft = fm.beginTransaction();

@@ -57,7 +57,6 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
         label.setVisibility(View.VISIBLE);
         label.setText("Онлайн запись");
         ChangeStyle.whiteColor(getActivity());
-
         mPresenter = new SelectionScreenPresenter(this);
         ButterKnife.bind(this, view);
         Log.e("Storage", SingletonStorage.getInstance().getServicesId() + " "
@@ -69,7 +68,7 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
 
         mTextProcedure.setText(SingletonStorage.getInstance().getServicesDescription().equals("") ? "Выберите услугу" : SingletonStorage.getInstance().getServicesDescription());
         mTextAssociate.setText(SingletonStorage.getInstance().getAssociateName().equals("") ? "Выберите специалиста" : SingletonStorage.getInstance().getAssociateName());
-        mTextDate.setText(SingletonStorage.getInstance().getDate().equals("") ? "Выберите время" : SingletonStorage.getInstance().getDate()+" "+SingletonStorage.getInstance().getTime());
+        mTextDate.setText(SingletonStorage.getInstance().getDate().equals("") ? "Выберите время" : SingletonStorage.getInstance().getDate() + " " + SingletonStorage.getInstance().getTime());
         return view;
     }
 
@@ -77,17 +76,17 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
     @OnClick(R.id.procedure)
     public void onMProcedureClicked() {
         ServiceFragment fragment = new ServiceFragment();
-        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        ft.addToBackStack("stack");
+        //ft.addToBackStack("stack");
         ft.commit();
     }
 
     @OnClick(R.id.associate)
     public void onMAssociateClicked() {
         AssociateListFragment fragment = new AssociateListFragment();
-        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.addToBackStack("stack");
@@ -98,7 +97,7 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
     public void onMDateClicked() {
         DateSelectionFragment fragment = new DateSelectionFragment();
         // TODO: 29.01.2018 add servise bundle
-        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.addToBackStack("stack");
@@ -109,7 +108,7 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
     public void onViewClicked() {
         CreateRecordFragment fragment = new CreateRecordFragment();
         // TODO: 29.01.2018 add servise bundle
-        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.addToBackStack("stack");

@@ -52,6 +52,7 @@ public class AssociateListFragment extends Fragment implements AssociateMvp {
     @Override
     public void startProcedure() {
         SelectionScreenFragment fragment = new SelectionScreenFragment();
+        getActivity().getSupportFragmentManager().popBackStack();
         // TODO: 29.01.2018 add associate bundle
         android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, fragment);

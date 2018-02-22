@@ -1,6 +1,5 @@
 package com.lence.startpattern.ui.service;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -20,9 +19,6 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ServiceFragment extends Fragment implements ServiceMvp {
     GridView gridView;
     ArrayList<SectionsModel> list = new ArrayList<>();

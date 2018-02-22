@@ -70,10 +70,12 @@ ProcedurePresenter pr;
     @Override
     public void startDateSelection() {
         SelectionScreenFragment fragment = new SelectionScreenFragment();
+        getActivity().getSupportFragmentManager().popBackStack();
+        //BackStackTools.clearStack(getActivity().getSupportFragmentManager());
         android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        ft.addToBackStack("stack");
+        //ft.addToBackStack("stack");
         ft.commit();
     }
 
