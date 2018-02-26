@@ -62,7 +62,7 @@ public class DoctorFragment extends Fragment implements DoctorMvp {
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
-        PagerAdapter adapter = new PagerAdapter(getContext(),getActivity().getSupportFragmentManager());
+        PagerAdapter adapter = new PagerAdapter(getContext(),getActivity().getSupportFragmentManager(),args.getInt("id"));
         mVp.setAdapter(adapter);
         mVp.getAdapter().notifyDataSetChanged();
         mVp.setCurrentItem(1);
@@ -89,7 +89,7 @@ public class DoctorFragment extends Fragment implements DoctorMvp {
         }
 
 
-        PagerAdapter adapter = new PagerAdapter(getContext(),getActivity().getSupportFragmentManager());
+        PagerAdapter adapter = new PagerAdapter(getContext(),getActivity().getSupportFragmentManager(),args.getInt("id"));
         mVp.setAdapter(adapter);
         mVp.getAdapter().notifyDataSetChanged();
         mVp.setCurrentItem(1);
@@ -101,6 +101,7 @@ public class DoctorFragment extends Fragment implements DoctorMvp {
     @OnClick(R.id.nextStep)
     public void onViewClicked() {
         ProcedureFragment fragment = new ProcedureFragment();
+        getActivity().getSupportFragmentManager().popBackStack();
         Bundle bundle = new Bundle();
         Log.e("doctor", "id "+args.getInt("id"));
         bundle.putInt("doctorId",args.getInt("id"));

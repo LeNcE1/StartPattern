@@ -1,30 +1,42 @@
 package com.lence.startpattern.ui.doctor.review;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.lence.startpattern.R;
+import com.lence.startpattern.model.DoctorReviewsModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
 
+@SuppressLint("ValidFragment")
 public class DoctorReviewFragment extends Fragment implements DoctorReviewMvp{
     RecyclerView recyclerView;
     DoctorReviewAdapter mAdapter;
     DoctorReviewPresenter pr;
     List<String> posts = new ArrayList<>();
+    private int mDoctorId;
 
     public DoctorReviewFragment() {
-        // Required empty public constructor
+
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle bundle = getArguments();
+        mDoctorId = bundle.getInt("doctorId");
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,16 +44,18 @@ public class DoctorReviewFragment extends Fragment implements DoctorReviewMvp{
         View view = inflater.inflate(R.layout.doctor_review, container, false);
         ButterKnife.bind(this, view);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        for (int i = 0; i < 10; i++) {
-            posts.add("User " + i);
-
-        }
-        mAdapter = new DoctorReviewAdapter(posts,pr);
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(mAdapter);
-        recyclerView.getAdapter().notifyDataSetChanged();
+        Log.e("doctorId","doctorId "+mDoctorId);
+        pr = new DoctorReviewPresenter(this);
+        pr.loadDoctorReview(mDoctorId);
         return view;
     }
 
+    @Override
+    public void refreshList(List<DoctorReviewsModel> body) {
+        mAdapter = new DoctorReviewAdapter(body,pr);
+        recyclerView.setAdapter(mAdapter);
+        recyclerView.getAdapter().notifyDataSetChanged();
+    }
 }

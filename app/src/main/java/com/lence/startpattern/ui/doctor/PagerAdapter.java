@@ -2,6 +2,7 @@ package com.lence.startpattern.ui.doctor;
 
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -12,10 +13,12 @@ import com.lence.startpattern.ui.doctor.review.DoctorReviewFragment;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
     private Context mContext;
+    private int mDoctorId;
 
-    public PagerAdapter(Context context, FragmentManager fm) {
+    public PagerAdapter(Context context, FragmentManager fm, int doctorId) {
         super(fm);
         mContext = context;
+        mDoctorId = doctorId;
     }
 
     @Override
@@ -23,10 +26,18 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         if (position == 0) {
             return new DoctorInfoFragment();
         } else if (position == 1){
-            return new DoctorReviewFragment();
+            return addArgsInDoctorReviewFragment(mDoctorId);
         } else {
-            return new DoctorReviewFragment();
+            return new DoctorInfoFragment();
         }
+    }
+
+    private DoctorReviewFragment addArgsInDoctorReviewFragment(int mDoctorId){
+        final DoctorReviewFragment doctorReviewFragment = new DoctorReviewFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("doctorId",mDoctorId);
+        doctorReviewFragment.setArguments(bundle);
+        return doctorReviewFragment;
     }
 
     @Override

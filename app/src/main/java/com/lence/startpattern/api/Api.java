@@ -3,6 +3,7 @@ package com.lence.startpattern.api;
 
 import com.lence.startpattern.model.AssociateModel;
 import com.lence.startpattern.model.AssociateServicesModel;
+import com.lence.startpattern.model.DoctorReviewsModel;
 import com.lence.startpattern.model.SectionsModel;
 import com.lence.startpattern.model.ServicesModel;
 
@@ -33,5 +34,8 @@ public interface Api {
 
     @GET("/api/doctors/{doctor}/services")
     Call<List<AssociateServicesModel>> getDoctorServices(@Path("doctor") int id);
-    
+
+    @GET("/api/doctors/{doctor}/reviews")
+    Call<List<DoctorReviewsModel>> getDoctorReviews(@Path("doctor") int id);
+
 }

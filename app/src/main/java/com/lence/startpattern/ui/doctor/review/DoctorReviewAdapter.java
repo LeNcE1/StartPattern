@@ -9,6 +9,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.lence.startpattern.R;
+import com.lence.startpattern.model.DoctorReviewsModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,15 +21,14 @@ import butterknife.ButterKnife;
 public class DoctorReviewAdapter extends RecyclerView.Adapter<DoctorReviewAdapter.RibotViewHolder> {
 
 
-
-    private List<String> mRibots = new ArrayList<>();
+    private List<DoctorReviewsModel> mRibots = new ArrayList<>();
     DoctorReviewPresenter pr;
     SharedPreferences user;
     int pag = 20;
     String pod;
     String m;
 
-    public DoctorReviewAdapter(List<String> posts, DoctorReviewPresenter presenter) {
+    public DoctorReviewAdapter(List<DoctorReviewsModel> posts, DoctorReviewPresenter presenter) {
         mRibots = posts;
         pr = presenter;
     }
@@ -80,12 +80,10 @@ public class DoctorReviewAdapter extends RecyclerView.Adapter<DoctorReviewAdapte
 //        }
 
 
-        final String example = mRibots.get(position);
-        holder.mName.setText(example);
-        if (position <= 5) {
-            holder.mRatingBar.setRating(position);
-        }
-
+        holder.mName.setText(mRibots.get(position).getName());
+        holder.mReview.setText(mRibots.get(position).getText());
+        holder.mRatingBar.setRating(mRibots.get(position).getRate());
+        // TODO: 26.02.2018 исправить верстку карточки отзыва 
 
     }
 

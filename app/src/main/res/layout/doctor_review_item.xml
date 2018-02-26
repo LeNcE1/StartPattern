@@ -45,7 +45,9 @@
                 android:text="100 отзывов"
                 android:layout_gravity="top"
                 android:textColor="@color/blue"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone"/>
+
         </LinearLayout>
 
         <TextView
