@@ -20,6 +20,8 @@ import com.lence.startpattern.ui.dateSelection.DateSelectionFragment;
 import com.lence.startpattern.ui.service.ServiceFragment;
 import com.lence.startpattern.utils.ChangeStyle;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -57,6 +59,11 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
         label.setVisibility(View.VISIBLE);
         label.setText("Онлайн запись");
         ChangeStyle.whiteColor(getActivity());
+        ArrayList<Object> l = new ArrayList<>();
+        l.add(123);
+        if(((ArrayList<?>) l).get(0) instanceof String)
+        Log.e("list", "list "+l.getClass());
+        else Log.e("list", "lis "+l.getClass());
         mPresenter = new SelectionScreenPresenter(this);
         ButterKnife.bind(this, view);
         Log.e("Storage", SingletonStorage.getInstance().getServicesId() + " "

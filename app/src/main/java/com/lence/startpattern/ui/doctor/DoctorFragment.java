@@ -8,6 +8,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +43,7 @@ public class DoctorFragment extends Fragment implements DoctorMvp {
     Button mNextStep;
     @BindView(R.id.spec)
     TextView mSpec;
-
+    Bundle args;
     public DoctorFragment() {
 
     }
@@ -73,14 +74,15 @@ public class DoctorFragment extends Fragment implements DoctorMvp {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.doctor, container, false);
         ChangeStyle.blueColor(getActivity());
-        Bundle bundle = getArguments();
+        args = getArguments();
+
         ButterKnife.bind(this, view);
         mPresenter = new DoctorPresenter(this);
-        if (bundle != null) {
-            mName.setText(bundle.getString("name"));
-            mSpec.setText(bundle.getString("spec"));
+        if (args != null) {
+            mName.setText(args.getString("name"));
+            mSpec.setText(args.getString("spec"));
             Picasso.with(getContext())
-                    .load(bundle.getString("image"))
+                    .load(args.getString("image"))
                     .resize(200, 200)
                     .centerCrop()
                     .into(mAvatar);
@@ -100,7 +102,9 @@ public class DoctorFragment extends Fragment implements DoctorMvp {
     public void onViewClicked() {
         ProcedureFragment fragment = new ProcedureFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt("doctorId",bundle.getInt("id"));
+        Log.e("doctor", "id "+args.getInt("id"));
+        bundle.putInt("doctorId",args.getInt("id"));
+        bundle.putString("doctorName",args.getString("name"));
         fragment.setArguments(bundle);
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, fragment);

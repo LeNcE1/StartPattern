@@ -2,6 +2,7 @@ package com.lence.startpattern.api;
 
 
 import com.lence.startpattern.model.AssociateModel;
+import com.lence.startpattern.model.AssociateServicesModel;
 import com.lence.startpattern.model.SectionsModel;
 import com.lence.startpattern.model.ServicesModel;
 
@@ -31,6 +32,6 @@ public interface Api {
     Call<List<AssociateModel>> getDoctors();
 
     @GET("/api/doctors/{doctor}/services")
-    Call<List<AssociateModel>> getDoctorServices(@Path("doctor") int id);
-    // TODO: 20.02.2018 доделать услуги доктора 
+    Call<List<AssociateServicesModel>> getDoctorServices(@Path("doctor") int id);
+    
 }

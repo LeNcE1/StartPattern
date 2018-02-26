@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,18 +13,19 @@ import android.widget.TextView;
 
 import com.lence.startpattern.R;
 import com.lence.startpattern.SingletonStorage;
-import com.lence.startpattern.model.ServicesModel;
 import com.lence.startpattern.ui.selectionScreen.SelectionScreenFragment;
 import com.lence.startpattern.utils.ChangeStyle;
 
 import java.util.List;
 
 
-public class ProcedureFragment extends Fragment implements ProcedureMvp{
-ProcedurePresenter pr;
+public class ProcedureFragment extends Fragment implements ProcedureMvp {
+    ProcedurePresenter pr;
     RecyclerView recyclerView;
-    ProcedureAdapter mProcedureAdapter;
-
+    Object mAdapter;
+//    ProcedureAdapter mProcedureAdapter;
+//    ProcedureDoctorAdapter mProcedureDoctorAdapter;
+    Bundle args;
 
     public ProcedureFragment() {
         // Required empty public constructor
@@ -42,13 +42,13 @@ ProcedurePresenter pr;
         TextView label = (TextView) getActivity().findViewById(R.id.label);
         label.setText("Процедура");
 
-        Bundle bundle = getArguments();
-        Log.e("bundle","bundle"+bundle.toString());
-        if(bundle.getInt("id",0) != 0) {
-            pr.loadSections(bundle.getInt("id"));
-        }
-        else {
-            pr.loadDoctorSections(bundle.getInt("doctorId"));
+        args = getArguments();
+        //Log.e("bundle", "bundle" + args.getInt("id"));
+        if (args.getInt("id", 0) != 0) {
+            pr.loadSections(args.getInt("id"));
+        } else {
+            //Log.e("doctorId", "doctorId " + args.getInt("doctorId"));
+            pr.loadDoctorSections(args.getInt("doctorId"));
         }
         SingletonStorage.getInstance().setAssociateId(0);
         SingletonStorage.getInstance().setServicesDescription("");
@@ -62,7 +62,7 @@ ProcedurePresenter pr;
         //recyclerView.setAdapter(mProcedureAdapter);
         //recyclerView.getAdapter().notifyDataSetChanged();
 
-
+// TODO: 26.02.2018 доделать оформление заказа через сотрудника 
         return view;
     }
 
@@ -71,6 +71,8 @@ ProcedurePresenter pr;
     public void startDateSelection() {
         SelectionScreenFragment fragment = new SelectionScreenFragment();
         getActivity().getSupportFragmentManager().popBackStack();
+        SingletonStorage.getInstance().setAssociateId(args.getInt("doctorId", 0));
+        SingletonStorage.getInstance().setAssociateName(args.getString("doctorName", ""));
         //BackStackTools.clearStack(getActivity().getSupportFragmentManager());
         android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, fragment);
@@ -80,9 +82,20 @@ ProcedurePresenter pr;
     }
 
     @Override
-    public void refreshList(List<ServicesModel> body) {
-        mProcedureAdapter = new ProcedureAdapter(body,pr);
-        recyclerView.setAdapter(mProcedureAdapter);
-        recyclerView.getAdapter().notifyDataSetChanged();
-    }
+    public void refreshList(List<Object> body) {
+            mAdapter = new ProcedureAdapter(body, pr);
+            recyclerView.setAdapter((ProcedureAdapter) mAdapter);
+            recyclerView.getAdapter().notifyDataSetChanged();
+        }
+//        mProcedureAdapter = new ProcedureAdapter(body, pr);
+//        recyclerView.setAdapter(mProcedureAdapter);
+//        recyclerView.getAdapter().notifyDataSetChanged();
+  //  }
+
+//    @Override
+//    public void refreshList(List<AssociateServicesModel> body) {
+//        mProcedureDoctorAdapter = new ProcedureDoctorAdapter(body, pr);
+//        recyclerView.setAdapter(mProcedureDoctorAdapter);
+//        recyclerView.getAdapter().notifyDataSetChanged();
+//    }
 }
