@@ -12,6 +12,11 @@
             android:id="@+id/doctor"
             android:icon="@drawable/assignment_ind"
             android:title="Сотрудники" />
+        <item
+            android:id="@+id/history"
+            android:icon="@drawable/assignment"
+            android:title="Мои записи" />
+
 
     </group>
 

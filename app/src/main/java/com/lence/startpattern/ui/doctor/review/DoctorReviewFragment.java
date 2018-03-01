@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.lence.startpattern.R;
 import com.lence.startpattern.model.DoctorReviewsModel;
@@ -17,14 +18,18 @@ import com.lence.startpattern.model.DoctorReviewsModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 @SuppressLint("ValidFragment")
-public class DoctorReviewFragment extends Fragment implements DoctorReviewMvp{
+public class DoctorReviewFragment extends Fragment implements DoctorReviewMvp {
     RecyclerView recyclerView;
     DoctorReviewAdapter mAdapter;
     DoctorReviewPresenter pr;
     List<String> posts = new ArrayList<>();
+    @BindView(R.id.createReview)
+    Button mCreateReview;
     private int mDoctorId;
 
     public DoctorReviewFragment() {
@@ -46,7 +51,7 @@ public class DoctorReviewFragment extends Fragment implements DoctorReviewMvp{
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);
-        Log.e("doctorId","doctorId "+mDoctorId);
+        Log.e("doctorId", "doctorId " + mDoctorId);
         pr = new DoctorReviewPresenter(this);
         pr.loadDoctorReview(mDoctorId);
         return view;
@@ -54,8 +59,15 @@ public class DoctorReviewFragment extends Fragment implements DoctorReviewMvp{
 
     @Override
     public void refreshList(List<DoctorReviewsModel> body) {
-        mAdapter = new DoctorReviewAdapter(body,pr);
+        mAdapter = new DoctorReviewAdapter(body, pr);
         recyclerView.setAdapter(mAdapter);
         recyclerView.getAdapter().notifyDataSetChanged();
+    }
+
+
+    @OnClick(R.id.createReview)
+    public void onViewClicked() {
+        CreateReviewDialog dialog = new CreateReviewDialog();
+        dialog.show(getActivity().getSupportFragmentManager(),"name");
     }
 }
