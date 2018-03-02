@@ -68,6 +68,10 @@ public class DoctorReviewFragment extends Fragment implements DoctorReviewMvp {
     @OnClick(R.id.createReview)
     public void onViewClicked() {
         CreateReviewDialog dialog = new CreateReviewDialog();
+        Bundle bundle = new Bundle();
+        bundle.putInt("doctorId",mDoctorId);
+
+        dialog.setArguments(bundle);
         dialog.show(getActivity().getSupportFragmentManager(),"name");
     }
 }
