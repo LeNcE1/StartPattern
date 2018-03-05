@@ -21,12 +21,12 @@ import android.widget.TextView;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.lence.startpattern.R;
+import com.lence.startpattern.model.DateMap;
 import com.lence.startpattern.ui.selectionScreen.SelectionScreenFragment;
 import com.lence.startpattern.utils.ChangeStyle;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,6 +60,7 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
     @BindView(R.id.calendarView)
     com.applandeo.materialcalendarview.CalendarView mCalendarView;
     private Calendar thisDay;
+    ArrayList<DateMap> dates;
 
     public DateSelectionFragment() {
         // Required empty public constructor
@@ -75,6 +76,7 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
 
         mContext = view.getContext();
         presenter = new DateSelectionPresenter(this);
+        presenter.loadTimeDoctor(1);
         ButterKnife.bind(this, view);
         TextView label = (TextView) getActivity().findViewById(R.id.label);
         label.setText("Выбор даты");
@@ -86,11 +88,11 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
 
         mCalendarView.setMinimumDate(today);
         mCalendarView.setMaximumDate(future);
-        List<Calendar> calendars = new ArrayList<>();
-        Calendar disableDay = Calendar.getInstance();
-        disableDay.set(2018, 1, 1);
-        calendars.add(disableDay);
-        mCalendarView.setDisabledDays(calendars);
+
+//        Calendar disableDay = Calendar.getInstance();
+//        disableDay.set(2018, 1, 1);
+//        calendars.add(disableDay);
+//        mCalendarView.setDisabledDays(calendars);
 
         Log.e("future", String.valueOf(future.get(Calendar.MONTH)));
 
@@ -122,7 +124,7 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
             public void onDayClick(EventDay eventDay) {
                 thisDay = eventDay.getCalendar();
 
-                if (thisDay.get(Calendar.YEAR) == 2018 && thisDay.get(Calendar.MONTH) == 0 && thisDay.get(Calendar.DATE) == 24) {
+                if (thisDay.get(Calendar.YEAR) == 2018 && thisDay.get(Calendar.MONTH) == 2 && thisDay.get(Calendar.DATE) == 23) {
 
                     rv.scrollToPosition(thisDay.get(Calendar.DATE));
                     rv.scrollBy(62, 0);
@@ -149,11 +151,16 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
         mRvDay.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         mRvEven.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         mRvMorning.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
-        ArrayList<String> arrayList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            arrayList.add("1" + i + ":00");
+        //Log.e("map", dates.get(5).getKey());
+        ArrayList<String> keys = new ArrayList<>();
+        for (DateMap d : dates) {
+            keys.add(d.getKey());
         }
-
+        int index = keys.indexOf(thisDay.get(Calendar.YEAR) + "-" + ((thisDay.get(Calendar.MONTH) + 1) < 10 ? ("0" + (thisDay.get(Calendar.MONTH) + 1)) : (thisDay.get(Calendar.MONTH) + 1)) + "-" + thisDay.get(Calendar.DATE));
+        Log.e("index", (thisDay.get(Calendar.YEAR) + "-" + ((thisDay.get(Calendar.MONTH) + 1) < 10 ? ("0" + (thisDay.get(Calendar.MONTH) + 1)) : (thisDay.get(Calendar.MONTH) + 1)) + "-" + thisDay.get(Calendar.DATE)));
+        Log.e("index", index + "");
+        ArrayList<String> arrayList = dates.get(index).getValue();
+// TODO: 05.03.2018 добавить проверку на пустоту списка и разделение на время дня
         TimesAdapter timesAdapter = new TimesAdapter(arrayList, presenter);
         mRvDay.setAdapter(timesAdapter);
         mRvEven.setAdapter(timesAdapter);
@@ -174,6 +181,12 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.addToBackStack("stack");
         ft.commit();
+    }
+
+    @Override
+    public void setDates(ArrayList<DateMap> map) {
+        //Log.e("map", map.get(5).getKey());
+        dates = map;
     }
 
 

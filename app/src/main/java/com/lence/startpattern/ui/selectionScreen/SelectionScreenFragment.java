@@ -61,11 +61,12 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
         ChangeStyle.whiteColor(getActivity());
         ArrayList<Object> l = new ArrayList<>();
         l.add(123);
-        if(((ArrayList<?>) l).get(0) instanceof String)
-        Log.e("list", "list "+l.getClass());
-        else Log.e("list", "lis "+l.getClass());
+        if (((ArrayList<?>) l).get(0) instanceof String)
+            Log.e("list", "list " + l.getClass());
+        else Log.e("list", "lis " + l.getClass());
         mPresenter = new SelectionScreenPresenter(this);
         ButterKnife.bind(this, view);
+
         Log.e("Storage", SingletonStorage.getInstance().getServicesId() + " "
                 + SingletonStorage.getInstance().getServicesDescription() + " "
                 + SingletonStorage.getInstance().getAssociateId() + " "
@@ -76,9 +77,29 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
         mTextProcedure.setText(SingletonStorage.getInstance().getServicesDescription().equals("") ? "Выберите услугу" : SingletonStorage.getInstance().getServicesDescription());
         mTextAssociate.setText(SingletonStorage.getInstance().getAssociateName().equals("") ? "Выберите специалиста" : SingletonStorage.getInstance().getAssociateName());
         mTextDate.setText(SingletonStorage.getInstance().getDate().equals("") ? "Выберите время" : SingletonStorage.getInstance().getDate() + " " + SingletonStorage.getInstance().getTime());
+
+//        enable(mAssociate,false);
+//        enable(mDate,false);
+//        mNextStep.setEnabled(false);
+//        if (!SingletonStorage.getInstance().getServicesDescription().equals("")) {
+//            enable(mAssociate,true);
+//        }
+//        if (!SingletonStorage.getInstance().getAssociateName().equals("")) {
+//            enable(mDate,true);
+//        }
+//        if (!SingletonStorage.getInstance().getDate().equals("")) {
+//            mNextStep.setEnabled(true);
+//        }
         return view;
     }
 
+    private void enable(View view,boolean en) {
+        view.setEnabled(en);
+        if (!en)
+            view.setBackgroundColor(getResources().getColor(R.color.disabledGray));
+        else
+            view.setBackgroundColor(getResources().getColor(R.color.white));
+    }
 
     @OnClick(R.id.procedure)
     public void onMProcedureClicked() {
