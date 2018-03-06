@@ -9,19 +9,23 @@ import android.widget.TextView;
 
 import com.lence.startpattern.R;
 
-import java.util.List;
+import java.util.ArrayList;
 
 
 public class PickerAdapter extends RecyclerView.Adapter<PickerAdapter.TextVH> {
 
     private Context context;
-    private List<Integer> dataList;
+    ArrayList<String> dataList;
     private RecyclerView recyclerView;
 
-    public PickerAdapter(Context context, List<Integer> dataList, RecyclerView recyclerView) {
+    public PickerAdapter(Context context, ArrayList<String> dataList, RecyclerView recyclerView) {
         this.context = context;
-        this.dataList = dataList;
         this.recyclerView = recyclerView;
+        if(!dataList.get(0).equals("00:00")) {
+            dataList.add(0, "00:00");
+            dataList.add("00:00");
+        }
+        this.dataList = dataList;
     }
 
     @Override
@@ -35,8 +39,7 @@ public class PickerAdapter extends RecyclerView.Adapter<PickerAdapter.TextVH> {
     @Override
     public void onBindViewHolder(TextVH holder, final int position) {
         TextVH textVH = holder;
-
-        if (dataList.get(position) >= 1 && dataList.get(position) <= 31) {
+        if (position >= 1 && position < dataList.size()-1) {
             textVH.pickerTxt.setText(dataList.get(position).toString());
             textVH.pickerTxt.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -48,7 +51,7 @@ public class PickerAdapter extends RecyclerView.Adapter<PickerAdapter.TextVH> {
             });
         }
         else {
-            textVH.pickerTxt.setText("");
+            textVH.pickerTxt.setText("     ");
         }
     }
 
@@ -57,7 +60,7 @@ public class PickerAdapter extends RecyclerView.Adapter<PickerAdapter.TextVH> {
         return dataList.size();
     }
 
-    public void swapData(List<Integer> newData) {
+    public void swapData(ArrayList<String> newData) {
         dataList = newData;
         notifyDataSetChanged();
     }

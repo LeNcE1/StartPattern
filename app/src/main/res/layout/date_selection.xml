@@ -3,157 +3,83 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
     tools:context=".ui.dateSelection.DateSelectionFragment">
 
     <com.applandeo.materialcalendarview.CalendarView
         android:id="@+id/calendarView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/status"
         android:layout_alignParentTop="true"
         android:elevation="4dp"
         app:daysLabelsColor="@color/blue"
+        app:disabledDaysLabelsColor="@color/gray"
         app:forwardButtonSrc="@drawable/arrow_right"
         app:headerColor="@color/white"
         app:headerLabelColor="@color/textHead"
+        app:pagesColor="@color/white"
+        app:previousButtonSrc="@drawable/arrow_left"
         app:selectionColor="@color/blue"
         app:selectionLabelColor="@color/white"
         app:todayLabelColor="@color/colorAccent"
-        app:pagesColor="@color/white"
-        app:previousButtonSrc="@drawable/arrow_left"
         app:type="one_day_picker" />
 
     <android.support.v7.widget.CardView
         android:id="@+id/time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/calendarView"
+        android:layout_marginTop="2dp"
         android:elevation="4dp"
         android:visibility="gone"
         app:cardCornerRadius="2dp">
 
-        <LinearLayout
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <TextView
+            <ImageView
+                android:id="@+id/leftArrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/arrow_left" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center_horizontal"
-                android:text="vahn" />
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/rightArrow"
+                android:layout_toRightOf="@id/leftArrow"
+                android:clipToPadding="false"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/leftArrow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    app:srcCompat="@drawable/arrow_left" />
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@id/rightArrow"
-                    android:layout_toRightOf="@id/leftArrow"
-                    android:clipToPadding="false"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp" />
-
-                <ImageView
-                    android:id="@+id/rightArrow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    app:srcCompat="@drawable/arrow_right" />
-
-            </RelativeLayout>
-
-            <TextView
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/rightArrow"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:gravity="center_horizontal"
-                android:text="gn" />
-        </LinearLayout>
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/arrow_right" />
+
+        </RelativeLayout>
 
     </android.support.v7.widget.CardView>
 
-    <LinearLayout
-        android:id="@+id/freeTime"
+
+    <Button
+        android:id="@+id/next"
+        style="@style/Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/time"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Утро"
-            android:textColor="@color/textHead"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvMorning"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="День"
-            android:textColor="@color/textHead"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvDay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Вечер"
-            android:textColor="@color/textHead"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvEven"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" />
-    </LinearLayout>
-
-
-    <TextView
-        android:id="@+id/status"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="56dp"
-        android:layout_marginRight="56dp"
-        android:layout_marginTop="16dp"
-        android:text="выходной"
-        android:textSize="16dp" />
+        android:layout_marginTop="4dp"
+        android:visibility="gone"
+        android:text="button" />
 </RelativeLayout>
