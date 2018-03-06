@@ -112,7 +112,7 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
             public void onDayClick(EventDay eventDay) {
                 thisDay = eventDay.getCalendar();
                 Calendar today = Calendar.getInstance();
-                if (disableDays.indexOf(thisDay) == -1&&!thisDay.before(today)) {
+                if (disableDays.indexOf(thisDay) == -1 && !thisDay.before(today)) {
                     rv.scrollToPosition(thisDay.get(Calendar.DATE));
                     rv.scrollBy(62, 0);
                     mTime.setVisibility(View.VISIBLE);
@@ -144,7 +144,7 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
                 + (thisDay.get(Calendar.YEAR) + "-"
                 + ((thisDay.get(Calendar.MONTH) + 1) < 10 ? ("0" + (thisDay.get(Calendar.MONTH) + 1)) : (thisDay.get(Calendar.MONTH) + 1)) + "-"
                 + (thisDay.get(Calendar.DATE) < 10 ? ("0" + thisDay.get(Calendar.DATE)) : thisDay.get(Calendar.DATE)))
-                + " на " + (arrayList.get(0).equals("00:00")?arrayList.get(1):arrayList.get(0)));
+                + " на " + (arrayList.get(0).equals("00:00") ? arrayList.get(1) : arrayList.get(0)));
         adapter = new PickerAdapter(getContext(), arrayList, rv);
         PickerLayoutManager pickerLayoutManager = new PickerLayoutManager(getContext(), PickerLayoutManager.HORIZONTAL, false);
         pickerLayoutManager.setOnScrollStopListener(new PickerLayoutManager.onScrollStopListener() {
