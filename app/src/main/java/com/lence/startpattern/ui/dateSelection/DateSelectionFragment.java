@@ -10,7 +10,6 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +21,7 @@ import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
 import com.lence.startpattern.R;
+import com.lence.startpattern.SingletonStorage;
 import com.lence.startpattern.model.DateMap;
 import com.lence.startpattern.ui.selectionScreen.SelectionScreenFragment;
 import com.lence.startpattern.utils.ChangeStyle;
@@ -52,10 +52,15 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
     CalendarView mCalendarView;
     @BindView(R.id.next)
     Button mNext;
+    TextView label;
     private Calendar thisDay;
     ArrayList<DateMap> dates;
     ArrayList<String> keys;
     ArrayList<Calendar> disableDays;
+    PickerLayoutManager pickerLayoutManager;
+    ArrayList<String> arrayList;
+    String date;
+    String time;
 
     public DateSelectionFragment() {
         // Required empty public constructor
@@ -65,7 +70,7 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new DateSelectionPresenter(this);
-        presenter.loadTimeDoctor(1);
+        presenter.loadTimeDoctor(SingletonStorage.getInstance().getAssociateId());
     }
 
     @Override
@@ -78,24 +83,23 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
         mContext = view.getContext();
 
         ButterKnife.bind(this, view);
-        TextView label = (TextView) getActivity().findViewById(R.id.label);
+        label = (TextView) getActivity().findViewById(R.id.label);
         label.setText("Выбор даты");
         Calendar today = Calendar.getInstance();
-        today.set(today.get(Calendar.YEAR), today.get(Calendar.MONTH), today.get(Calendar.DATE) - 1);
+        today.set(today.get(Calendar.YEAR), today.get(Calendar.MONTH), (today.get(Calendar.DATE)) - 1);
+
         Calendar future = Calendar.getInstance();
         future.set(today.get(Calendar.YEAR), today.get(Calendar.MONTH) + 5, 31);
         SnapHelper snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(rv);
-// TODO: 06.03.2018 разобраться почему календарь начинается с января
+// TODO: 06.03.2018 разобраться почему не выбирается сегодня
+//        Log.e("today", String.valueOf(today.get(Calendar.YEAR))
+//                + "-" + String.valueOf(today.get(Calendar.MONTH))
+//                + "-" + String.valueOf(today.get(Calendar.DATE)));
         mCalendarView.setMinimumDate(today);
         mCalendarView.setMaximumDate(future);
 
-//        Calendar disableDay = Calendar.getInstance();
-//        disableDay.set(2018, 1, 1);
-//        calendars.add(disableDay);
-//        mCalendarView.setDisabledDays(calendars);
-
-        Log.e("future", String.valueOf(future.get(Calendar.MONTH)));
+        //Log.e("future", String.valueOf(future.get(Calendar.MONTH)));
 
 //        Log.e("future", "future");
 
@@ -114,7 +118,7 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
                 Calendar today = Calendar.getInstance();
                 if (disableDays.indexOf(thisDay) == -1 && !thisDay.before(today)) {
                     rv.scrollToPosition(thisDay.get(Calendar.DATE));
-                    rv.scrollBy(62, 0);
+                    rv.scrollBy(120, 0);
                     mTime.setVisibility(View.VISIBLE);
                     mNext.setVisibility(View.VISIBLE);
 
@@ -135,28 +139,54 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
         int index = keys.indexOf(thisDay.get(Calendar.YEAR) + "-"
                 + ((thisDay.get(Calendar.MONTH) + 1) < 10 ? ("0" + (thisDay.get(Calendar.MONTH) + 1)) : (thisDay.get(Calendar.MONTH) + 1)) + "-"
                 + (thisDay.get(Calendar.DATE) < 10 ? ("0" + thisDay.get(Calendar.DATE)) : thisDay.get(Calendar.DATE)));
-        Log.e("index", thisDay.get(Calendar.YEAR) + "-"
+//        Log.e("index", thisDay.get(Calendar.YEAR) + "-"
+//                + ((thisDay.get(Calendar.MONTH) + 1) < 10 ? ("0" + (thisDay.get(Calendar.MONTH) + 1)) : (thisDay.get(Calendar.MONTH) + 1)) + "-"
+//                + (thisDay.get(Calendar.DATE) < 10 ? ("0" + thisDay.get(Calendar.DATE)) : thisDay.get(Calendar.DATE)));
+        //Log.e("index", index + "");
+        arrayList = dates.get(index).getValue();
+        date = (thisDay.get(Calendar.YEAR) + "-"
                 + ((thisDay.get(Calendar.MONTH) + 1) < 10 ? ("0" + (thisDay.get(Calendar.MONTH) + 1)) : (thisDay.get(Calendar.MONTH) + 1)) + "-"
                 + (thisDay.get(Calendar.DATE) < 10 ? ("0" + thisDay.get(Calendar.DATE)) : thisDay.get(Calendar.DATE)));
-        Log.e("index", index + "");
-        ArrayList<String> arrayList = dates.get(index).getValue();
-        mNext.setText("Записаться "
-                + (thisDay.get(Calendar.YEAR) + "-"
-                + ((thisDay.get(Calendar.MONTH) + 1) < 10 ? ("0" + (thisDay.get(Calendar.MONTH) + 1)) : (thisDay.get(Calendar.MONTH) + 1)) + "-"
-                + (thisDay.get(Calendar.DATE) < 10 ? ("0" + thisDay.get(Calendar.DATE)) : thisDay.get(Calendar.DATE)))
-                + " на " + (arrayList.get(0).equals("00:00") ? arrayList.get(1) : arrayList.get(0)));
+        time = arrayList.get(0).equals("00:00") ? arrayList.get(1) : arrayList.get(0);
+        label.setText(date + " " + time);
         adapter = new PickerAdapter(getContext(), arrayList, rv);
-        PickerLayoutManager pickerLayoutManager = new PickerLayoutManager(getContext(), PickerLayoutManager.HORIZONTAL, false);
+        pickerLayoutManager = new PickerLayoutManager(getContext(), PickerLayoutManager.HORIZONTAL, false);
+
         pickerLayoutManager.setOnScrollStopListener(new PickerLayoutManager.onScrollStopListener() {
             @Override
             public void selectedView(View view) {
                 TextView text = view.findViewById(R.id.picker_item);
                 //Log.e("text",text.getText().toString());
-                mNext.setText("Записаться "
-                        + (thisDay.get(Calendar.YEAR) + "-"
-                        + ((thisDay.get(Calendar.MONTH) + 1) < 10 ? ("0" + (thisDay.get(Calendar.MONTH) + 1)) : (thisDay.get(Calendar.MONTH) + 1)) + "-"
-                        + (thisDay.get(Calendar.DATE) < 10 ? ("0" + thisDay.get(Calendar.DATE)) : thisDay.get(Calendar.DATE)))
-                        + " на " + text.getText().toString());
+//                Log.e("Last", String.valueOf(pickerLayoutManager.findLastVisibleItemPosition()));
+//                Log.e("First", String.valueOf(pickerLayoutManager.findFirstVisibleItemPosition()));
+//                Log.e("this", String.valueOf(arrayList.get(pickerLayoutManager.findLastCompletelyVisibleItemPosition())));
+                time = text.getText().toString();
+                label.setText(date + " " + time);
+            }
+        });
+
+        mLeftArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!arrayList.get(pickerLayoutManager.findFirstCompletelyVisibleItemPosition()).equals("00:00")) {
+                    rv.scrollToPosition(pickerLayoutManager.findFirstVisibleItemPosition());
+                    rv.scrollBy(-184, 0);
+                    time = arrayList.get(pickerLayoutManager.findLastCompletelyVisibleItemPosition());
+                    label.setText(date + " " + time);
+
+                }
+            }
+        });
+
+        mRightArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!arrayList.get(pickerLayoutManager.findLastCompletelyVisibleItemPosition()).equals("00:00")) {
+                    rv.scrollToPosition(pickerLayoutManager.findLastVisibleItemPosition());
+                    rv.scrollBy(184, 0);
+                    time = arrayList.get(pickerLayoutManager.findFirstCompletelyVisibleItemPosition());
+                    label.setText(date + " " + time);
+                }
             }
         });
 //        pickerLayoutManager.setChangeAlpha(false);
@@ -171,7 +201,6 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
     @Override
     public void startOnlineRecord() {
         SelectionScreenFragment fragment = new SelectionScreenFragment();
-        // TODO: 29.01.2018 add date bundle 
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
@@ -190,41 +219,16 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
             keys.add(d.getKey());
             if (d.getValue().isEmpty()) {
                 String[] s = d.getKey().split("-");
-                Log.e("cal", s[0] + " " + s[1] + " " + s[2]);
+                //Log.e("cal", s[0] + " " + s[1] + " " + s[2]);
                 Calendar c = Calendar.getInstance();
                 c.set(Integer.valueOf(s[0]), (Integer.valueOf(s[1]) - 1), Integer.valueOf(s[2]));
-                Log.e("cal", String.valueOf(c.get(Calendar.MONTH)));
+                // Log.e("cal", String.valueOf(c.get(Calendar.MONTH)));
                 disableDays.add(c);
             }
 
         }
         mCalendarView.setDisabledDays(disableDays);
-    }
-
-
-    //@OnClick(R.id.status)
-    // public void onViewClicked() {
-//        int day = mDatePicker.getDayOfMonth();
-//        int month = mDatePicker.getMonth();
-//        int year = mDatePicker.getYear();
-//        TimeSelectionFragment fragment = new TimeSelectionFragment();
-//        FragmentManager fragmentManager = getFragmentManager();
-//        fragmentManager.beginTransaction()          // получаем экземпляр FragmentTransaction
-//                .replace(R.id.content, fragment)
-//                .addToBackStack("myStack")
-//                .commit();
-
-
-    //  }
-
-
-    @OnClick(R.id.leftArrow)
-    public void onMLeftArrowClicked() {
-
-    }
-
-    @OnClick(R.id.rightArrow)
-    public void onMRightArrowClicked() {
+        mCalendarView.showCurrentMonthPage();
     }
 
 
@@ -238,5 +242,13 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
 
     @OnClick(R.id.next)
     public void onViewClicked() {
+        SingletonStorage.getInstance().setDate(date);
+        SingletonStorage.getInstance().setTime(time);
+        SelectionScreenFragment fragment = new SelectionScreenFragment();
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content, fragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        //ft.addToBackStack("stack");
+        ft.commit();
     }
 }

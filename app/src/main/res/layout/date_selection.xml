@@ -1,85 +1,91 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    tools:context=".ui.dateSelection.DateSelectionFragment">
+    android:layout_height="match_parent">
 
-    <com.applandeo.materialcalendarview.CalendarView
-        android:id="@+id/calendarView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:elevation="4dp"
-        app:daysLabelsColor="@color/blue"
-        app:disabledDaysLabelsColor="@color/gray"
-        app:forwardButtonSrc="@drawable/arrow_right"
-        app:headerColor="@color/white"
-        app:headerLabelColor="@color/textHead"
-        app:pagesColor="@color/white"
-        app:previousButtonSrc="@drawable/arrow_left"
-        app:selectionColor="@color/blue"
-        app:selectionLabelColor="@color/white"
-        app:todayLabelColor="@color/colorAccent"
-        app:type="one_day_picker" />
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/time"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/calendarView"
-        android:layout_marginTop="2dp"
-        android:elevation="4dp"
-        android:visibility="gone"
-        app:cardCornerRadius="2dp">
+        android:layout_height="match_parent"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        tools:context=".ui.dateSelection.DateSelectionFragment">
 
+        <com.applandeo.materialcalendarview.CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:elevation="4dp"
+            app:daysLabelsColor="@color/blue"
+            app:disabledDaysLabelsColor="@color/gray"
+            app:forwardButtonSrc="@drawable/arrow_right"
+            app:headerColor="@color/white"
+            app:headerLabelColor="@color/textHead"
+            app:pagesColor="@color/white"
+            app:previousButtonSrc="@drawable/arrow_left"
+            app:selectionColor="@color/blue"
+            app:selectionLabelColor="@color/white"
+            app:todayLabelColor="@color/colorAccent"
+            app:type="one_day_picker" />
 
-        <RelativeLayout
+        <android.support.v7.widget.CardView
+            android:id="@+id/time"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_below="@id/calendarView"
+            android:layout_marginTop="2dp"
+            android:elevation="4dp"
+            android:visibility="gone"
+            app:cardCornerRadius="2dp">
 
-            <ImageView
-                android:id="@+id/leftArrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                app:srcCompat="@drawable/arrow_left" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@id/rightArrow"
-                android:layout_toRightOf="@id/leftArrow"
-                android:clipToPadding="false"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp" />
+                android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/rightArrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                app:srcCompat="@drawable/arrow_right" />
+                <ImageView
+                    android:id="@+id/leftArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/arrow_left" />
 
-        </RelativeLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/rightArrow"
+                    android:layout_toRightOf="@id/leftArrow"
+                    android:clipToPadding="false"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp" />
 
-    </android.support.v7.widget.CardView>
+                <ImageView
+                    android:id="@+id/rightArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/arrow_right" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
 
 
-    <Button
-        android:id="@+id/next"
-        style="@style/Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/time"
-        android:layout_marginTop="4dp"
-        android:visibility="gone"
-        android:text="button" />
-</RelativeLayout>
+        <Button
+            android:id="@+id/next"
+            style="@style/Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/time"
+            android:layout_marginTop="4dp"
+            android:text="Записаться"
+            android:textColor="@color/white"
+            android:visibility="gone" />
+    </RelativeLayout>
+</ScrollView>

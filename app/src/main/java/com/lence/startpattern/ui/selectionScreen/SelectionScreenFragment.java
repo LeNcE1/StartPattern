@@ -1,6 +1,7 @@
 package com.lence.startpattern.ui.selectionScreen;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -78,18 +79,19 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
         mTextAssociate.setText(SingletonStorage.getInstance().getAssociateName().equals("") ? "Выберите специалиста" : SingletonStorage.getInstance().getAssociateName());
         mTextDate.setText(SingletonStorage.getInstance().getDate().equals("") ? "Выберите время" : SingletonStorage.getInstance().getDate() + " " + SingletonStorage.getInstance().getTime());
 
-//        enable(mAssociate,false);
-//        enable(mDate,false);
-//        mNextStep.setEnabled(false);
-//        if (!SingletonStorage.getInstance().getServicesDescription().equals("")) {
-//            enable(mAssociate,true);
-//        }
-//        if (!SingletonStorage.getInstance().getAssociateName().equals("")) {
-//            enable(mDate,true);
-//        }
-//        if (!SingletonStorage.getInstance().getDate().equals("")) {
-//            mNextStep.setEnabled(true);
-//        }
+        enable(mAssociate,false);
+        enable(mDate,false);
+        mNextStep.setEnabled(false);
+        if (!SingletonStorage.getInstance().getServicesDescription().equals("")) {
+            enable(mAssociate,true);
+        }
+        if (!SingletonStorage.getInstance().getAssociateName().equals("")) {
+            enable(mDate,true);
+        }
+        if (!SingletonStorage.getInstance().getDate().equals("")) {
+            mNextStep.setEnabled(true);
+            mNextStep.setTextColor(Color.WHITE);
+        }
         return view;
     }
 
