@@ -11,6 +11,5 @@ import java.util.Calendar;
 public interface DateSelectionMvp {
     void showCalendar();
     void showFreeTime(Context context, Calendar thisDay);
-    void startOnlineRecord();
     void setDates(ArrayList<DateMap> map);
 }

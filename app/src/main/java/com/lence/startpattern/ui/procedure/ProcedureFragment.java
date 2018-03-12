@@ -1,9 +1,10 @@
 package com.lence.startpattern.ui.procedure;
 
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,10 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.lence.startpattern.MainActivity;
 import com.lence.startpattern.R;
 import com.lence.startpattern.SingletonStorage;
-import com.lence.startpattern.ui.selectionScreen.SelectionScreenFragment;
-import com.lence.startpattern.utils.ChangeStyle;
 
 import java.util.List;
 
@@ -23,9 +23,10 @@ public class ProcedureFragment extends Fragment implements ProcedureMvp {
     ProcedurePresenter pr;
     RecyclerView recyclerView;
     Object mAdapter;
-//    ProcedureAdapter mProcedureAdapter;
+    //    ProcedureAdapter mProcedureAdapter;
 //    ProcedureDoctorAdapter mProcedureDoctorAdapter;
     Bundle args;
+    ProgressDialog dialog;
 
     public ProcedureFragment() {
         // Required empty public constructor
@@ -36,11 +37,25 @@ public class ProcedureFragment extends Fragment implements ProcedureMvp {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.procedure, container, false);
-        ChangeStyle.whiteColor(getActivity());
+        //ChangeStyle.whiteColor(getActivity());
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         pr = new ProcedurePresenter(this);
         TextView label = (TextView) getActivity().findViewById(R.id.label);
         label.setText("Процедура");
+
+
+        dialog = new ProgressDialog(getActivity(),R.style.full_screen_dialog){
+            @Override
+            protected void onCreate(Bundle savedInstanceState) {
+                super.onCreate(savedInstanceState);
+                setContentView(R.layout.dialog_progress);
+                getWindow().setLayout(ViewGroup.LayoutParams.FILL_PARENT,
+                        ViewGroup.LayoutParams.FILL_PARENT);
+            }
+        };
+
+        dialog.setCancelable(false);
+        dialog.show();
 
         args = getArguments();
         //Log.e("bundle", "bundle" + args.getInt("id"));
@@ -69,28 +84,22 @@ public class ProcedureFragment extends Fragment implements ProcedureMvp {
 
     @Override
     public void startDateSelection() {
-        SelectionScreenFragment fragment = new SelectionScreenFragment();
-        getActivity().getSupportFragmentManager().popBackStack();
         SingletonStorage.getInstance().setAssociateId(args.getInt("doctorId", 0));
         SingletonStorage.getInstance().setAssociateName(args.getString("doctorName", ""));
-        //BackStackTools.clearStack(getActivity().getSupportFragmentManager());
-        android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, fragment);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        //ft.addToBackStack("stack");
-        ft.commit();
+        startActivity(new Intent(getActivity(), MainActivity.class));
     }
 
     @Override
     public void refreshList(List<Object> body) {
-            mAdapter = new ProcedureAdapter(body, pr);
-            recyclerView.setAdapter((ProcedureAdapter) mAdapter);
-            recyclerView.getAdapter().notifyDataSetChanged();
-        }
+        mAdapter = new ProcedureAdapter(body, pr);
+        recyclerView.setAdapter((ProcedureAdapter) mAdapter);
+        recyclerView.getAdapter().notifyDataSetChanged();
+        dialog.dismiss();
+    }
 //        mProcedureAdapter = new ProcedureAdapter(body, pr);
 //        recyclerView.setAdapter(mProcedureAdapter);
 //        recyclerView.getAdapter().notifyDataSetChanged();
-  //  }
+    //  }
 
 //    @Override
 //    public void refreshList(List<AssociateServicesModel> body) {

@@ -1,16 +1,16 @@
 package com.lence.startpattern.ui.dateSelection;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,11 +20,10 @@ import android.widget.TextView;
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
+import com.lence.startpattern.MainActivity;
 import com.lence.startpattern.R;
 import com.lence.startpattern.SingletonStorage;
 import com.lence.startpattern.model.DateMap;
-import com.lence.startpattern.ui.selectionScreen.SelectionScreenFragment;
-import com.lence.startpattern.utils.ChangeStyle;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -35,7 +34,7 @@ import butterknife.OnClick;
 import travel.ithaka.android.horizontalpickerlib.PickerLayoutManager;
 
 
-public class DateSelectionFragment extends Fragment implements DateSelectionMvp {
+public class DateSelectionActivity extends AppCompatActivity implements DateSelectionMvp {
     DateSelectionPresenter presenter;
 
     @BindView(R.id.rv)
@@ -61,32 +60,41 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
     ArrayList<String> arrayList;
     String date;
     String time;
-
-    public DateSelectionFragment() {
-        // Required empty public constructor
-    }
+    ProgressDialog dialog;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new DateSelectionPresenter(this);
         presenter.loadTimeDoctor(SingletonStorage.getInstance().getAssociateId());
+        dialog = new ProgressDialog(this,R.style.full_screen_dialog){
+            @Override
+            protected void onCreate(Bundle savedInstanceState) {
+                super.onCreate(savedInstanceState);
+                setContentView(R.layout.dialog_progress);
+                getWindow().setLayout(ViewGroup.LayoutParams.FILL_PARENT,
+                        ViewGroup.LayoutParams.FILL_PARENT);
+            }
+        };
+
+        dialog.setCancelable(false);
+        dialog.show();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.date_selection, container, false);
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        setContentView(R.layout.date_selection);
+        mContext = this;
 
-        ChangeStyle.whiteColor(getActivity());
-
-        mContext = view.getContext();
-
-        ButterKnife.bind(this, view);
-        label = (TextView) getActivity().findViewById(R.id.label);
+        ButterKnife.bind(this);
+        label = (TextView) findViewById(R.id.label);
         label.setText("Выбор даты");
         Calendar today = Calendar.getInstance();
         today.set(today.get(Calendar.YEAR), today.get(Calendar.MONTH), (today.get(Calendar.DATE)) - 1);
+
+
+
 
         Calendar future = Calendar.getInstance();
         future.set(today.get(Calendar.YEAR), today.get(Calendar.MONTH) + 5, 31);
@@ -127,8 +135,9 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
             }
 
         });
-        return view;
+
     }
+
 
     @Override
     public void showFreeTime(Context context, final Calendar thisDay) {
@@ -149,8 +158,8 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
                 + (thisDay.get(Calendar.DATE) < 10 ? ("0" + thisDay.get(Calendar.DATE)) : thisDay.get(Calendar.DATE)));
         time = arrayList.get(0).equals("00:00") ? arrayList.get(1) : arrayList.get(0);
         label.setText(date + " " + time);
-        adapter = new PickerAdapter(getContext(), arrayList, rv);
-        pickerLayoutManager = new PickerLayoutManager(getContext(), PickerLayoutManager.HORIZONTAL, false);
+        adapter = new PickerAdapter(this, arrayList, rv);
+        pickerLayoutManager = new PickerLayoutManager(this, PickerLayoutManager.HORIZONTAL, false);
 
         pickerLayoutManager.setOnScrollStopListener(new PickerLayoutManager.onScrollStopListener() {
             @Override
@@ -198,15 +207,6 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
 
     }
 
-    @Override
-    public void startOnlineRecord() {
-        SelectionScreenFragment fragment = new SelectionScreenFragment();
-        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, fragment);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        ft.addToBackStack("stack");
-        ft.commit();
-    }
 
     @Override
     public void setDates(ArrayList<DateMap> map) {
@@ -229,6 +229,7 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
         }
         mCalendarView.setDisabledDays(disableDays);
         mCalendarView.showCurrentMonthPage();
+        dialog.dismiss();
     }
 
 
@@ -244,11 +245,6 @@ public class DateSelectionFragment extends Fragment implements DateSelectionMvp 
     public void onViewClicked() {
         SingletonStorage.getInstance().setDate(date);
         SingletonStorage.getInstance().setTime(time);
-        SelectionScreenFragment fragment = new SelectionScreenFragment();
-        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, fragment);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        //ft.addToBackStack("stack");
-        ft.commit();
+        startActivity(new Intent(this, MainActivity.class));
     }
 }

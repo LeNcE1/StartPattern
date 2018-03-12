@@ -14,9 +14,8 @@ import android.widget.ImageView;
 
 import com.lence.startpattern.ui.associateAll.AssociateAllListFragment;
 import com.lence.startpattern.ui.selectionScreen.SelectionScreenFragment;
-import com.lence.startpattern.ui.service.ServiceFragment;
+import com.lence.startpattern.ui.service.ServiceActivity;
 import com.lence.startpattern.ui.sessionHistory.SessionHistoryFragment;
-import com.lence.startpattern.utils.BackStackTools;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -58,20 +57,20 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    @Override
-    public void onBackPressed() {
-        android.support.v4.app.FragmentManager fragmentManager = this.getSupportFragmentManager();
-        // Log.e("BackStackEntryCount", String.valueOf());
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            if (fragmentManager.getBackStackEntryCount() > 1) {
-                super.onBackPressed();
-            }
-        }
-    }
+//    @Override
+//    public void onBackPressed() {
+//        android.support.v4.app.FragmentManager fragmentManager = this.getSupportFragmentManager();
+//        // Log.e("BackStackEntryCount", String.valueOf());
+//
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        if (drawer.isDrawerOpen(GravityCompat.START)) {
+//            drawer.closeDrawer(GravityCompat.START);
+//        } else {
+//            if (fragmentManager.getBackStackEntryCount() > 1) {
+//                super.onBackPressed();
+//            }
+//        }
+//    }
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
@@ -102,11 +101,11 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.online_record) {
-            if (!this.getClass().equals(ServiceFragment.class)) {
+            if (!this.getClass().equals(ServiceActivity.class)) {
 
                 SelectionScreenFragment fragment = new SelectionScreenFragment();
                 android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-                BackStackTools.clearStack(fm);
+                //BackStackTools.clearStack(fm);
                 FragmentTransaction ft = fm.beginTransaction();
 
                 ft.replace(R.id.content, fragment);
@@ -116,7 +115,7 @@ public class MainActivity extends AppCompatActivity
             }
         } else if (id == R.id.doctor) {
             android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-            BackStackTools.clearStack(fm);
+           // BackStackTools.clearStack(fm);
             AssociateAllListFragment fragment = new AssociateAllListFragment();
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.content, fragment);
@@ -125,7 +124,7 @@ public class MainActivity extends AppCompatActivity
             ft.commit();
         } else if (id == R.id.history) {
             android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-            BackStackTools.clearStack(fm);
+            //BackStackTools.clearStack(fm);
             SessionHistoryFragment fragment = new SessionHistoryFragment();
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.content, fragment);

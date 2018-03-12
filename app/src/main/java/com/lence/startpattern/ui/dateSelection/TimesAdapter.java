@@ -56,13 +56,6 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.RibotViewHol
 
         final String example = String.valueOf(mRibots.get(position));
         holder.mPickerItem.setText(example);
-        holder.mPickerItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pr.startOnlineRecord();
-            }
-        });
-
     }
 
 

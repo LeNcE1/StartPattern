@@ -71,7 +71,4 @@ public class DateSelectionPresenter {
 
     }
 
-    public void startOnlineRecord() {
-        mMvp.startOnlineRecord();
-    }
 }

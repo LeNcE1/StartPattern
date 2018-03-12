@@ -1,6 +1,7 @@
 package com.lence.startpattern.ui.selectionScreen;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,13 +16,11 @@ import android.widget.TextView;
 
 import com.lence.startpattern.R;
 import com.lence.startpattern.SingletonStorage;
-import com.lence.startpattern.ui.associate.AssociateListFragment;
+import com.lence.startpattern.ui.associate.AssociateListActivity;
 import com.lence.startpattern.ui.createRecord.CreateRecordFragment;
-import com.lence.startpattern.ui.dateSelection.DateSelectionFragment;
-import com.lence.startpattern.ui.service.ServiceFragment;
+import com.lence.startpattern.ui.dateSelection.DateSelectionActivity;
+import com.lence.startpattern.ui.service.ServiceActivity;
 import com.lence.startpattern.utils.ChangeStyle;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,11 +59,7 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
         label.setVisibility(View.VISIBLE);
         label.setText("Онлайн запись");
         ChangeStyle.whiteColor(getActivity());
-        ArrayList<Object> l = new ArrayList<>();
-        l.add(123);
-        if (((ArrayList<?>) l).get(0) instanceof String)
-            Log.e("list", "list " + l.getClass());
-        else Log.e("list", "lis " + l.getClass());
+        // TODO: 07.03.2018 дропнуть кнопку назад на экране 
         mPresenter = new SelectionScreenPresenter(this);
         ButterKnife.bind(this, view);
 
@@ -105,40 +100,41 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
 
     @OnClick(R.id.procedure)
     public void onMProcedureClicked() {
-        ServiceFragment fragment = new ServiceFragment();
-        android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, fragment);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        //ft.addToBackStack("stack");
-        ft.commit();
+        startActivity(new Intent(getActivity(), ServiceActivity.class));
+//        ServiceActivity fragment = new ServiceActivity();
+//        FragmentTransaction ft = getFragmentManager().beginTransaction();
+//        ft.replace(R.id.content, fragment);
+//        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+//        ft.addToBackStack("stack");
+//        ft.commit();
     }
 
     @OnClick(R.id.associate)
     public void onMAssociateClicked() {
-        AssociateListFragment fragment = new AssociateListFragment();
-        android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, fragment);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        ft.addToBackStack("stack");
-        ft.commit();
+        startActivity(new Intent(getActivity(), AssociateListActivity.class));
+//        AssociateListActivity fragment = new AssociateListActivity();
+//        FragmentTransaction ft = getFragmentManager().beginTransaction();
+//        ft.replace(R.id.content, fragment);
+//        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+//        ft.addToBackStack("stack");
+//        ft.commit();
     }
 
     @OnClick(R.id.date)
     public void onMDateClicked() {
-        DateSelectionFragment fragment = new DateSelectionFragment();
-        // TODO: 29.01.2018 add servise bundle
-        android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, fragment);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        ft.addToBackStack("stack");
-        ft.commit();
+        startActivity(new Intent(getActivity(), DateSelectionActivity.class));
+//        DateSelectionActivity fragment = new DateSelectionActivity();
+//        FragmentTransaction ft = getFragmentManager().beginTransaction();
+//        ft.replace(R.id.content, fragment);
+//        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+//        ft.addToBackStack("stack");
+//        ft.commit();
     }
 
     @OnClick(R.id.nextStep)
     public void onViewClicked() {
         CreateRecordFragment fragment = new CreateRecordFragment();
-        // TODO: 29.01.2018 add servise bundle
-        android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.content, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.addToBackStack("stack");

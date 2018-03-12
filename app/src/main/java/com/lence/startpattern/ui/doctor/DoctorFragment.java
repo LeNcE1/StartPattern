@@ -44,6 +44,7 @@ public class DoctorFragment extends Fragment implements DoctorMvp {
     @BindView(R.id.spec)
     TextView mSpec;
     Bundle args;
+
     public DoctorFragment() {
 
     }
@@ -57,12 +58,13 @@ public class DoctorFragment extends Fragment implements DoctorMvp {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
+
     }
 
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
-        PagerAdapter adapter = new PagerAdapter(getContext(),getActivity().getSupportFragmentManager(),args.getInt("id"));
+        PagerAdapter adapter = new PagerAdapter(getContext(), getFragmentManager(), args.getInt("id"));
         mVp.setAdapter(adapter);
         mVp.getAdapter().notifyDataSetChanged();
         mVp.setCurrentItem(1);
@@ -89,7 +91,7 @@ public class DoctorFragment extends Fragment implements DoctorMvp {
         }
 
 
-        PagerAdapter adapter = new PagerAdapter(getContext(),getActivity().getSupportFragmentManager(),args.getInt("id"));
+        PagerAdapter adapter = new PagerAdapter(getContext(), getFragmentManager(), args.getInt("id"));
         mVp.setAdapter(adapter);
         mVp.getAdapter().notifyDataSetChanged();
         mVp.setCurrentItem(1);
@@ -101,17 +103,30 @@ public class DoctorFragment extends Fragment implements DoctorMvp {
     @OnClick(R.id.nextStep)
     public void onViewClicked() {
         ProcedureFragment fragment = new ProcedureFragment();
-        getActivity().getSupportFragmentManager().popBackStack();
+        //getFragmentManager().popBackStack();
         Bundle bundle = new Bundle();
-        Log.e("doctor", "id "+args.getInt("id"));
-        bundle.putInt("doctorId",args.getInt("id"));
-        bundle.putString("doctorName",args.getString("name"));
+        Log.e("doctor", "id " + args.getInt("id"));
+        bundle.putInt("doctorId", args.getInt("id"));
+        bundle.putString("doctorName", args.getString("name"));
         fragment.setArguments(bundle);
-        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, fragment);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        ft.addToBackStack("stack");
-        ft.commit();
+        getFragmentManager().beginTransaction()
+                .hide(this)
+                .replace(R.id.content, fragment)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .addToBackStack("stack")
+                .commit();
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+    }
 }
+

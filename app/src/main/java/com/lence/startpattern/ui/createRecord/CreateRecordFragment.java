@@ -68,7 +68,7 @@ public class CreateRecordFragment extends Fragment implements CreateRecordMvp {
     @OnClick(R.id.enter)
     public void onViewClicked() {
         OnlineRecordFragment fragment = new OnlineRecordFragment();
-        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.content, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.addToBackStack("stack");
