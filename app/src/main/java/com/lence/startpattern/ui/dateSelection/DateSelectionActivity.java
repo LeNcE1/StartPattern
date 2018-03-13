@@ -90,14 +90,12 @@ public class DateSelectionActivity extends AppCompatActivity implements DateSele
         ButterKnife.bind(this);
         label = (TextView) findViewById(R.id.label);
         label.setText("Выбор даты");
+
         Calendar today = Calendar.getInstance();
         today.set(today.get(Calendar.YEAR), today.get(Calendar.MONTH), (today.get(Calendar.DATE)) - 1);
-
-
-
-
         Calendar future = Calendar.getInstance();
         future.set(today.get(Calendar.YEAR), today.get(Calendar.MONTH) + 5, 31);
+
         SnapHelper snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(rv);
 // TODO: 06.03.2018 разобраться почему не выбирается сегодня
@@ -107,16 +105,11 @@ public class DateSelectionActivity extends AppCompatActivity implements DateSele
         mCalendarView.setMinimumDate(today);
         mCalendarView.setMaximumDate(future);
 
+
         //Log.e("future", String.valueOf(future.get(Calendar.MONTH)));
 
 //        Log.e("future", "future");
 
-        mTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showCalendar();
-            }
-        });
 // TODO: 22.01.2018 change count day of month in adapter
 
         mCalendarView.setOnDayClickListener(new OnDayClickListener() {
@@ -153,9 +146,9 @@ public class DateSelectionActivity extends AppCompatActivity implements DateSele
 //                + (thisDay.get(Calendar.DATE) < 10 ? ("0" + thisDay.get(Calendar.DATE)) : thisDay.get(Calendar.DATE)));
         //Log.e("index", index + "");
         arrayList = dates.get(index).getValue();
-        date = (thisDay.get(Calendar.YEAR) + "-"
-                + ((thisDay.get(Calendar.MONTH) + 1) < 10 ? ("0" + (thisDay.get(Calendar.MONTH) + 1)) : (thisDay.get(Calendar.MONTH) + 1)) + "-"
-                + (thisDay.get(Calendar.DATE) < 10 ? ("0" + thisDay.get(Calendar.DATE)) : thisDay.get(Calendar.DATE)));
+        date = ((thisDay.get(Calendar.DATE) < 10 ? ("0" + thisDay.get(Calendar.DATE)) : thisDay.get(Calendar.DATE))
+                + "-" + ((thisDay.get(Calendar.MONTH) + 1) < 10 ? ("0" + (thisDay.get(Calendar.MONTH) + 1)) : (thisDay.get(Calendar.MONTH) + 1))
+                + "-"+ thisDay.get(Calendar.YEAR));
         time = arrayList.get(0).equals("00:00") ? arrayList.get(1) : arrayList.get(0);
         label.setText(date + " " + time);
         adapter = new PickerAdapter(this, arrayList, rv);
@@ -229,16 +222,11 @@ public class DateSelectionActivity extends AppCompatActivity implements DateSele
         }
         mCalendarView.setDisabledDays(disableDays);
         mCalendarView.showCurrentMonthPage();
+        showFreeTime(mContext,Calendar.getInstance());
         dialog.dismiss();
     }
 
 
-    @Override
-    public void showCalendar() {
-        mTime.setVisibility(View.GONE);
-        mCalendarView.setVisibility(View.VISIBLE);
-        mNext.setVisibility(View.VISIBLE);
-    }
 
 
     @OnClick(R.id.next)

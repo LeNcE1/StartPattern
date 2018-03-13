@@ -34,6 +34,7 @@ public interface Api {
 
     @GET("/api/doctors")
     Call<List<AssociateModel>> getDoctors();
+    // TODO: 13.03.2018 добавить запрос на сотрудника по услуге
 
     @GET("/api/doctors/{doctor}/services")
     Call<List<AssociateServicesModel>> getDoctorServices(@Path("doctor") int id);

@@ -41,22 +41,20 @@ public class ProcedureAdapter extends RecyclerView.Adapter<ProcedureAdapter.Ribo
 
     @Override
     public void onBindViewHolder(final RibotViewHolder holder, final int position) {
-        if(mRibots.get(position).getClass().isAssignableFrom(ServicesModel.class)) {
-            final ServicesModel model = (ServicesModel)mRibots.get(position);
+        if (mRibots.get(position).getClass().isAssignableFrom(ServicesModel.class)) {
+            final ServicesModel model = (ServicesModel) mRibots.get(position);
             holder.name.setText(model.getName());
             holder.price.setText(model.getPrice().toString());
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    SingletonStorage.getInstance().setServicesId(model.getId());
-                    SingletonStorage.getInstance().setServicesDescription(model.getName());
+                    SingletonStorage.getInstance().setServices(model.getId(), model.getName(), model.getPrice());
                     pr.startProcedure();
                 }
             });
-        }
-        else if(mRibots.get(position).getClass().isAssignableFrom(AssociateServicesModel.class)){
-            final AssociateServicesModel model = (AssociateServicesModel)mRibots.get(position);
+        } else if (mRibots.get(position).getClass().isAssignableFrom(AssociateServicesModel.class)) {
+            final AssociateServicesModel model = (AssociateServicesModel) mRibots.get(position);
             holder.name.setText(model.getName());
             holder.price.setText(model.getPrice().toString());
 

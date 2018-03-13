@@ -39,10 +39,11 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         SelectionScreenFragment fragment = new SelectionScreenFragment();
+        //getSupportFragmentManager().popBackStack();
         android.support.v4.app.FragmentTransaction ft = this.getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        ft.addToBackStack("stack");
+        //ft.addToBackStack("stack");
         ft.commit();
 
         ImageView arrowBack = findViewById(R.id.arrowBack);
@@ -57,20 +58,18 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-//    @Override
-//    public void onBackPressed() {
-//        android.support.v4.app.FragmentManager fragmentManager = this.getSupportFragmentManager();
-//        // Log.e("BackStackEntryCount", String.valueOf());
-//
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        if (drawer.isDrawerOpen(GravityCompat.START)) {
-//            drawer.closeDrawer(GravityCompat.START);
-//        } else {
-//            if (fragmentManager.getBackStackEntryCount() > 1) {
-//                super.onBackPressed();
-//            }
-//        }
-//    }
+    @Override
+    public void onBackPressed() {
+        android.support.v4.app.FragmentManager fragmentManager = this.getSupportFragmentManager();
+         //Log.e("BackStackEntryCount", fragmentManager.);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+                super.onBackPressed();
+        }
+    }
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {

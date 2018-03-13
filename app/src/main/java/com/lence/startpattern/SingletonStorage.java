@@ -6,8 +6,12 @@ import android.util.Log;
 public class SingletonStorage {
     private int servicesId = 0;
     private String servicesDescription = "";
+    private int servicesPrice = 0;
     private int associateId = 0;
     private String associateName = "";
+    private String associateDescription = "";
+    private String associateImage = "";
+    private int associateRate = 0;
     private String date = "";
     private String time = "";
     private static SingletonStorage instance;
@@ -28,6 +32,58 @@ public class SingletonStorage {
 
     }
 
+    public void setServices(int servicesId,
+                            String servicesDescription,
+                            int servicesPrice) {
+        setServicesId(servicesId);
+        setServicesDescription(servicesDescription);
+        setServicesPrice(servicesPrice);
+        setAssociateId(0);
+        setAssociateName("");
+        setAssociateDescription("");
+        setAssociateImage("");
+        setAssociateRate(0);
+        setDate("");
+        setTime("");
+    }
+
+    public void setAssociate(int associateId,
+                             String associateName,
+                             String associateDescription,
+                             String associateImage,
+                             int associateRate) {
+        setServicesId(servicesId);
+        setServicesDescription(servicesDescription);
+        setServicesPrice(servicesPrice);
+        setAssociateId(associateId);
+        setAssociateName(associateName);
+        setAssociateDescription(associateDescription);
+        setAssociateImage(associateImage);
+        setAssociateRate(associateRate);
+        setDate("");
+        setTime("");
+    }
+
+    public void setAll(int servicesId,
+                       String servicesDescription,
+                       int servicesPrice,
+                       int associateId,
+                       String associateName,
+                       String associateDescription,
+                       int associateRate,
+                       String date,
+                       String time) {
+        setServicesId(servicesId);
+        setServicesDescription(servicesDescription);
+        setServicesPrice(servicesPrice);
+        setAssociateId(associateId);
+        setAssociateName(associateName);
+        setAssociateDescription(associateDescription);
+        setAssociateRate(associateRate);
+        setDate(date);
+        setTime(time);
+    }
+
     public int getServicesId() {
         return servicesId;
     }
@@ -44,6 +100,14 @@ public class SingletonStorage {
         this.servicesDescription = servicesDescription;
     }
 
+    public int getServicesPrice() {
+        return servicesPrice;
+    }
+
+    public void setServicesPrice(int servicesPrice) {
+        this.servicesPrice = servicesPrice;
+    }
+
     public int getAssociateId() {
         return associateId;
     }
@@ -58,6 +122,30 @@ public class SingletonStorage {
 
     public void setAssociateName(String associateName) {
         this.associateName = associateName;
+    }
+
+    public String getAssociateDescription() {
+        return associateDescription;
+    }
+
+    public void setAssociateDescription(String associateDescription) {
+        this.associateDescription = associateDescription;
+    }
+
+    public String getAssociateImage() {
+        return associateImage;
+    }
+
+    public void setAssociateImage(String associateImage) {
+        this.associateImage = associateImage;
+    }
+
+    public int getAssociateRate() {
+        return associateRate;
+    }
+
+    public void setAssociateRate(int associateRate) {
+        this.associateRate = associateRate;
     }
 
     public String getDate() {

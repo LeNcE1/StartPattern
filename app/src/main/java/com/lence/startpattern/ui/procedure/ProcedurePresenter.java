@@ -50,8 +50,8 @@ public class ProcedurePresenter {
         App.getApi().getDoctorServices(doctorId).enqueue(new Callback<List<AssociateServicesModel>>() {
             @Override
             public void onResponse(Call<List<AssociateServicesModel>> call, Response<List<AssociateServicesModel>> response) {
-                Log.e("Sections", response.code() + " " + response.message());
-                Log.e("body", response.body().get(0).getName());
+                //Log.e("Sections", response.code() + " " + response.message());
+               // Log.e("body", response.body().get(0).getName());
                // mMvp.refreshListDoctorServicesModel(response.body());
                 ArrayList<Object> l= new ArrayList<Object>(response.body());
                 mMvp.refreshList(l);

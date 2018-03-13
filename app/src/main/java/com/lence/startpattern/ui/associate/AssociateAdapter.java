@@ -109,14 +109,17 @@ public class AssociateAdapter extends RecyclerView.Adapter<AssociateAdapter.Ribo
                 .centerCrop()
                 .into(holder.avatar);
 
-        // holder.ratingBar.setRating(mRibots.get(position).get);
+        holder.ratingBar.setRating(mRibots.get(position).getRate());
 
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SingletonStorage.getInstance().setAssociateName(mRibots.get(position).getSurname() + " " + mRibots.get(position).getName() + " " + mRibots.get(position).getSecondname());
-                SingletonStorage.getInstance().setAssociateId(mRibots.get(position).getId());
+                SingletonStorage.getInstance().setAssociate(mRibots.get(position).getId(),
+                        mRibots.get(position).getSurname() + " " + mRibots.get(position).getName() + " " + mRibots.get(position).getSecondname(),
+                        String.valueOf(mRibots.get(position).getDescription()),
+                        mRibots.get(position).getImage(),
+                        mRibots.get(position).getRate());
                 pr.startProcedure();
             }
         });

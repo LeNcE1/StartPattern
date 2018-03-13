@@ -44,7 +44,7 @@ public class ProcedureFragment extends Fragment implements ProcedureMvp {
         label.setText("Процедура");
 
 
-        dialog = new ProgressDialog(getActivity(),R.style.full_screen_dialog){
+        dialog = new ProgressDialog(getActivity(), R.style.full_screen_dialog) {
             @Override
             protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
@@ -65,27 +65,26 @@ public class ProcedureFragment extends Fragment implements ProcedureMvp {
             //Log.e("doctorId", "doctorId " + args.getInt("doctorId"));
             pr.loadDoctorSections(args.getInt("doctorId"));
         }
-        SingletonStorage.getInstance().setAssociateId(0);
-        SingletonStorage.getInstance().setServicesDescription("");
-        SingletonStorage.getInstance().setAssociateName("");
-        SingletonStorage.getInstance().setServicesId(0);
-        SingletonStorage.getInstance().setDate("");
-        SingletonStorage.getInstance().setTime("");
+
         //mProcedureAdapter = new ProcedureAdapter(posts,pr);
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);
         //recyclerView.setAdapter(mProcedureAdapter);
         //recyclerView.getAdapter().notifyDataSetChanged();
 
-// TODO: 26.02.2018 доделать оформление заказа через сотрудника 
+// TODO: 26.02.2018 доделать оформление заказа через сотрудника, исправить баг с кнопкой назад
         return view;
     }
 
 
     @Override
     public void startDateSelection() {
-        SingletonStorage.getInstance().setAssociateId(args.getInt("doctorId", 0));
-        SingletonStorage.getInstance().setAssociateName(args.getString("doctorName", ""));
+        SingletonStorage.getInstance().setAssociate(
+                args.getInt("doctorId", 0),
+                args.getString("doctorName", ""),
+                args.getString("doctorSpec", ""),
+                args.getString("doctorImage", ""),
+                args.getInt("doctorRate", 0));
         startActivity(new Intent(getActivity(), MainActivity.class));
     }
 

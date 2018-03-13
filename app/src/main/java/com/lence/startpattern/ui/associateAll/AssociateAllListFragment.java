@@ -67,13 +67,14 @@ public class AssociateAllListFragment extends Fragment implements AssociateAllMv
     }
 
     @Override
-    public void startDoctor(int id, String name, String spec, String image) {
+    public void startDoctor(int id, String name, String spec, String image, int rate) {
         DoctorFragment fragment = new DoctorFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("id", id);
         bundle.putString("name", name);
         bundle.putString("spec", spec);
         bundle.putString("image", image);
+        bundle.putInt("rate", rate);
         fragment.setArguments(bundle);
         getActivity().getSupportFragmentManager().beginTransaction()
                 .hide(this)

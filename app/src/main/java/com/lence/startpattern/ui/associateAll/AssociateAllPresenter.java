@@ -18,8 +18,8 @@ public class AssociateAllPresenter {
         mMvp = mvp;
     }
 
-    void startDoctor(int id,String name, String spec, String image) {
-        mMvp.startDoctor(id,name,spec,image);
+    void startDoctor(int id,String name, String spec, String image, int rate) {
+        mMvp.startDoctor(id,name,spec,image,rate);
     }
 
     public void loadAssociate() {

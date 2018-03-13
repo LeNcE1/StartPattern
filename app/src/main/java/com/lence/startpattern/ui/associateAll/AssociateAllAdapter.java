@@ -77,7 +77,7 @@ public class AssociateAllAdapter extends RecyclerView.Adapter<AssociateAllAdapte
                 .centerCrop()
                 .into(holder.avatar);
 
-        // holder.ratingBar.setRating(mRibots.get(position).get);
+        holder.ratingBar.setRating(mRibots.get(position).getRate());
 
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +86,7 @@ public class AssociateAllAdapter extends RecyclerView.Adapter<AssociateAllAdapte
                 pr.startDoctor(mRibots.get(position).getId(),
                         mRibots.get(position).getSurname() + " " + mRibots.get(position).getName() + " " + mRibots.get(position).getSecondname(),
                         String.valueOf(mRibots.get(position).getDescription()),
-                        mRibots.get(position).getImage());
+                        mRibots.get(position).getImage(),mRibots.get(position).getRate());
             }
         });
 

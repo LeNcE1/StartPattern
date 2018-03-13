@@ -14,7 +14,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lence.startpattern.R;
+import com.lence.startpattern.SingletonStorage;
 import com.lence.startpattern.ui.onlineRecord.OnlineRecordFragment;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,6 +47,8 @@ public class CreateRecordFragment extends Fragment implements CreateRecordMvp {
     TextView mTime;
     @BindView(R.id.timeSelect)
     RelativeLayout mTimeSelect;
+    @BindView(R.id.price)
+    TextView mPrice;
 
     public CreateRecordFragment() {
         // Required empty public constructor
@@ -59,7 +63,19 @@ public class CreateRecordFragment extends Fragment implements CreateRecordMvp {
         ButterKnife.bind(this, view);
         TextView label = (TextView) getActivity().findViewById(R.id.label);
         label.setText("Создать запись");
-
+        SingletonStorage storage = SingletonStorage.getInstance();
+        mProcedure.setText(storage.getServicesDescription());
+        Picasso.with(getContext())
+                .load(storage.getAssociateImage())
+                .resize(200, 200)
+                .centerCrop()
+                .into(mAvatar);
+        mName.setText(storage.getAssociateName());
+        mSpec.setText(storage.getAssociateDescription());
+        mRatingBar.setRating(storage.getAssociateRate());
+        mPrice.setText(String.valueOf(storage.getServicesPrice()));
+        mDate.setText(storage.getDate());
+        mTime.setText(storage.getTime());
 
         return view;
     }
@@ -68,16 +84,14 @@ public class CreateRecordFragment extends Fragment implements CreateRecordMvp {
     @OnClick(R.id.enter)
     public void onViewClicked() {
         OnlineRecordFragment fragment = new OnlineRecordFragment();
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.content, fragment);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        ft.addToBackStack("stack");
-        ft.commit();
+        getFragmentManager().beginTransaction()
+                .hide(this)
+                .replace(R.id.content, fragment)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .addToBackStack("stack")
+                .commit();
 
     }
-
-
-
 
 
 }

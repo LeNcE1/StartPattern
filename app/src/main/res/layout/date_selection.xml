@@ -85,7 +85,6 @@
                 android:layout_below="@id/calendarView"
                 android:layout_marginTop="2dp"
                 android:elevation="4dp"
-                android:visibility="gone"
                 app:cardCornerRadius="2dp">
 
 
@@ -135,7 +134,7 @@
                 android:layout_marginTop="4dp"
                 android:text="Записаться"
                 android:textColor="@color/white"
-                android:visibility="gone" />
+                />
         </RelativeLayout>
     </ScrollView>
 </LinearLayout>

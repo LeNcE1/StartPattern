@@ -108,6 +108,9 @@ public class DoctorFragment extends Fragment implements DoctorMvp {
         Log.e("doctor", "id " + args.getInt("id"));
         bundle.putInt("doctorId", args.getInt("id"));
         bundle.putString("doctorName", args.getString("name"));
+        bundle.putString("doctorSpec", args.getString("spec"));
+        bundle.putString("doctorImage", args.getString("image"));
+        bundle.putInt("doctorRate", args.getInt("rate"));
         fragment.setArguments(bundle);
         getFragmentManager().beginTransaction()
                 .hide(this)

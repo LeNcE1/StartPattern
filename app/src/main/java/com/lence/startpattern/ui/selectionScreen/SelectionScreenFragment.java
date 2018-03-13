@@ -65,6 +65,7 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
 
         Log.e("Storage", SingletonStorage.getInstance().getServicesId() + " "
                 + SingletonStorage.getInstance().getServicesDescription() + " "
+                + SingletonStorage.getInstance().getServicesPrice() + " "
                 + SingletonStorage.getInstance().getAssociateId() + " "
                 + SingletonStorage.getInstance().getAssociateName() + " "
                 + SingletonStorage.getInstance().getDate() + " "
@@ -74,14 +75,14 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
         mTextAssociate.setText(SingletonStorage.getInstance().getAssociateName().equals("") ? "Выберите специалиста" : SingletonStorage.getInstance().getAssociateName());
         mTextDate.setText(SingletonStorage.getInstance().getDate().equals("") ? "Выберите время" : SingletonStorage.getInstance().getDate() + " " + SingletonStorage.getInstance().getTime());
 
-        enable(mAssociate,false);
-        enable(mDate,false);
+        enable(mAssociate, false);
+        enable(mDate, false);
         mNextStep.setEnabled(false);
         if (!SingletonStorage.getInstance().getServicesDescription().equals("")) {
-            enable(mAssociate,true);
+            enable(mAssociate, true);
         }
         if (!SingletonStorage.getInstance().getAssociateName().equals("")) {
-            enable(mDate,true);
+            enable(mDate, true);
         }
         if (!SingletonStorage.getInstance().getDate().equals("")) {
             mNextStep.setEnabled(true);
@@ -90,7 +91,7 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
         return view;
     }
 
-    private void enable(View view,boolean en) {
+    private void enable(View view, boolean en) {
         view.setEnabled(en);
         if (!en)
             view.setBackgroundColor(getResources().getColor(R.color.disabledGray));
@@ -134,11 +135,12 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
     @OnClick(R.id.nextStep)
     public void onViewClicked() {
         CreateRecordFragment fragment = new CreateRecordFragment();
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.content, fragment);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        ft.addToBackStack("stack");
-        ft.commit();
+        getFragmentManager().beginTransaction()
+                .hide(this)
+                .replace(R.id.content, fragment)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .addToBackStack("stack")
+                .commit();
     }
 
 

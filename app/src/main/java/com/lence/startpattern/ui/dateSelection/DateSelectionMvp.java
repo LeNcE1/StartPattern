@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public interface DateSelectionMvp {
-    void showCalendar();
     void showFreeTime(Context context, Calendar thisDay);
     void setDates(ArrayList<DateMap> map);
 }
