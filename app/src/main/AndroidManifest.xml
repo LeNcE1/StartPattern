@@ -49,7 +49,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.doctor.DoctorActivity"
+            android:name=".ui.DoctorActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />

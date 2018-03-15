@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.lence.startpattern.R;
-import com.lence.startpattern.ui.associateAll.AssociateAllListFragment;
 import com.lence.startpattern.ui.createRecord.CreateRecordFragment;
 import com.lence.startpattern.ui.onlineRecord.OnlineRecordFragment;
 import com.lence.startpattern.ui.selectionScreen.SelectionScreenFragment;
@@ -33,7 +32,6 @@ public class EntryActivity extends AppCompatActivity
         toolbar.setTitle("");
         // toolbar.setLogo(R.drawable.logo);
         setSupportActionBar(toolbar);
-// TODO: 14.03.2018 подумать над выделением главного активити чтобы вынести запись на прием в отдельное активити 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -65,21 +63,19 @@ public class EntryActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        // TODO: 13.03.2018 полностью переделать, убрать везде добавление в бекстек, добавить теги к фрагментам и обрабатывать нажатие назад по тегу 
-        // TODO: 13.03.2018 https://github.com/DattaHujare/NavigationDrawer/blob/master/app/src/main/java/com/spokeinfotech/navigationdrawer/MainActivity.java
         android.support.v4.app.FragmentManager fragmentManager = this.getSupportFragmentManager();
         //Log.e("BackStackEntryCount", fragmentManager.);
         Fragment selectionScreen = fragmentManager.findFragmentByTag("SelectionScreen");
         Fragment createRecord = fragmentManager.findFragmentByTag("CreateRecord");
         Fragment onlineRecord = fragmentManager.findFragmentByTag("OnlineRecord");
-        Fragment associateAllList = fragmentManager.findFragmentByTag("AssociateAllList");
-        Fragment sessionHistory = fragmentManager.findFragmentByTag("SessionHistory");
-        Fragment doctor = fragmentManager.findFragmentByTag("Doctor");
-        Fragment procedureDoctor = fragmentManager.findFragmentByTag("Procedure");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        }  else if (selectionScreen instanceof SelectionScreenFragment && selectionScreen.isVisible()) {
+
+            startActivity(new Intent(this,MainActivity.class));
+
         } else if (createRecord instanceof CreateRecordFragment && createRecord.isVisible()) {
             fragmentManager.beginTransaction()
                     .hide(createRecord)
@@ -92,22 +88,8 @@ public class EntryActivity extends AppCompatActivity
                     .hide(onlineRecord)
                     .replace(R.id.content,createRecord,"CreateRecord")
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                    .show(selectionScreen)
+                    .show(createRecord)
                     .commit();
-//        } else if (doctor instanceof DoctorActivity && doctor.isVisible()) {
-//            fragmentManager.beginTransaction()
-//                    .hide(doctor)
-//                    .replace(R.id.content,associateAllList,"AssociateAllList")
-//                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-//                    .show(associateAllList)
-//                    .commit();
-//        } else if (procedureDoctor instanceof ProcedureFragment && procedureDoctor.isVisible()) {
-//            fragmentManager.beginTransaction()
-//                    .hide(procedureDoctor)
-//                    .replace(R.id.content,new DoctorActivity(),"Doctor")
-//                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-//                    //.show(doctor)
-//                    .commit();
        }
     }
 
@@ -145,14 +127,7 @@ public class EntryActivity extends AppCompatActivity
                 startActivity(new Intent(this, EntryActivity.class));
             }
         } else if (id == R.id.doctor) {
-            android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-            // BackStackTools.clearStack(fm);
-            AssociateAllListFragment fragment = new AssociateAllListFragment();
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.replace(R.id.content, fragment, "AssociateAllList");
-            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            ft.addToBackStack("stack");
-            ft.commit();
+            startActivity(new Intent(this, DoctorActivity.class));
         } else if (id == R.id.history) {
             android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
             //BackStackTools.clearStack(fm);

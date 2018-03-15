@@ -12,9 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.lence.startpattern.ui.EntryActivity;
 import com.lence.startpattern.R;
 import com.lence.startpattern.SingletonStorage;
+import com.lence.startpattern.ui.EntryActivity;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class ProcedureFragment extends Fragment implements ProcedureMvp {
     Object mAdapter;
     //    ProcedureAdapter mProcedureAdapter;
 //    ProcedureDoctorAdapter mProcedureDoctorAdapter;
-    Bundle args;
+    Intent args;
     ProgressDialog dialog;
 
     public ProcedureFragment() {
@@ -37,19 +37,12 @@ public class ProcedureFragment extends Fragment implements ProcedureMvp {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.procedure, container, false);
-        //ChangeStyle.whiteColor(getActivity());
+
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         pr = new ProcedurePresenter(this);
 
-        // TODO: 14.03.2018 разделить на 2 разных фрагмента с разной версткой и адаптерами, чтобы не было костыля
-
-        if (getActivity() instanceof EntryActivity) {
-            //костыль
-            TextView label = (TextView) getActivity().findViewById(R.id.label);
-            label.setText("Процедура");
-            View bar = view.findViewById(R.id.bar);
-            bar.setVisibility(View.GONE);
-        }
+        TextView label = (TextView) getActivity().findViewById(R.id.label);
+        label.setText("Процедура");
 
         dialog = new ProgressDialog(getActivity(), R.style.full_screen_dialog) {
             @Override
@@ -64,22 +57,17 @@ public class ProcedureFragment extends Fragment implements ProcedureMvp {
         dialog.setCancelable(false);
         dialog.show();
 
-        args = getArguments();
+        args = getActivity().getIntent();
         //Log.e("bundle", "bundle" + args.getInt("id"));
-        if (args.getInt("id", 0) != 0) {
-            pr.loadSections(args.getInt("id"));
+        if (args.getIntExtra("id_categ", 0) != 0) {
+            pr.loadSections(args.getIntExtra("id_categ",0));
         } else {
             //Log.e("doctorId", "doctorId " + args.getInt("doctorId"));
-            pr.loadDoctorSections(args.getInt("doctorId"));
+            pr.loadDoctorSections(args.getIntExtra("id",0));
         }
-
-        //mProcedureAdapter = new ProcedureAdapter(posts,pr);
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);
-        //recyclerView.setAdapter(mProcedureAdapter);
-        //recyclerView.getAdapter().notifyDataSetChanged();
 
-// TODO: 26.02.2018 доделать оформление заказа через сотрудника, исправить баг с кнопкой назад
         return view;
     }
 
@@ -87,11 +75,11 @@ public class ProcedureFragment extends Fragment implements ProcedureMvp {
     @Override
     public void startDateSelection() {
         SingletonStorage.getInstance().setAssociate(
-                args.getInt("doctorId", 0),
-                args.getString("doctorName", ""),
-                args.getString("doctorSpec", ""),
-                args.getString("doctorImage", ""),
-                args.getInt("doctorRate", 0));
+                args.getIntExtra("id", 0),
+                args.getStringExtra("name"),
+                args.getStringExtra("spec"),
+                args.getStringExtra("image"),
+                args.getIntExtra("rate", 0));
         startActivity(new Intent(getActivity(), EntryActivity.class));
     }
 
@@ -102,15 +90,4 @@ public class ProcedureFragment extends Fragment implements ProcedureMvp {
         recyclerView.getAdapter().notifyDataSetChanged();
         dialog.dismiss();
     }
-//        mProcedureAdapter = new ProcedureAdapter(body, pr);
-//        recyclerView.setAdapter(mProcedureAdapter);
-//        recyclerView.getAdapter().notifyDataSetChanged();
-    //  }
-
-//    @Override
-//    public void refreshList(List<AssociateServicesModel> body) {
-//        mProcedureDoctorAdapter = new ProcedureDoctorAdapter(body, pr);
-//        recyclerView.setAdapter(mProcedureDoctorAdapter);
-//        recyclerView.getAdapter().notifyDataSetChanged();
-//    }
 }

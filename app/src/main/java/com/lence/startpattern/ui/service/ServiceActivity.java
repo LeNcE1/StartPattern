@@ -56,9 +56,10 @@ public class ServiceActivity extends AppCompatActivity implements ServiceMvp {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 gridView.setVisibility(View.GONE);
                 ProcedureFragment fragment = new ProcedureFragment();
-                Bundle bundle = new Bundle();
-                bundle.putInt("id", list.get(position).getId());
-                fragment.setArguments(bundle);
+                getIntent().putExtra("id_categ", list.get(position).getId());
+//                Bundle bundle = new Bundle();
+//                bundle.putInt("id", list.get(position).getId());
+//                fragment.setArguments(bundle);
                 android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content, fragment);
                 ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);

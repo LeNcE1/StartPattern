@@ -1,5 +1,6 @@
 package com.lence.startpattern.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
@@ -12,10 +13,10 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.lence.startpattern.R;
-import com.lence.startpattern.ui.associateAll.AssociateAllListFragment;
 import com.lence.startpattern.ui.selectionScreen.SelectionScreenFragment;
 import com.lence.startpattern.ui.service.ServiceActivity;
 import com.lence.startpattern.ui.sessionHistory.SessionHistoryFragment;
+import com.lence.startpattern.utils.ChangeStyle;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        ChangeStyle.whiteColor(this);
     }
 
     @Override
@@ -70,14 +72,7 @@ public class MainActivity extends AppCompatActivity
                 ft.commit();
             }
         } else if (id == R.id.doctor) {
-            android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
-            // BackStackTools.clearStack(fm);
-            AssociateAllListFragment fragment = new AssociateAllListFragment();
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.replace(R.id.content, fragment, "AssociateAllList");
-            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-            ft.addToBackStack("stack");
-            ft.commit();
+            startActivity(new Intent(this, DoctorActivity.class));
         } else if (id == R.id.history) {
             android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
             //BackStackTools.clearStack(fm);

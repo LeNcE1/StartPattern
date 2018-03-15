@@ -71,20 +71,20 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
                 + SingletonStorage.getInstance().getDate() + " "
                 + SingletonStorage.getInstance().getTime());
 
-        mTextProcedure.setText(SingletonStorage.getInstance().getServicesDescription().equals("") ? "Выберите услугу" : SingletonStorage.getInstance().getServicesDescription());
-        mTextAssociate.setText(SingletonStorage.getInstance().getAssociateName().equals("") ? "Выберите специалиста" : SingletonStorage.getInstance().getAssociateName());
-        mTextDate.setText(SingletonStorage.getInstance().getDate().equals("") ? "Выберите время" : SingletonStorage.getInstance().getDate() + " " + SingletonStorage.getInstance().getTime());
+        mTextProcedure.setText(SingletonStorage.getInstance().getServicesDescription() == null ? "Выберите услугу" : SingletonStorage.getInstance().getServicesDescription());
+        mTextAssociate.setText(SingletonStorage.getInstance().getAssociateName() == null ? "Выберите специалиста" : SingletonStorage.getInstance().getAssociateName());
+        mTextDate.setText(SingletonStorage.getInstance().getDate() == null ? "Выберите время" : SingletonStorage.getInstance().getDate() + " " + SingletonStorage.getInstance().getTime());
 
         enable(mAssociate, false);
         enable(mDate, false);
         mNextStep.setEnabled(false);
-        if (!SingletonStorage.getInstance().getServicesDescription().equals("")) {
+        if (SingletonStorage.getInstance().getServicesDescription() != null) {
             enable(mAssociate, true);
         }
-        if (!SingletonStorage.getInstance().getAssociateName().equals("")) {
+        if (SingletonStorage.getInstance().getAssociateName() != null) {
             enable(mDate, true);
         }
-        if (!SingletonStorage.getInstance().getDate().equals("")) {
+        if (SingletonStorage.getInstance().getDate() != null) {
             mNextStep.setEnabled(true);
             mNextStep.setTextColor(Color.WHITE);
         }
@@ -137,7 +137,7 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
         CreateRecordFragment fragment = new CreateRecordFragment();
         getFragmentManager().beginTransaction()
                 .hide(this)
-                .replace(R.id.content, fragment,"CreateRecord")
+                .replace(R.id.content, fragment, "CreateRecord")
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .addToBackStack("stack")
                 .commit();

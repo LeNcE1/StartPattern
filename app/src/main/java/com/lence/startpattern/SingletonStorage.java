@@ -5,15 +5,15 @@ import android.util.Log;
 
 public class SingletonStorage {
     private int servicesId = 0;
-    private String servicesDescription = "";
+    private String servicesDescription = null;
     private int servicesPrice = 0;
     private int associateId = 0;
-    private String associateName = "";
-    private String associateDescription = "";
-    private String associateImage = "";
+    private String associateName = null;
+    private String associateDescription = null;
+    private String associateImage = null;
     private int associateRate = 0;
-    private String date = "";
-    private String time = "";
+    private String date = null;
+    private String time = null;
     private static SingletonStorage instance;
 
     public static void initInstance() {
@@ -39,12 +39,12 @@ public class SingletonStorage {
         setServicesDescription(servicesDescription);
         setServicesPrice(servicesPrice);
         setAssociateId(0);
-        setAssociateName("");
-        setAssociateDescription("");
-        setAssociateImage("");
+        setAssociateName(null);
+        setAssociateDescription(null);
+        setAssociateImage(null);
         setAssociateRate(0);
-        setDate("");
-        setTime("");
+        setDate(null);
+        setTime(null);
     }
 
     public void setAssociate(int associateId,
@@ -60,8 +60,8 @@ public class SingletonStorage {
         setAssociateDescription(associateDescription);
         setAssociateImage(associateImage);
         setAssociateRate(associateRate);
-        setDate("");
-        setTime("");
+        setDate(null);
+        setTime(null);
     }
 
     public void setAll(int servicesId,
