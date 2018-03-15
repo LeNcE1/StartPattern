@@ -61,8 +61,7 @@ public class ProcedureAdapter extends RecyclerView.Adapter<ProcedureAdapter.Ribo
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    SingletonStorage.getInstance().setServicesId(model.getId());
-                    SingletonStorage.getInstance().setServicesDescription(model.getName());
+                    SingletonStorage.getInstance().setServices(model.getId(), model.getName(), model.getPrice());
                     pr.startProcedure();
                 }
             });

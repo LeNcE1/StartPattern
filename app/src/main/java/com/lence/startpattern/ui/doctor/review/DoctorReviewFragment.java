@@ -40,7 +40,7 @@ public class DoctorReviewFragment extends Fragment implements DoctorReviewMvp {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
-        mDoctorId = bundle.getInt("doctorId");
+        mDoctorId = getActivity().getIntent().getIntExtra("id", 0);
     }
 
     @Override
@@ -53,7 +53,9 @@ public class DoctorReviewFragment extends Fragment implements DoctorReviewMvp {
         recyclerView.setLayoutManager(manager);
         Log.e("doctorId", "doctorId " + mDoctorId);
         pr = new DoctorReviewPresenter(this);
-        pr.loadDoctorReview(mDoctorId);
+        if (mDoctorId != 0) {
+            pr.loadDoctorReview(mDoctorId);
+        }
         return view;
     }
 
@@ -68,10 +70,6 @@ public class DoctorReviewFragment extends Fragment implements DoctorReviewMvp {
     @OnClick(R.id.createReview)
     public void onViewClicked() {
         CreateReviewDialog dialog = new CreateReviewDialog();
-        Bundle bundle = new Bundle();
-        bundle.putInt("doctorId",mDoctorId);
-
-        dialog.setArguments(bundle);
-        dialog.show(getActivity().getSupportFragmentManager(),"name");
+        dialog.show(getActivity().getSupportFragmentManager(), "name");
     }
 }

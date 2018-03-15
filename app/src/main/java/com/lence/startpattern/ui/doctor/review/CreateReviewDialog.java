@@ -55,8 +55,7 @@ public class CreateReviewDialog extends DialogFragment {
             title.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         }
         unbinder = ButterKnife.bind(this, view);
-        Bundle bundle = getArguments();
-        mDoctorId = bundle.getInt("doctorId");
+        mDoctorId = getActivity().getIntent().getIntExtra("id",0);
         return view;
     }
 
