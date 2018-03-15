@@ -11,7 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.lence.startpattern.MainActivity;
+import com.lence.startpattern.ui.EntryActivity;
 import com.lence.startpattern.R;
 import com.lence.startpattern.model.AssociateModel;
 import com.lence.startpattern.ui.selectionScreen.SelectionScreenFragment;
@@ -56,7 +56,7 @@ public class AssociateListActivity extends AppCompatActivity implements Associat
     @Override
     public void startProcedure() {
         SelectionScreenFragment fragment = new SelectionScreenFragment();
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, EntryActivity.class));
         getFragmentManager().popBackStack();
     }
 

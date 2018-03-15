@@ -137,7 +137,7 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
         CreateRecordFragment fragment = new CreateRecordFragment();
         getFragmentManager().beginTransaction()
                 .hide(this)
-                .replace(R.id.content, fragment)
+                .replace(R.id.content, fragment,"CreateRecord")
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .addToBackStack("stack")
                 .commit();

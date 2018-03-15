@@ -13,11 +13,11 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="Base.ThemeOverlay.AppCompat.ActionBar" >
+    <style name="AppTheme.AppBarOverlay" parent="Base.ThemeOverlay.AppCompat.ActionBar">
         <item name="colorControlNormal">@color/white</item>
     </style>
 
-    <style name="AppTheme.Doctor" parent="Base.ThemeOverlay.AppCompat.ActionBar" >
+    <style name="AppTheme.Doctor" parent="Base.ThemeOverlay.AppCompat.ActionBar">
         <item name="colorControlNormal">@color/colorAccent</item>
         <item name="colorPrimary">@android:color/transparent</item>
     </style>
@@ -27,9 +27,9 @@
 
     <style name="MyRatingBar" parent="Theme.AppCompat">
 
-            <item name="android:progressDrawable">@drawable/ratingstars</item>
-            <item name="android:minHeight">22dip</item>
-            <item name="android:maxHeight">22dip</item>
+        <item name="android:progressDrawable">@drawable/ratingstars</item>
+        <item name="android:minHeight">22dip</item>
+        <item name="android:maxHeight">22dip</item>
 
     </style>
 

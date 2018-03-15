@@ -30,4 +30,5 @@
         <item>Ноябрь</item>
         <item>Декабрь</item>
     </array>
+    <string name="title_activity_main">MainActivity</string>
 </resources>

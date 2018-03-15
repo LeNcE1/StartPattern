@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.lence.startpattern.MainActivity">
+    tools:context="com.lence.startpattern.ui.EntryActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBar"
@@ -59,7 +59,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="14dp"
-                app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
+                app:srcCompat="@drawable/arrow_blue" />
         </RelativeLayout>
     </android.support.design.widget.AppBarLayout>
 

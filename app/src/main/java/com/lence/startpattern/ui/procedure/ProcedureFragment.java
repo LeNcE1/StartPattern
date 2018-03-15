@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.lence.startpattern.MainActivity;
+import com.lence.startpattern.ui.EntryActivity;
 import com.lence.startpattern.R;
 import com.lence.startpattern.SingletonStorage;
 
@@ -40,9 +40,16 @@ public class ProcedureFragment extends Fragment implements ProcedureMvp {
         //ChangeStyle.whiteColor(getActivity());
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         pr = new ProcedurePresenter(this);
-        TextView label = (TextView) getActivity().findViewById(R.id.label);
-        label.setText("Процедура");
 
+        // TODO: 14.03.2018 разделить на 2 разных фрагмента с разной версткой и адаптерами, чтобы не было костыля
+
+        if (getActivity() instanceof EntryActivity) {
+            //костыль
+            TextView label = (TextView) getActivity().findViewById(R.id.label);
+            label.setText("Процедура");
+            View bar = view.findViewById(R.id.bar);
+            bar.setVisibility(View.GONE);
+        }
 
         dialog = new ProgressDialog(getActivity(), R.style.full_screen_dialog) {
             @Override
@@ -85,7 +92,7 @@ public class ProcedureFragment extends Fragment implements ProcedureMvp {
                 args.getString("doctorSpec", ""),
                 args.getString("doctorImage", ""),
                 args.getInt("doctorRate", 0));
-        startActivity(new Intent(getActivity(), MainActivity.class));
+        startActivity(new Intent(getActivity(), EntryActivity.class));
     }
 
     @Override

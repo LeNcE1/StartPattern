@@ -2,10 +2,10 @@ package com.lence.startpattern.ui.associateAll;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.lence.startpattern.R;
 import com.lence.startpattern.model.AssociateModel;
-import com.lence.startpattern.ui.doctor.DoctorFragment;
+import com.lence.startpattern.ui.doctor.DoctorActivity;
 import com.lence.startpattern.utils.ChangeStyle;
 
 import java.util.ArrayList;
@@ -68,20 +68,28 @@ public class AssociateAllListFragment extends Fragment implements AssociateAllMv
 
     @Override
     public void startDoctor(int id, String name, String spec, String image, int rate) {
-        DoctorFragment fragment = new DoctorFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt("id", id);
-        bundle.putString("name", name);
-        bundle.putString("spec", spec);
-        bundle.putString("image", image);
-        bundle.putInt("rate", rate);
-        fragment.setArguments(bundle);
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .hide(this)
-                .replace(R.id.content, fragment)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .addToBackStack("stack")
-                .commit();
+        Intent intent = new Intent(getActivity(),DoctorActivity.class);
+        intent.putExtra("id", id);
+        intent.putExtra("name", name);
+        intent.putExtra("spec", spec);
+        intent.putExtra("image", image);
+        intent.putExtra("rate", rate);
+        startActivity(intent);
+
+//        DoctorActivity fragment = new DoctorActivity();
+//        Bundle bundle = new Bundle();
+//        bundle.putInt("id", id);
+//        bundle.putString("name", name);
+//        bundle.putString("spec", spec);
+//        bundle.putString("image", image);
+//        bundle.putInt("rate", rate);
+//        fragment.setArguments(bundle);
+//        getActivity().getSupportFragmentManager().beginTransaction()
+//                .hide(this)
+//                .replace(R.id.content, fragment,"Doctor")
+//                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+//                //.addToBackStack("stackDoctor")
+//                .commit();
     }
 
     @Override

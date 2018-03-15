@@ -86,9 +86,9 @@ public class CreateRecordFragment extends Fragment implements CreateRecordMvp {
         OnlineRecordFragment fragment = new OnlineRecordFragment();
         getFragmentManager().beginTransaction()
                 .hide(this)
-                .replace(R.id.content, fragment)
+                .replace(R.id.content, fragment,"OnlineRecord")
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .addToBackStack("stack")
+                //.addToBackStack("stack")
                 .commit();
 
     }

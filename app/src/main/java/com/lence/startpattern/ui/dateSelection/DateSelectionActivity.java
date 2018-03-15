@@ -20,7 +20,7 @@ import android.widget.TextView;
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
 import com.applandeo.materialcalendarview.listeners.OnDayClickListener;
-import com.lence.startpattern.MainActivity;
+import com.lence.startpattern.ui.EntryActivity;
 import com.lence.startpattern.R;
 import com.lence.startpattern.SingletonStorage;
 import com.lence.startpattern.model.DateMap;
@@ -233,6 +233,6 @@ public class DateSelectionActivity extends AppCompatActivity implements DateSele
     public void onViewClicked() {
         SingletonStorage.getInstance().setDate(date);
         SingletonStorage.getInstance().setTime(time);
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, EntryActivity.class));
     }
 }
