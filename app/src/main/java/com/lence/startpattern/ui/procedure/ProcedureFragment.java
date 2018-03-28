@@ -42,7 +42,7 @@ public class ProcedureFragment extends Fragment implements ProcedureMvp {
         pr = new ProcedurePresenter(this);
 
         TextView label = (TextView) getActivity().findViewById(R.id.label);
-        label.setText("Процедура");
+        label.setText("ПРОЦЕДУРА");
 
         dialog = new ProgressDialog(getActivity(), R.style.full_screen_dialog) {
             @Override

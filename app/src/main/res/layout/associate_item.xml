@@ -43,9 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="adtsbdtbsd"
-                android:textColor="@color/textHead"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+                style="@style/AppTheme.TextTitle" />
 
             <TextView
                 android:id="@+id/spec"
@@ -53,8 +51,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Vrach"
-                android:textColor="@color/textSubtitle"
-                android:textSize="16dp" />
+                style="@style/AppTheme.TextTitle"
+                android:textColor="@color/subtitle"
+                android:textSize="9sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -79,9 +78,10 @@
                     android:layout_alignParentRight="true"
                     android:layout_weight="1"
                     android:text="100 отзывов"
-                    android:textSize="12dp"
+                    style="@style/AppTheme.TextTitle"
+                    android:textSize="10sp"
                     android:textColor="@color/blue"
-                    android:textStyle="bold" />
+                     />
             </RelativeLayout>
 
         </LinearLayout>

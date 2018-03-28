@@ -29,7 +29,7 @@ OnlineRecordPresenter mPresenter;
         mPresenter = new OnlineRecordPresenter(this);
         ButterKnife.bind(this, view);
         TextView label = (TextView) getActivity().findViewById(R.id.label);
-        label.setText("Записаться");
+        label.setText("ЗАПИСАТЬСЯ");
 
 
         return view;

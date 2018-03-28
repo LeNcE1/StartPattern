@@ -33,7 +33,7 @@ public class AssociateListActivity extends AppCompatActivity implements Associat
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         pr = new AssociatePresenter(this);
         TextView label = (TextView) findViewById(R.id.label);
-        label.setText("Сотрудник");
+        label.setText("СОТРУДНИК");
         pr.loadAssociate();
 
         dialog = new ProgressDialog(this,R.style.full_screen_dialog){

@@ -3,40 +3,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+
     tools:context=".ui.onlineRecord.OnlineRecordFragment">
 
     <TextView
         android:id="@+id/details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_margin="16dp"
         android:drawableRight="@drawable/arrow_up"
         android:gravity="center_vertical"
         android:text="Посмотреть детали заказа"
-        android:textColor="@color/textHead"
-        android:textSize="16dp"
-        android:textStyle="bold" />
+        style="@style/AppTheme.TextTitle" />
 
-    <android.support.v7.widget.CardView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/details"
+        android:layout_below="@id/details">
 
-        android:elevation="4dp"
-        app:cardCornerRadius="2dp">
-
-
-        <ScrollView
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
-            android:padding="16dp">
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:elevation="4dp"
+            app:cardCornerRadius="2dp">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="16dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -44,8 +43,9 @@
                     android:layout_marginLeft="4dp"
                     android:labelFor="@id/name"
                     android:text="Имя"
+                    style="@style/AppTheme.TextTitle"
                     android:textColor="@color/blue"
-                    android:textSize="12dp" />
+                    android:textSize="10sp" />
 
                 <EditText
                     android:id="@+id/name"
@@ -60,8 +60,9 @@
                     android:layout_marginTop="8dp"
                     android:labelFor="@id/phone"
                     android:text="Телефон"
+                    style="@style/AppTheme.TextTitle"
                     android:textColor="@color/blue"
-                    android:textSize="12dp" />
+                    android:textSize="10sp" />
 
                 <EditText
                     android:id="@+id/phone"
@@ -76,8 +77,9 @@
                     android:layout_marginTop="8dp"
                     android:labelFor="@id/email"
                     android:text="Email"
+                    style="@style/AppTheme.TextTitle"
                     android:textColor="@color/blue"
-                    android:textSize="12dp" />
+                    android:textSize="10sp" />
 
                 <EditText
                     android:id="@+id/email"
@@ -100,8 +102,9 @@
                     android:layout_marginTop="8dp"
                     android:labelFor="@id/reminder"
                     android:text="Напоминание"
+                    style="@style/AppTheme.TextTitle"
                     android:textColor="@color/blue"
-                    android:textSize="12dp" />
+                    android:textSize="10sp" />
 
                 <Spinner
                     android:id="@+id/reminder"
@@ -131,6 +134,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
                         android:inputType="textMultiLine"
+                        style="@style/AppTheme.TextTitle"
+                        android:textSize="12sp"
                         android:text="Нажимая кнопку  Записаться, вы сошлашаетесь с условиями пользовательского соглашения" />
 
                 </LinearLayout>
@@ -143,15 +148,14 @@
                     android:layout_marginBottom="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
-                    android:background="@color/blue"
+                    android:background="@drawable/button_background"
                     android:text="записаться"
-                    android:textColor="@color/white"
-                    android:textStyle="bold" />
+                     android:textColor="@color/white"
+                    style="@style/AppTheme.TextTitle"/>
             </LinearLayout>
 
-        </ScrollView>
 
-
-    </android.support.v7.widget.CardView>
+        </android.support.v7.widget.CardView>
+    </ScrollView>
 
 </RelativeLayout>

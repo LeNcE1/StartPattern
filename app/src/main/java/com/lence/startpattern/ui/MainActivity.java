@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
         TextView label = (TextView) findViewById(R.id.label);
-        label.setText("Start");
+        label.setText("START");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

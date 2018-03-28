@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lence.startpattern.R;
@@ -45,6 +46,12 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
     TextView mTextAssociate;
     @BindView(R.id.textDate)
     TextView mTextDate;
+    @BindView(R.id.clearPrcedure)
+    ImageView mClearPrcedure;
+    @BindView(R.id.clearAssociate)
+    ImageView mClearAssociate;
+    @BindView(R.id.clearDate)
+    ImageView mClearDate;
 
     public SelectionScreenFragment() {
         // Required empty public constructor
@@ -57,7 +64,7 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
         View view = inflater.inflate(R.layout.selection_screen, container, false);
         TextView label = (TextView) getActivity().findViewById(R.id.label);
         label.setVisibility(View.VISIBLE);
-        label.setText("Онлайн запись");
+        label.setText("ОНЛАЙН-ЗАПИСЬ");
         ChangeStyle.whiteColor(getActivity());
         // TODO: 07.03.2018 дропнуть кнопку назад на экране 
         mPresenter = new SelectionScreenPresenter(this);
@@ -144,4 +151,41 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
     }
 
 
+    @OnClick(R.id.clearPrcedure)
+    public void onMClearPrcedureClicked() {
+        SingletonStorage.getInstance().setServices(0, "", 0);
+        mTextProcedure.setText("Выберите услугу");
+
+        SingletonStorage.getInstance().setAssociate(0, "", "", "", 0);
+        enable(mAssociate, false);
+        mTextAssociate.setText("Выберите специалиста");
+
+        SingletonStorage.getInstance().setDate("");
+        SingletonStorage.getInstance().setTime("");
+        mTextDate.setText("Выберите время");
+        enable(mDate, false);
+        mNextStep.setEnabled(false);
+    }
+
+    @OnClick(R.id.clearAssociate)
+    public void onMClearAssociateClicked() {
+        SingletonStorage.getInstance().setAssociate(0, "", "", "", 0);
+        enable(mAssociate, false);
+        mTextAssociate.setText("Выберите специалиста");
+
+        SingletonStorage.getInstance().setDate("");
+        SingletonStorage.getInstance().setTime("");
+        mTextDate.setText("Выберите время");
+        enable(mDate, false);
+        mNextStep.setEnabled(false);
+    }
+
+    @OnClick(R.id.clearDate)
+    public void onMClearDateClicked() {
+        SingletonStorage.getInstance().setDate("");
+        SingletonStorage.getInstance().setTime("");
+        mTextDate.setText("Выберите время");
+        enable(mDate, false);
+        mNextStep.setEnabled(false);
+    }
 }

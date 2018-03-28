@@ -20,6 +20,7 @@ import com.lence.startpattern.ui.onlineRecord.OnlineRecordFragment;
 import com.lence.startpattern.ui.selectionScreen.SelectionScreenFragment;
 import com.lence.startpattern.ui.service.ServiceActivity;
 import com.lence.startpattern.ui.sessionHistory.SessionHistoryFragment;
+import com.lence.startpattern.utils.ChangeStyle;
 
 public class EntryActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -40,7 +41,7 @@ public class EntryActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+       // ChangeStyle.whiteColor(this);
         SelectionScreenFragment fragment = new SelectionScreenFragment();
         //getSupportFragmentManager().popBackStack();
         android.support.v4.app.FragmentTransaction ft = this.getSupportFragmentManager().beginTransaction();

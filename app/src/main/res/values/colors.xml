@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#F7F8FD</color>
     <color name="colorPrimaryDark">#de000000</color>
-    <color name="colorAccent">#1B6294</color>
+    <color name="colorAccent">#717274</color>
     <color name="blue">#33C4FE</color>
     <color name="red">#FE3333</color>
     <color name="white">#ffffff</color>
@@ -17,4 +17,7 @@
     <color name="textSubtitle">#89000000</color>
     <color name="textLabel">#61000000</color>
     <color name="transparent">#00000000</color>
+    <color name="label">#24253D</color>
+    <color name="title">#CC2F3047</color>
+    <color name="subtitle">#662F3047</color>
 </resources>

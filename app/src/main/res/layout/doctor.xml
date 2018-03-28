@@ -31,26 +31,28 @@
 
             <TextView
                 android:id="@+id/name"
+                style="@style/AppTheme.TextTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/avatar"
                 android:gravity="center_horizontal"
                 android:text="Цыдыпов Андрей Иванович"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/spec"
+                style="@style/AppTheme.TextTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/name"
-
                 android:gravity="center_horizontal"
                 android:text="хирург"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/nextStep"
+                style="@style/AppTheme.TextTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/spec"
@@ -60,9 +62,9 @@
                 android:background="@drawable/button_background"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
-                android:text="Записаться на прием"
+                android:text="Записаться"
                 android:textColor="@color/white"
-                android:textSize="12dp" />
+                android:textSize="12sp" />
 
         </RelativeLayout>
 

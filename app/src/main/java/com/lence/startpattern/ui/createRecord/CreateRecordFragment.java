@@ -62,7 +62,7 @@ public class CreateRecordFragment extends Fragment implements CreateRecordMvp {
         mPresenter = new CreateRecordPresenter(this);
         ButterKnife.bind(this, view);
         TextView label = (TextView) getActivity().findViewById(R.id.label);
-        label.setText("Создать запись");
+        label.setText("СОЗДАТЬ ЗАПИСЬ");
         SingletonStorage storage = SingletonStorage.getInstance();
         mProcedure.setText(storage.getServicesDescription());
         Picasso.with(getContext())

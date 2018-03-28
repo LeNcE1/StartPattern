@@ -56,7 +56,7 @@ public class AssociateAllListFragment extends Fragment implements AssociateAllMv
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         pr = new AssociateAllPresenter(this);
         TextView label = (TextView) getActivity().findViewById(R.id.label);
-        label.setText("Сотрудник");
+        label.setText("СОТРУДНИК");
         pr.loadAssociate();
         ChangeStyle.whiteColor(getActivity());
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());

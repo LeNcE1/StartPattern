@@ -89,7 +89,7 @@ public class DateSelectionActivity extends AppCompatActivity implements DateSele
 
         ButterKnife.bind(this);
         label = (TextView) findViewById(R.id.label);
-        label.setText("Выбор даты");
+        label.setText("ВЫБОР ДАТЫ");
 
         Calendar today = Calendar.getInstance();
         today.set(today.get(Calendar.YEAR), today.get(Calendar.MONTH), (today.get(Calendar.DATE)) - 1);

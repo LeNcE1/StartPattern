@@ -31,7 +31,7 @@ public class ServiceActivity extends AppCompatActivity implements ServiceMvp {
         setContentView(R.layout.service);
         TextView label = (TextView) findViewById(R.id.label);
         label.setVisibility(View.VISIBLE);
-        label.setText("Услуга");
+        label.setText("УСЛУГА");
         ServicePresenter presenter = new ServicePresenter(this);
         ButterKnife.bind(this);
         presenter.loadSections();

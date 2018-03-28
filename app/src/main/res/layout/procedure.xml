@@ -31,20 +31,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Виды услуг"
-            android:textColor="@color/textHead"
-            android:textSize="16dp"
-            android:textStyle="bold" />
+            android:text="ВИДЫ УСЛУГ"
+            style="@style/AppTheme.TextTitle" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:gravity="center"
-            android:text="Цена (Р.)"
-            android:textColor="@color/textHead"
-            android:textSize="16dp"
-            android:textStyle="bold" />
+            android:text="ЦЕНА (Р.)"
+            style="@style/AppTheme.TextTitle" />
 
     </LinearLayout>
 </RelativeLayout>

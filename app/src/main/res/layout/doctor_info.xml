@@ -10,6 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/text"
+        style="@style/AppTheme.TextTitle"
+        android:textSize="12sp"
         android:text="Описание жизни человека, сделанное другими людьми или им самим (автобиография). Биография является источником первичной социологической информации" />
 
 </LinearLayout>

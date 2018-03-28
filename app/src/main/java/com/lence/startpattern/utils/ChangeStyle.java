@@ -19,9 +19,9 @@ public abstract class ChangeStyle {
         View appBarLayout = activity.findViewById(R.id.appBar);
         View content = activity.findViewById(R.id.content);
         setMargins(content, 0, 0, 0, 0);
-        appBarLayout.setBackgroundResource(R.color.white);
+        appBarLayout.setBackgroundResource(R.color.colorPrimary);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            appBarLayout.setElevation(8);
+            appBarLayout.setElevation(0);
         }
         TextView label = (TextView) activity.findViewById(R.id.label);
         label.setVisibility(View.VISIBLE);
@@ -30,7 +30,7 @@ public abstract class ChangeStyle {
         ImageView arrowBack = activity.findViewById(R.id.arrowBack);
         arrowBack.setColorFilter(activity.getResources().getColor(R.color.colorAccent));
         Toolbar toolbar = activity.findViewById(R.id.toolbar);
-        toolbar.setBackgroundResource(R.color.white);
+        toolbar.setBackgroundResource(R.color.colorPrimary);
         ToolbarColorizeHelper.colorizeToolbar(toolbar, activity.getResources().getColor(R.color.colorAccent), activity);
     }
 

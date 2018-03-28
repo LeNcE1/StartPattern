@@ -36,15 +36,13 @@
 
                 <TextView
                     android:id="@+id/textView"
+                    style="@style/AppTheme.TextTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/textProcedure"
-
                     android:text="услуга"
 
-                    android:textColor="@color/textHead"
-                    android:textSize="24dp"
-                    android:textStyle="bold" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/textProcedure"
@@ -62,11 +60,11 @@
                     android:textSize="16dp" />
 
                 <ImageView
+                    android:id="@+id/clearPrcedure"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/textView"
                     android:layout_alignParentEnd="true"
-
                     android:layout_alignParentRight="true"
                     app:srcCompat="@drawable/cancel" />
 
@@ -98,15 +96,13 @@
 
                 <TextView
                     android:id="@+id/textViewAssociate"
+                    style="@style/AppTheme.TextTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/textAssociate"
-
                     android:text="сотрудник"
 
-                    android:textColor="@color/textHead"
-                    android:textSize="24dp"
-                    android:textStyle="bold" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/textAssociate"
@@ -124,6 +120,7 @@
                     android:textSize="16dp" />
 
                 <ImageView
+                    android:id="@+id/clearAssociate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/textViewAssociate"
@@ -159,15 +156,14 @@
 
                 <TextView
                     android:id="@+id/textViewDate"
+                    style="@style/AppTheme.TextTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/textDate"
-
                     android:text="Дата и время"
 
-                    android:textColor="@color/textHead"
-                    android:textSize="24dp"
-                    android:textStyle="bold" />
+
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/textDate"
@@ -180,11 +176,12 @@
                     android:layout_toRightOf="@+id/textViewDate"
                     android:gravity="right"
                     android:paddingBottom="16dp"
-                    android:text="19.01.2018 10:30"
+                    android:text=""
                     android:textColor="@color/textSubtitle"
                     android:textSize="16dp" />
 
                 <ImageView
+                    android:id="@+id/clearDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/textViewDate"

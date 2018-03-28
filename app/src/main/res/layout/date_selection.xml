@@ -3,13 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:elevation="8dp">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,14 +26,12 @@
 
             <TextView
                 android:id="@+id/label"
+                style="@style/AppTheme.TextLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:gravity="top"
-                android:text="TextTextTextText"
-                android:textColor="@color/textCustom"
-                android:textSize="17dp"
-                android:textStyle="bold" />
+                android:text="TextTextTextText" />
 
         </LinearLayout>
 
@@ -133,8 +130,7 @@
                 android:layout_below="@id/time"
                 android:layout_marginTop="4dp"
                 android:text="Записаться"
-                android:textColor="@color/white"
-                />
+                android:textColor="@color/white" />
         </RelativeLayout>
     </ScrollView>
 </LinearLayout>

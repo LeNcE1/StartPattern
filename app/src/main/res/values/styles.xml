@@ -37,6 +37,7 @@
         <item name="android:background">@drawable/button_background</item>
         <item name="android:textColorPrimary">@color/white</item>
         <item name="android:textColorPrimaryDisableOnly">@color/gray</item>
+        <item name="android:fontFamily">@font/font_family_bold</item>
     </style>
 
 
@@ -47,6 +48,20 @@
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
         <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
 
+    </style>
+
+    <style name="AppTheme.TextLabel" parent="AppTheme">
+        <item name="android:fontFamily">@font/font_family_bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">17sp</item>
+        <item name="android:letterSpacing">0.2</item>
+        <item name="android:textColor">@color/label</item>
+    </style>
+    
+    <style name="AppTheme.TextTitle" parent="AppTheme">
+        <item name="android:fontFamily">@font/font_family_semibold</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/title</item>
     </style>
 
 </resources>
