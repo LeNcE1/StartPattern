@@ -45,13 +45,15 @@
                     android:text="Имя"
                     style="@style/AppTheme.TextTitle"
                     android:textColor="@color/blue"
-                    android:textSize="10sp" />
+                    android:textSize="10sp"
+                    />
 
                 <EditText
                     android:id="@+id/name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    />
 
                 <TextView
                     android:layout_width="match_parent"

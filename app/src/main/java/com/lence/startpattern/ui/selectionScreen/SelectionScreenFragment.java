@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lence.startpattern.R;
 import com.lence.startpattern.SingletonStorage;
@@ -93,17 +94,16 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
         }
         if (SingletonStorage.getInstance().getDate() != null) {
             mNextStep.setEnabled(true);
-            mNextStep.setTextColor(Color.WHITE);
         }
         return view;
     }
 
-    private void enable(View view, boolean en) {
-        view.setEnabled(en);
+    private void enable(CardView view, boolean en) {
+        //view.setEnabled(en);
         if (!en)
-            view.setBackgroundColor(getResources().getColor(R.color.disabledGray));
+            view.setCardBackgroundColor(getResources().getColor(R.color.disabledGray));
         else
-            view.setBackgroundColor(getResources().getColor(R.color.white));
+            view.setCardBackgroundColor(getResources().getColor(R.color.white));
     }
 
     @OnClick(R.id.procedure)
@@ -119,24 +119,20 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
 
     @OnClick(R.id.associate)
     public void onMAssociateClicked() {
-        startActivity(new Intent(getActivity(), AssociateListActivity.class));
-//        AssociateListActivity fragment = new AssociateListActivity();
-//        FragmentTransaction ft = getFragmentManager().beginTransaction();
-//        ft.replace(R.id.content, fragment);
-//        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-//        ft.addToBackStack("stack");
-//        ft.commit();
+        if (SingletonStorage.getInstance().getServicesId() != 0) {
+            startActivity(new Intent(getActivity(), AssociateListActivity.class));
+        } else {
+            Toast.makeText(getActivity(), "Сначала выберите услугу", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @OnClick(R.id.date)
     public void onMDateClicked() {
-        startActivity(new Intent(getActivity(), DateSelectionActivity.class));
-//        DateSelectionActivity fragment = new DateSelectionActivity();
-//        FragmentTransaction ft = getFragmentManager().beginTransaction();
-//        ft.replace(R.id.content, fragment);
-//        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-//        ft.addToBackStack("stack");
-//        ft.commit();
+        if (SingletonStorage.getInstance().getAssociateId() != 0) {
+            startActivity(new Intent(getActivity(), DateSelectionActivity.class));
+        } else {
+            Toast.makeText(getActivity(), "Сначала выберите услугу и специалиста", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @OnClick(R.id.nextStep)
@@ -153,39 +149,43 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
 
     @OnClick(R.id.clearPrcedure)
     public void onMClearPrcedureClicked() {
-        SingletonStorage.getInstance().setServices(0, "", 0);
-        mTextProcedure.setText("Выберите услугу");
+        if (!mTextProcedure.getText().toString().equals("Выберите услугу")) {
+            SingletonStorage.getInstance().setServices(0, "", 0);
+            mTextProcedure.setText("Выберите услугу");
 
-        SingletonStorage.getInstance().setAssociate(0, "", "", "", 0);
-        enable(mAssociate, false);
-        mTextAssociate.setText("Выберите специалиста");
+            SingletonStorage.getInstance().setAssociate(0, "", "", "", 0);
+            enable(mAssociate, false);
+            mTextAssociate.setText("Выберите специалиста");
 
-        SingletonStorage.getInstance().setDate("");
-        SingletonStorage.getInstance().setTime("");
-        mTextDate.setText("Выберите время");
-        enable(mDate, false);
-        mNextStep.setEnabled(false);
+            SingletonStorage.getInstance().setDate("");
+            SingletonStorage.getInstance().setTime("");
+            mTextDate.setText("Выберите время");
+            enable(mDate, false);
+            mNextStep.setEnabled(false);
+        }
     }
 
     @OnClick(R.id.clearAssociate)
     public void onMClearAssociateClicked() {
-        SingletonStorage.getInstance().setAssociate(0, "", "", "", 0);
-        enable(mAssociate, false);
-        mTextAssociate.setText("Выберите специалиста");
+        if (!mTextAssociate.getText().toString().equals("Выберите специалиста")) {
+            SingletonStorage.getInstance().setAssociate(0, "", "", "", 0);
+            mTextAssociate.setText("Выберите специалиста");
 
-        SingletonStorage.getInstance().setDate("");
-        SingletonStorage.getInstance().setTime("");
-        mTextDate.setText("Выберите время");
-        enable(mDate, false);
-        mNextStep.setEnabled(false);
+            SingletonStorage.getInstance().setDate("");
+            SingletonStorage.getInstance().setTime("");
+            mTextDate.setText("Выберите время");
+            enable(mDate, false);
+            mNextStep.setEnabled(false);
+        }
     }
 
     @OnClick(R.id.clearDate)
     public void onMClearDateClicked() {
-        SingletonStorage.getInstance().setDate("");
-        SingletonStorage.getInstance().setTime("");
-        mTextDate.setText("Выберите время");
-        enable(mDate, false);
-        mNextStep.setEnabled(false);
+        if (!mTextDate.getText().toString().equals("Выберите время")) {
+            SingletonStorage.getInstance().setDate("");
+            SingletonStorage.getInstance().setTime("");
+            mTextDate.setText("Выберите время");
+            mNextStep.setEnabled(false);
+        }
     }
 }

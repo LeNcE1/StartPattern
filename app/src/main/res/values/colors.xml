@@ -11,7 +11,8 @@
     <color name="barGrey">#f4f4f4</color>
     <color name="textGray">#414141</color>
     <color name="gray">#1b000000</color>
-    <color name="disabledGray">#1e000000</color>
+    <color name="disabled">#1e000000</color>
+    <color name="disabledGray">#d4d4d4</color>
     <color name="textCustom">#24253D</color>
     <color name="textHead">#de000000</color>
     <color name="textSubtitle">#89000000</color>

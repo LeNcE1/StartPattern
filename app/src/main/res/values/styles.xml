@@ -35,8 +35,7 @@
 
     <style name="Button" parent="Base.Widget.AppCompat.Button">
         <item name="android:background">@drawable/button_background</item>
-        <item name="android:textColorPrimary">@color/white</item>
-        <item name="android:textColorPrimaryDisableOnly">@color/gray</item>
+        <item name="android:textColor">@drawable/button_text_color</item>
         <item name="android:fontFamily">@font/font_family_bold</item>
     </style>
 

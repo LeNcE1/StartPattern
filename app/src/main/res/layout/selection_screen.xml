@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
+
     android:paddingTop="16dp"
     tools:context="com.lence.startpattern.ui.selectionScreen.SelectionScreenFragment">
 
@@ -18,7 +17,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            app:cardCornerRadius="2dp">
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="4dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -40,12 +42,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/textProcedure"
-                    android:text="услуга"
-
+                    android:layout_marginTop="16dp"
+                    android:text="УСЛУГА"
                     android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/textProcedure"
+                    style="@style/AppTheme.TextTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -56,8 +59,7 @@
                     android:gravity="right"
                     android:paddingBottom="16dp"
                     android:text=""
-                    android:textColor="@color/textSubtitle"
-                    android:textSize="16dp" />
+                    android:textSize="10sp" />
 
                 <ImageView
                     android:id="@+id/clearPrcedure"
@@ -78,7 +80,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/procedure"
             android:layout_marginBottom="16dp"
-            app:cardCornerRadius="2dp">
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="4dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -100,12 +105,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/textAssociate"
-                    android:text="сотрудник"
-
+                    android:layout_marginTop="16dp"
+                    android:text="СОТРУДНИК"
                     android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/textAssociate"
+                    style="@style/AppTheme.TextTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -114,10 +120,11 @@
                     android:layout_toEndOf="@+id/textViewAssociate"
                     android:layout_toRightOf="@+id/textViewAssociate"
                     android:gravity="right"
+                    android:letterSpacing="0.1"
                     android:paddingBottom="16dp"
                     android:text=""
-                    android:textColor="@color/textSubtitle"
-                    android:textSize="16dp" />
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/clearAssociate"
@@ -138,7 +145,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/associate"
             android:layout_marginBottom="16dp"
-            app:cardCornerRadius="2dp">
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="4dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -160,13 +170,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/textDate"
-                    android:text="Дата и время"
-
+                    android:layout_marginTop="16dp"
+                    android:text="ДАТА И ВРЕМЯ"
 
                     android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/textDate"
+                    style="@style/AppTheme.TextTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -175,10 +186,10 @@
                     android:layout_toEndOf="@+id/textViewDate"
                     android:layout_toRightOf="@+id/textViewDate"
                     android:gravity="right"
+                    android:letterSpacing="0.1"
                     android:paddingBottom="16dp"
                     android:text=""
-                    android:textColor="@color/textSubtitle"
-                    android:textSize="16dp" />
+                    android:textSize="10sp" />
 
                 <ImageView
                     android:id="@+id/clearDate"
@@ -199,8 +210,11 @@
             style="@style/Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_below="@id/date"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:elevation="2dp"
             android:text="оформить заказ" />
     </RelativeLayout>
 </ScrollView>
