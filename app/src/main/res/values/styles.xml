@@ -63,4 +63,10 @@
         <item name="android:textColor">@color/title</item>
     </style>
 
+    <style name="tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:fontFamily">@font/font_family_bold</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:letterSpacing">0.04</item>
+    </style>
+
 </resources>

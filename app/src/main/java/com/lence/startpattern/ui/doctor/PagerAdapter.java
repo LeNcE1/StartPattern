@@ -49,11 +49,11 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
         // Generate title based on item position
         switch (position) {
             case 0:
-                return "Информация";
+                return "ИНФОРМАЦИЯ";
             case 1:
-                return "Отзывы";
+                return "ОТЗЫВЫ";
             case 2:
-                return "Расписание";
+                return "ГРАФИК ПРИЕМА";
             default:
                 return null;
         }

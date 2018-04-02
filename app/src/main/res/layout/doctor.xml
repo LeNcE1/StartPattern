@@ -76,7 +76,9 @@
             android:layout_below="@id/head"
             android:background="@color/white"
             android:elevation="4dp"
-            app:tabMode="fixed">
+            app:tabIndicatorColor="@color/blue"
+            app:tabTextAppearance="@style/tab_text"
+            app:tabMode="scrollable">
 
 
         </android.support.design.widget.TabLayout>
