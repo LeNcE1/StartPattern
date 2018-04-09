@@ -15,7 +15,7 @@
         android:layout_marginRight="16dp"
         android:background="@drawable/button_background"
         style="@style/AppTheme.TextTitle"
-        android:text="Оставить отзыв"
+        android:text="ОСТАВИТЬ ОТЗЫВ"
         android:textColor="@color/white"
         android:textSize="10sp"/>
 

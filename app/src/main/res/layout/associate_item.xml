@@ -53,7 +53,7 @@
                 android:text="Vrach"
                 style="@style/AppTheme.TextTitle"
                 android:textColor="@color/subtitle"
-                android:textSize="9sp" />
+                android:textSize="12sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -79,7 +79,7 @@
                     android:layout_weight="1"
                     android:text="100 отзывов"
                     style="@style/AppTheme.TextTitle"
-                    android:textSize="10sp"
+                    android:textSize="12sp"
                     android:textColor="@color/blue"
                      />
             </RelativeLayout>
