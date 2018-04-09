@@ -19,24 +19,14 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.RibotViewHol
 
 
 
-    private List<String> mRibots = new ArrayList<>();
-    DateSelectionPresenter pr;
+    private List<String> mRibots;
+    private DateSelectionPresenter mPresenter;
 
 
     public TimesAdapter(ArrayList<String> posts, DateSelectionPresenter presenter) {
         mRibots = posts;
-        pr = presenter;
+        mPresenter = presenter;
     }
-
-//    public AssociateAllAdapter(List<News> posts, NewsPresentr pr, SharedPreferences user, String pod, String m) {
-//        this.pod = pod;
-//        this.mRibots = posts;
-//        this.pr = pr;
-//        this.user = user;
-//        this.m = m;
-//    }
-
-
 
     @Override
     public RibotViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -47,9 +37,6 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.RibotViewHol
         return new RibotViewHolder(itemView);
     }
 
-
-    int doposition = 0;
-
     @Override
     public void onBindViewHolder(final RibotViewHolder holder, final int position) {
 
@@ -57,7 +44,6 @@ public class TimesAdapter extends RecyclerView.Adapter<TimesAdapter.RibotViewHol
         final String example = String.valueOf(mRibots.get(position));
         holder.mPickerItem.setText(example);
     }
-
 
     @Override
     public int getItemCount() {

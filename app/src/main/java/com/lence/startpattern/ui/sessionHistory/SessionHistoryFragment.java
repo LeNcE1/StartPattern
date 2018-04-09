@@ -22,7 +22,7 @@ public class SessionHistoryFragment extends Fragment implements SessionHistoryMv
     @BindView(R.id.tab)
     TabLayout mTab;
     @BindView(R.id.vp)
-    ViewPager mVp;
+    ViewPager mViewPager;
 
     public SessionHistoryFragment() {
         // Required empty public constructor
@@ -37,10 +37,10 @@ public class SessionHistoryFragment extends Fragment implements SessionHistoryMv
         mPresenter = new SessionHistoryPresenter(this);
 
         SessionHistoryPagerAdapter adapter = new SessionHistoryPagerAdapter(getContext(), getActivity().getSupportFragmentManager());
-        mVp.setAdapter(adapter);
-        mVp.getAdapter().notifyDataSetChanged();
-        mVp.setCurrentItem(0);
-        mTab.setupWithViewPager(mVp);
+        mViewPager.setAdapter(adapter);
+        mViewPager.getAdapter().notifyDataSetChanged();
+        mViewPager.setCurrentItem(0);
+        mTab.setupWithViewPager(mViewPager);
         return view;
     }
 

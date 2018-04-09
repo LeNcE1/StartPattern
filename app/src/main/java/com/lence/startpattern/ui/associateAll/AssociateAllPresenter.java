@@ -34,7 +34,7 @@ public class AssociateAllPresenter {
 
             @Override
             public void onFailure(Call<List<AssociateModel>> call, Throwable t) {
-
+                Log.e("Exception", call + " " + t);
             }
         });
 

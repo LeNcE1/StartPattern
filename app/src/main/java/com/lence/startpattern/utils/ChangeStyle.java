@@ -37,9 +37,9 @@ public abstract class ChangeStyle {
     public static void blueColor(Activity activity) {
         View appBarLayout = activity.findViewById(R.id.appBar);
         View content = activity.findViewById(R.id.content);
-        TypedValue tv = new TypedValue();
-        activity.getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true);
-        int actionBarHeight = activity.getResources().getDimensionPixelSize(tv.resourceId);
+        TypedValue typedValue = new TypedValue();
+        activity.getTheme().resolveAttribute(android.R.attr.actionBarSize, typedValue, true);
+        int actionBarHeight = activity.getResources().getDimensionPixelSize(typedValue.resourceId);
         setMargins(content,0,-actionBarHeight,0,0);
         appBarLayout.setBackgroundResource(Color.alpha(0));
         //appBarLayout.setBackgroundResource(R.color.blue);
@@ -67,11 +67,11 @@ public abstract class ChangeStyle {
 //        s.setMargins(0, pixel_top, 0, 0);
 //    }
 
-    public static void setMargins(View v, int l, int t, int r, int b) {
-        if (v.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
-            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
-            p.setMargins(l, t, r, b);
-            v.requestLayout();
+    public static void setMargins(View view, int left, int top, int right, int bot) {
+        if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            layoutParams.setMargins(left, top, right, bot);
+            view.requestLayout();
         }
     }
 }

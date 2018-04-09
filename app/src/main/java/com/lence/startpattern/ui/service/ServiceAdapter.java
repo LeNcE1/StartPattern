@@ -15,9 +15,9 @@ import java.util.List;
 
 public class ServiceAdapter extends BaseAdapter {
     private Context mContext;
-    List<SectionsModel> mList;
+    private List<SectionsModel> mList;
 
-    public ServiceAdapter(Context c,List<SectionsModel> list) {
+    ServiceAdapter(Context c, List<SectionsModel> list) {
         mContext = c;
         mList=list;
 
@@ -37,8 +37,6 @@ public class ServiceAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
-
         View grid;
 
         if (convertView == null) {

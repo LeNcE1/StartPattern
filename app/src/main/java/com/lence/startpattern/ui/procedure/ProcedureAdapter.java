@@ -11,7 +11,6 @@ import com.lence.startpattern.SingletonStorage;
 import com.lence.startpattern.model.AssociateServicesModel;
 import com.lence.startpattern.model.ServicesModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -20,24 +19,20 @@ import butterknife.ButterKnife;
 
 public class ProcedureAdapter extends RecyclerView.Adapter<ProcedureAdapter.RibotViewHolder> {
 
-
-    private List<Object> mRibots = new ArrayList<>();
-    ProcedurePresenter pr;
+    private List<Object> mRibots;
+    ProcedurePresenter mPresenter;
 
     public ProcedureAdapter(List<Object> posts, ProcedurePresenter presenter) {
         mRibots = posts;
-        pr = presenter;
+        mPresenter = presenter;
     }
 
     @Override
     public RibotViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.procedure_item, parent, false);
-
-
         return new RibotViewHolder(itemView);
     }
-
 
     @Override
     public void onBindViewHolder(final RibotViewHolder holder, final int position) {
@@ -50,7 +45,7 @@ public class ProcedureAdapter extends RecyclerView.Adapter<ProcedureAdapter.Ribo
                 @Override
                 public void onClick(View v) {
                     SingletonStorage.getInstance().setServices(model.getId(), model.getName(), model.getPrice());
-                    pr.startProcedure();
+                    mPresenter.startProcedure();
                 }
             });
         } else if (mRibots.get(position).getClass().isAssignableFrom(AssociateServicesModel.class)) {
@@ -62,7 +57,7 @@ public class ProcedureAdapter extends RecyclerView.Adapter<ProcedureAdapter.Ribo
                 @Override
                 public void onClick(View v) {
                     SingletonStorage.getInstance().setServices(model.getId(), model.getName(), model.getPrice());
-                    pr.startProcedure();
+                    mPresenter.startProcedure();
                 }
             });
         }
@@ -82,7 +77,6 @@ public class ProcedureAdapter extends RecyclerView.Adapter<ProcedureAdapter.Ribo
         TextView name;
         @BindView(R.id.price)
         TextView price;
-
         @BindView(R.id.view)
         View mView;
 

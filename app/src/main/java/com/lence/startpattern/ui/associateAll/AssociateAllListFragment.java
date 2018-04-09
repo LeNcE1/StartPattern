@@ -3,6 +3,7 @@ package com.lence.startpattern.ui.associateAll;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -26,8 +27,7 @@ import java.util.List;
 public class AssociateAllListFragment extends Fragment implements AssociateAllMvp {
     RecyclerView recyclerView;
     AssociateAllAdapter mAssociateAllAdapter;
-    AssociateAllPresenter pr;
-    List<String> posts = new ArrayList<>();
+    AssociateAllPresenter mPresenter;
     ProgressDialog dialog;
 
     public AssociateAllListFragment() {
@@ -36,10 +36,9 @@ public class AssociateAllListFragment extends Fragment implements AssociateAllMv
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.associate_all, container, false);
-        FragmentManager fm = getFragmentManager();
         dialog = new ProgressDialog(getActivity(),R.style.full_screen_dialog){
             @Override
             protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +53,10 @@ public class AssociateAllListFragment extends Fragment implements AssociateAllMv
         dialog.show();
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        pr = new AssociateAllPresenter(this);
+        mPresenter = new AssociateAllPresenter(this);
         TextView label = (TextView) getActivity().findViewById(R.id.label);
         label.setText("СОТРУДНИК");
-        pr.loadAssociate();
+        mPresenter.loadAssociate();
         ChangeStyle.whiteColor(getActivity());
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);
@@ -84,7 +83,7 @@ public class AssociateAllListFragment extends Fragment implements AssociateAllMv
 
     @Override
     public void refreshList(List<AssociateModel> body) {
-        mAssociateAllAdapter = new AssociateAllAdapter(body, pr, getActivity());
+        mAssociateAllAdapter = new AssociateAllAdapter(body, mPresenter, getActivity());
         recyclerView.setAdapter(mAssociateAllAdapter);
         recyclerView.getAdapter().notifyDataSetChanged();
         dialog.dismiss();

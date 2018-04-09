@@ -23,18 +23,17 @@ import java.util.List;
 public class AssociateListActivity extends AppCompatActivity implements AssociateMvp {
     RecyclerView recyclerView;
     AssociateAdapter associateAdapter;
-    AssociatePresenter pr;
-    List<String> posts = new ArrayList<>();
+    AssociatePresenter mPresenter;
     ProgressDialog dialog;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.associate);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        pr = new AssociatePresenter(this);
+        mPresenter = new AssociatePresenter(this);
         TextView label = (TextView) findViewById(R.id.label);
         label.setText("СОТРУДНИК");
-        pr.loadAssociate();
+        mPresenter.loadAssociate();
 
         dialog = new ProgressDialog(this,R.style.full_screen_dialog){
             @Override
@@ -62,7 +61,7 @@ public class AssociateListActivity extends AppCompatActivity implements Associat
 
     @Override
     public void refreshList(List<AssociateModel> body) {
-        associateAdapter = new AssociateAdapter(body, pr,this);
+        associateAdapter = new AssociateAdapter(body, mPresenter,this);
         recyclerView.setAdapter(associateAdapter);
         recyclerView.getAdapter().notifyDataSetChanged();
         dialog.dismiss();

@@ -11,11 +11,13 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
@@ -35,10 +37,10 @@ import travel.ithaka.android.horizontalpickerlib.PickerLayoutManager;
 
 
 public class DateSelectionActivity extends AppCompatActivity implements DateSelectionMvp {
-    DateSelectionPresenter presenter;
+    DateSelectionPresenter mPresenter;
 
     @BindView(R.id.rv)
-    RecyclerView rv;
+    RecyclerView mRecyclerView;
     PickerAdapter adapter;
     @BindView(R.id.time)
     CardView mTime;
@@ -60,14 +62,14 @@ public class DateSelectionActivity extends AppCompatActivity implements DateSele
     ArrayList<String> arrayList;
     String date;
     String time;
-    ProgressDialog dialog;
+    ProgressDialog mDialog;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new DateSelectionPresenter(this);
-        presenter.loadTimeDoctor(SingletonStorage.getInstance().getAssociateId());
-        dialog = new ProgressDialog(this,R.style.full_screen_dialog){
+        mPresenter = new DateSelectionPresenter(this);
+        mPresenter.loadTimeDoctor(SingletonStorage.getInstance().getAssociateId());
+        mDialog = new ProgressDialog(this, R.style.full_screen_dialog) {
             @Override
             protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
@@ -77,8 +79,8 @@ public class DateSelectionActivity extends AppCompatActivity implements DateSele
             }
         };
 
-        dialog.setCancelable(false);
-        dialog.show();
+        mDialog.setCancelable(false);
+        mDialog.show();
     }
 
     @Override
@@ -97,8 +99,7 @@ public class DateSelectionActivity extends AppCompatActivity implements DateSele
         future.set(today.get(Calendar.YEAR), today.get(Calendar.MONTH) + 5, 31);
 
         SnapHelper snapHelper = new LinearSnapHelper();
-        snapHelper.attachToRecyclerView(rv);
-// TODO: 06.03.2018 разобраться почему не выбирается сегодня
+        snapHelper.attachToRecyclerView(mRecyclerView);
 //        Log.e("today", String.valueOf(today.get(Calendar.YEAR))
 //                + "-" + String.valueOf(today.get(Calendar.MONTH))
 //                + "-" + String.valueOf(today.get(Calendar.DATE)));
@@ -118,8 +119,8 @@ public class DateSelectionActivity extends AppCompatActivity implements DateSele
                 thisDay = eventDay.getCalendar();
                 Calendar today = Calendar.getInstance();
                 if (disableDays.indexOf(thisDay) == -1 && !thisDay.before(today)) {
-                    rv.scrollToPosition(thisDay.get(Calendar.DATE));
-                    rv.scrollBy(120, 0);
+                    mRecyclerView.scrollToPosition(thisDay.get(Calendar.DATE));
+                    mRecyclerView.scrollBy(120, 0);
                     mTime.setVisibility(View.VISIBLE);
                     mNext.setVisibility(View.VISIBLE);
 
@@ -148,10 +149,10 @@ public class DateSelectionActivity extends AppCompatActivity implements DateSele
         arrayList = dates.get(index).getValue();
         date = ((thisDay.get(Calendar.DATE) < 10 ? ("0" + thisDay.get(Calendar.DATE)) : thisDay.get(Calendar.DATE))
                 + "-" + ((thisDay.get(Calendar.MONTH) + 1) < 10 ? ("0" + (thisDay.get(Calendar.MONTH) + 1)) : (thisDay.get(Calendar.MONTH) + 1))
-                + "-"+ thisDay.get(Calendar.YEAR));
+                + "-" + thisDay.get(Calendar.YEAR));
         time = arrayList.get(0).equals("00:00") ? arrayList.get(1) : arrayList.get(0);
         label.setText(date + " " + time);
-        adapter = new PickerAdapter(this, arrayList, rv);
+        adapter = new PickerAdapter(this, arrayList, mRecyclerView);
         pickerLayoutManager = new PickerLayoutManager(this, PickerLayoutManager.HORIZONTAL, false);
 
         pickerLayoutManager.setOnScrollStopListener(new PickerLayoutManager.onScrollStopListener() {
@@ -171,8 +172,8 @@ public class DateSelectionActivity extends AppCompatActivity implements DateSele
             @Override
             public void onClick(View v) {
                 if (!arrayList.get(pickerLayoutManager.findFirstCompletelyVisibleItemPosition()).equals("00:00")) {
-                    rv.scrollToPosition(pickerLayoutManager.findFirstVisibleItemPosition());
-                    rv.scrollBy(-184, 0);
+                    mRecyclerView.scrollToPosition(pickerLayoutManager.findFirstVisibleItemPosition());
+                    mRecyclerView.scrollBy(-184, 0);
                     time = arrayList.get(pickerLayoutManager.findLastCompletelyVisibleItemPosition());
                     label.setText(date + " " + time);
 
@@ -184,8 +185,8 @@ public class DateSelectionActivity extends AppCompatActivity implements DateSele
             @Override
             public void onClick(View v) {
                 if (!arrayList.get(pickerLayoutManager.findLastCompletelyVisibleItemPosition()).equals("00:00")) {
-                    rv.scrollToPosition(pickerLayoutManager.findLastVisibleItemPosition());
-                    rv.scrollBy(184, 0);
+                    mRecyclerView.scrollToPosition(pickerLayoutManager.findLastVisibleItemPosition());
+                    mRecyclerView.scrollBy(184, 0);
                     time = arrayList.get(pickerLayoutManager.findFirstCompletelyVisibleItemPosition());
                     label.setText(date + " " + time);
                 }
@@ -195,8 +196,8 @@ public class DateSelectionActivity extends AppCompatActivity implements DateSele
 //        pickerLayoutManager.setScaleDownBy(0.99f);
 //        pickerLayoutManager.setScaleDownDistance(0.6f);
 
-        rv.setLayoutManager(pickerLayoutManager);
-        rv.setAdapter(adapter);
+        mRecyclerView.setLayoutManager(pickerLayoutManager);
+        mRecyclerView.setAdapter(adapter);
 
     }
 
@@ -208,25 +209,28 @@ public class DateSelectionActivity extends AppCompatActivity implements DateSele
         keys = new ArrayList<>();
         disableDays = new ArrayList<>();
 
-        for (DateMap d : dates) {
-            keys.add(d.getKey());
-            if (d.getValue().isEmpty()) {
-                String[] s = d.getKey().split("-");
+        for (DateMap date : dates) {
+            keys.add(date.getKey());
+            if (date.getValue().isEmpty()) {
+                String[] split = date.getKey().split("-");
                 //Log.e("cal", s[0] + " " + s[1] + " " + s[2]);
-                Calendar c = Calendar.getInstance();
-                c.set(Integer.valueOf(s[0]), (Integer.valueOf(s[1]) - 1), Integer.valueOf(s[2]));
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(Integer.valueOf(split[0]), (Integer.valueOf(split[1]) - 1), Integer.valueOf(split[2]));
                 // Log.e("cal", String.valueOf(c.get(Calendar.MONTH)));
-                disableDays.add(c);
+                disableDays.add(calendar);
             }
 
         }
         mCalendarView.setDisabledDays(disableDays);
         mCalendarView.showCurrentMonthPage();
-        showFreeTime(mContext,Calendar.getInstance());
-        dialog.dismiss();
+        showFreeTime(mContext, Calendar.getInstance());
+        mDialog.dismiss();
     }
 
-
+    @Override
+    public void showError(String error) {
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+    }
 
 
     @OnClick(R.id.next)

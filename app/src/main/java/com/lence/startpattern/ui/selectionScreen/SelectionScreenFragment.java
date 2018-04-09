@@ -54,11 +54,6 @@ public class SelectionScreenFragment extends Fragment implements SelectionScreen
     @BindView(R.id.clearDate)
     ImageView mClearDate;
 
-    public SelectionScreenFragment() {
-        // Required empty public constructor
-    }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

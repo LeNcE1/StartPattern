@@ -21,9 +21,9 @@ import java.util.List;
 import butterknife.ButterKnife;
 
 public class ServiceActivity extends AppCompatActivity implements ServiceMvp {
-    GridView gridView;
-    ArrayList<SectionsModel> list = new ArrayList<>();
-    ProgressDialog dialog;
+    GridView mGridView;
+    ArrayList<SectionsModel> mModels = new ArrayList<>();
+    ProgressDialog mDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class ServiceActivity extends AppCompatActivity implements ServiceMvp {
         ButterKnife.bind(this);
         presenter.loadSections();
 
-        dialog = new ProgressDialog(this,R.style.full_screen_dialog){
+        mDialog = new ProgressDialog(this,R.style.full_screen_dialog){
             @Override
             protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
@@ -46,19 +46,19 @@ public class ServiceActivity extends AppCompatActivity implements ServiceMvp {
             }
         };
 
-        dialog.setCancelable(false);
-        dialog.show();
-        gridView = (GridView) findViewById(R.id.gridview);
+        mDialog.setCancelable(false);
+        mDialog.show();
+        mGridView = (GridView) findViewById(R.id.gridview);
 
-        // gridView.setAdapter(new ServiceAdapter(getActivity(), list));
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        // mGridView.setAdapter(new ServiceAdapter(getActivity(), mModels));
+        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                gridView.setVisibility(View.GONE);
+                mGridView.setVisibility(View.GONE);
                 ProcedureFragment fragment = new ProcedureFragment();
-                getIntent().putExtra("id_categ", list.get(position).getId());
+                getIntent().putExtra("id_categ", mModels.get(position).getId());
 //                Bundle bundle = new Bundle();
-//                bundle.putInt("id", list.get(position).getId());
+//                bundle.putInt("id", mModels.get(position).getId());
 //                fragment.setArguments(bundle);
                 android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content, fragment);
@@ -73,14 +73,14 @@ public class ServiceActivity extends AppCompatActivity implements ServiceMvp {
 
     @Override
     public void refreshList(List<SectionsModel> body) {
-        list = (ArrayList<SectionsModel>) body;
-        gridView.setAdapter(new ServiceAdapter(this, body));
-        dialog.dismiss();
+        mModels = (ArrayList<SectionsModel>) body;
+        mGridView.setAdapter(new ServiceAdapter(this, body));
+        mDialog.dismiss();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        gridView.setVisibility(View.VISIBLE);
+        mGridView.setVisibility(View.VISIBLE);
     }
 }

@@ -27,23 +27,20 @@ public class AssociateAdapter extends RecyclerView.Adapter<AssociateAdapter.Ribo
 
 
     private List<AssociateModel> mRibots = new ArrayList<>();
-    AssociatePresenter pr;
+    AssociatePresenter mPresenter;
     SharedPreferences user;
-    int pag = 20;
-    String pod;
-    String m;
     Context mContext;
 
     public AssociateAdapter(List<AssociateModel> posts, AssociatePresenter presenter, Context context) {
         mRibots = posts;
-        pr = presenter;
+        mPresenter = presenter;
         mContext = context;
     }
 
-//    public AssociateAllAdapter(List<News> posts, NewsPresentr pr, SharedPreferences user, String pod, String m) {
+//    public AssociateAllAdapter(List<News> posts, NewsPresentr mPresenter, SharedPreferences user, String pod, String m) {
 //        this.pod = pod;
 //        this.mRibots = posts;
-//        this.pr = pr;
+//        this.mPresenter = mPresenter;
 //        this.user = user;
 //        this.m = m;
 //    }
@@ -64,8 +61,6 @@ public class AssociateAdapter extends RecyclerView.Adapter<AssociateAdapter.Ribo
     }
 
 
-    int doposition = 0;
-
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(final RibotViewHolder holder, final int position) {
@@ -74,14 +69,14 @@ public class AssociateAdapter extends RecyclerView.Adapter<AssociateAdapter.Ribo
 //                if(m != null){
 //                    Log.e("My post", "my post");
 //                    holder.delete.setVisibility(View.VISIBLE);
-//                    pr.loadNewsMy(user.getString("id", "1"), pag);
+//                    mPresenter.loadNewsMy(user.getString("id", "1"), pag);
 //                }
 //                else {
-//                    pr.loadNews(user.getString("id", "1"), pag);
+//                    mPresenter.loadNews(user.getString("id", "1"), pag);
 //                }
 //            }
 //            else{
-//                pr.loadNewspod(user.getString("id", "1"), pag);
+//                mPresenter.loadNewspod(user.getString("id", "1"), pag);
 //            }
 //            pag+=20;
 //        }
@@ -92,8 +87,8 @@ public class AssociateAdapter extends RecyclerView.Adapter<AssociateAdapter.Ribo
 //                holder.delete.setOnClickListener(new View.OnClickListener() {
 //                    @Override
 //                    public void onClick(View view) {
-//                        pr.deletePost(mRibots.get(position).getPostId());
-//                        pr.replase();
+//                        mPresenter.deletePost(mRibots.get(position).getPostId());
+//                        mPresenter.replase();
 //
 //                    }
 //                });
@@ -120,7 +115,7 @@ public class AssociateAdapter extends RecyclerView.Adapter<AssociateAdapter.Ribo
                         String.valueOf(mRibots.get(position).getDescription()),
                         mRibots.get(position).getImage(),
                         mRibots.get(position).getRate());
-                pr.startProcedure();
+                mPresenter.startProcedure();
             }
         });
 

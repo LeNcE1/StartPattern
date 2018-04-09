@@ -16,11 +16,11 @@ public class PickerAdapter extends RecyclerView.Adapter<PickerAdapter.TextVH> {
 
     private Context context;
     ArrayList<String> dataList;
-    private RecyclerView recyclerView;
+    private RecyclerView mRecyclerView;
 
     public PickerAdapter(Context context, ArrayList<String> dataList, RecyclerView recyclerView) {
         this.context = context;
-        this.recyclerView = recyclerView;
+        this.mRecyclerView = recyclerView;
         if(!dataList.get(0).equals("00:00")) {
             dataList.add(0, "00:00");
             dataList.add("00:00");
@@ -44,8 +44,8 @@ public class PickerAdapter extends RecyclerView.Adapter<PickerAdapter.TextVH> {
             textVH.pickerTxt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (recyclerView != null) {
-                        recyclerView.smoothScrollToPosition(position);
+                    if (mRecyclerView != null) {
+                        mRecyclerView.smoothScrollToPosition(position);
                     }
                 }
             });

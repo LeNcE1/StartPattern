@@ -21,11 +21,11 @@ public class SessionHistoryAdapter extends RecyclerView.Adapter<SessionHistoryAd
 
 
     private List<Object> mRibots = new ArrayList<>();
-    SessionHistoryPresenter pr;
+    private SessionHistoryPresenter mPresenter;
 
     public SessionHistoryAdapter(List<Object> posts, SessionHistoryPresenter presenter) {
         mRibots = posts;
-        pr = presenter;
+        mPresenter = presenter;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class SessionHistoryAdapter extends RecyclerView.Adapter<SessionHistoryAd
 //                public void onClick(View v) {
 //                    SingletonStorage.getInstance().setServicesId(model.getId());
 //                    SingletonStorage.getInstance().setServicesDescription(model.getName());
-//                    pr.startProcedure();
+//                    mPresenter.startProcedure();
 //                }
 //            });
 //        } else if (mRibots.get(position).getClass().isAssignableFrom(AssociateServicesModel.class)) {
@@ -63,7 +63,7 @@ public class SessionHistoryAdapter extends RecyclerView.Adapter<SessionHistoryAd
 //                public void onClick(View v) {
 //                    SingletonStorage.getInstance().setServicesId(model.getId());
 //                    SingletonStorage.getInstance().setServicesDescription(model.getName());
-//                    pr.startProcedure();
+//                    mPresenter.startProcedure();
 //                }
 //            });
 //        }

@@ -2,6 +2,7 @@ package com.lence.startpattern.ui.dateSelection;
 
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.lence.startpattern.api.App;
 import com.lence.startpattern.model.DateMap;
@@ -40,32 +41,34 @@ public class DateSelectionPresenter {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Log.e("TimeDoctor", response.code() + " " + response.message());
                 try {
-                    // Log.e("TimeDoctor", response.body().string().toString());
-                    JSONObject object = new JSONObject(response.body().string());
-                    ArrayList<DateMap> map = new ArrayList<>();
-                    JSONArray names = object.names();
-                    for (int i = 0; i<names.length(); i++){
-                        ArrayList<String> arrayList = new ArrayList<>();
-                        JSONArray arr = object.getJSONArray(names.getString(i));
-                        for (int j=0; j<arr.length(); j++){
-                            arrayList.add(arr.getString(j));
+                    if (response.code()==200) {
+                        //Log.e("TimeDoctor", response.body().string().toString());
+                        JSONObject object = new JSONObject(response.body().string());
+                        ArrayList<DateMap> map = new ArrayList<>();
+                        JSONArray names = object.names();
+                        for (int i = 0; i < names.length(); i++) {
+                            ArrayList<String> arrayList = new ArrayList<>();
+                            JSONArray arr = object.getJSONArray(names.getString(i));
+                            for (int j = 0; j < arr.length(); j++) {
+                                arrayList.add(arr.getString(j));
+                            }
+                            map.add(new DateMap(names.getString(i), arrayList));
+                            //Log.e("test", "data " + names.getString(i) + ": " + (arrayList.isEmpty()?0:arrayList.get(0)) + "!!!!");
                         }
-                        map.add(new DateMap(names.getString(i), arrayList));
-                        //Log.e("test", "data " + names.getString(i) + ": " + (arrayList.isEmpty()?0:arrayList.get(0)) + "!!!!");
+
+
+                        mMvp.setDates(map);
                     }
-
-
-                    mMvp.setDates(map);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
+                    else
+                        mMvp.showError(response.code() + " " + response.message());
+                } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                Log.e("Exception", call + " " + t);
             }
         });
 

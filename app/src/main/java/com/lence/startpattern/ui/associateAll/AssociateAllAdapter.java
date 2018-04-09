@@ -26,23 +26,20 @@ public class AssociateAllAdapter extends RecyclerView.Adapter<AssociateAllAdapte
 
 
     private List<AssociateModel> mRibots = new ArrayList<>();
-    AssociateAllPresenter pr;
+    private AssociateAllPresenter mPresenter;
     SharedPreferences user;
-    int pag = 20;
-    String pod;
-    String m;
     Context mContext;
 
     public AssociateAllAdapter(List<AssociateModel> posts, AssociateAllPresenter presenter, Context context) {
         mRibots = posts;
-        pr = presenter;
+        mPresenter = presenter;
         mContext = context;
     }
 
-//    public AssociateAllAdapter(List<News> posts, NewsPresentr pr, SharedPreferences user, String pod, String m) {
+//    public AssociateAllAdapter(List<News> posts, NewsPresentr mPresenter, SharedPreferences user, String pod, String m) {
 //        this.pod = pod;
 //        this.mRibots = posts;
-//        this.pr = pr;
+//        this.mPresenter = mPresenter;
 //        this.user = user;
 //        this.m = m;
 //    }
@@ -63,8 +60,6 @@ public class AssociateAllAdapter extends RecyclerView.Adapter<AssociateAllAdapte
     }
 
 
-    int doposition = 0;
-
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(final RibotViewHolder holder, final int position) {
@@ -83,7 +78,7 @@ public class AssociateAllAdapter extends RecyclerView.Adapter<AssociateAllAdapte
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pr.startDoctor(mRibots.get(position).getId(),
+                mPresenter.startDoctor(mRibots.get(position).getId(),
                         mRibots.get(position).getSurname() + " " + mRibots.get(position).getName() + " " + mRibots.get(position).getSecondname(),
                         String.valueOf(mRibots.get(position).getDescription()),
                         mRibots.get(position).getImage(),mRibots.get(position).getRate());

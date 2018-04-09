@@ -36,13 +36,13 @@ public class DoctorFragment extends Fragment implements DoctorMvp {
     @BindView(R.id.tab)
     TabLayout mTab;
     @BindView(R.id.vp)
-    ViewPager mVp;
+    ViewPager mViewPager;
     @BindView(R.id.nextStep)
     Button mNextStep;
     @BindView(R.id.spec)
     TextView mSpec;
     Intent args;
-    PagerAdapter adapter;
+    PagerAdapter mAdapter;
 
 
     @Override
@@ -63,11 +63,11 @@ public class DoctorFragment extends Fragment implements DoctorMvp {
                     .into(mAvatar);
         }
 
-        adapter = new PagerAdapter(getContext(), getFragmentManager(), args.getIntExtra("id", 0));
-        mVp.setAdapter(adapter);
-        mVp.getAdapter().notifyDataSetChanged();
-        mVp.setCurrentItem(1);
-        mTab.setupWithViewPager(mVp);
+        mAdapter = new PagerAdapter(getContext(), getFragmentManager(), args.getIntExtra("id", 0));
+        mViewPager.setAdapter(mAdapter);
+        mViewPager.getAdapter().notifyDataSetChanged();
+        mViewPager.setCurrentItem(1);
+        mTab.setupWithViewPager(mViewPager);
         return view;
     }
 

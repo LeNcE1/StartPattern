@@ -20,18 +20,13 @@ import java.util.List;
 
 
 public class ProcedureFragment extends Fragment implements ProcedureMvp {
-    ProcedurePresenter pr;
+    ProcedurePresenter mPresenter;
     RecyclerView recyclerView;
     Object mAdapter;
     //    ProcedureAdapter mProcedureAdapter;
 //    ProcedureDoctorAdapter mProcedureDoctorAdapter;
     Intent args;
-    ProgressDialog dialog;
-
-    public ProcedureFragment() {
-        // Required empty public constructor
-    }
-
+    ProgressDialog mDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,12 +34,12 @@ public class ProcedureFragment extends Fragment implements ProcedureMvp {
         View view = inflater.inflate(R.layout.procedure, container, false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-        pr = new ProcedurePresenter(this);
+        mPresenter = new ProcedurePresenter(this);
 
         TextView label = (TextView) getActivity().findViewById(R.id.label);
         label.setText("ПРОЦЕДУРА");
 
-        dialog = new ProgressDialog(getActivity(), R.style.full_screen_dialog) {
+        mDialog = new ProgressDialog(getActivity(), R.style.full_screen_dialog) {
             @Override
             protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
@@ -54,16 +49,16 @@ public class ProcedureFragment extends Fragment implements ProcedureMvp {
             }
         };
 
-        dialog.setCancelable(false);
-        dialog.show();
+        mDialog.setCancelable(false);
+        mDialog.show();
 
         args = getActivity().getIntent();
         //Log.e("bundle", "bundle" + args.getInt("id"));
         if (args.getIntExtra("id_categ", 0) != 0) {
-            pr.loadSections(args.getIntExtra("id_categ",0));
+            mPresenter.loadSections(args.getIntExtra("id_categ", 0));
         } else {
             //Log.e("doctorId", "doctorId " + args.getInt("doctorId"));
-            pr.loadDoctorSections(args.getIntExtra("id",0));
+            mPresenter.loadDoctorSections(args.getIntExtra("id", 0));
         }
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);
@@ -85,9 +80,9 @@ public class ProcedureFragment extends Fragment implements ProcedureMvp {
 
     @Override
     public void refreshList(List<Object> body) {
-        mAdapter = new ProcedureAdapter(body, pr);
+        mAdapter = new ProcedureAdapter(body, mPresenter);
         recyclerView.setAdapter((ProcedureAdapter) mAdapter);
         recyclerView.getAdapter().notifyDataSetChanged();
-        dialog.dismiss();
+        mDialog.dismiss();
     }
 }

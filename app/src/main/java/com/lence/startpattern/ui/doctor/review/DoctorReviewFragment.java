@@ -15,7 +15,6 @@ import android.widget.Button;
 import com.lence.startpattern.R;
 import com.lence.startpattern.model.DoctorReviewsModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -26,15 +25,10 @@ import butterknife.OnClick;
 public class DoctorReviewFragment extends Fragment implements DoctorReviewMvp {
     RecyclerView recyclerView;
     DoctorReviewAdapter mAdapter;
-    DoctorReviewPresenter pr;
-    List<String> posts = new ArrayList<>();
+    DoctorReviewPresenter mPresenter;
     @BindView(R.id.createReview)
     Button mCreateReview;
     private int mDoctorId;
-
-    public DoctorReviewFragment() {
-
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,16 +46,16 @@ public class DoctorReviewFragment extends Fragment implements DoctorReviewMvp {
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);
         Log.e("doctorId", "doctorId " + mDoctorId);
-        pr = new DoctorReviewPresenter(this);
+        mPresenter = new DoctorReviewPresenter(this);
         if (mDoctorId != 0) {
-            pr.loadDoctorReview(mDoctorId);
+            mPresenter.loadDoctorReview(mDoctorId);
         }
         return view;
     }
 
     @Override
     public void refreshList(List<DoctorReviewsModel> body) {
-        mAdapter = new DoctorReviewAdapter(body, pr);
+        mAdapter = new DoctorReviewAdapter(body, mPresenter);
         recyclerView.setAdapter(mAdapter);
         recyclerView.getAdapter().notifyDataSetChanged();
     }

@@ -20,19 +20,14 @@ import butterknife.ButterKnife;
 
 public class DoctorReviewAdapter extends RecyclerView.Adapter<DoctorReviewAdapter.RibotViewHolder> {
 
-
     private List<DoctorReviewsModel> mRibots = new ArrayList<>();
-    DoctorReviewPresenter pr;
+    DoctorReviewPresenter mPresenter;
     SharedPreferences user;
-    int pag = 20;
-    String pod;
-    String m;
 
     public DoctorReviewAdapter(List<DoctorReviewsModel> posts, DoctorReviewPresenter presenter) {
         mRibots = posts;
-        pr = presenter;
+        mPresenter = presenter;
     }
-
 
     @Override
     public RibotViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -44,42 +39,8 @@ public class DoctorReviewAdapter extends RecyclerView.Adapter<DoctorReviewAdapte
     }
 
 
-    int doposition = 0;
-
     @Override
     public void onBindViewHolder(final RibotViewHolder holder, final int position) {
-//        if(position == (pag-6)){
-//            if(pod == null) {
-//                if(m != null){
-//                    Log.e("My post", "my post");
-//                    holder.delete.setVisibility(View.VISIBLE);
-//                    pr.loadNewsMy(user.getString("id", "1"), pag);
-//                }
-//                else {
-//                    pr.loadNews(user.getString("id", "1"), pag);
-//                }
-//            }
-//            else{
-//                pr.loadNewspod(user.getString("id", "1"), pag);
-//            }
-//            pag+=20;
-//        }
-//        else{
-//            if(m != null){
-//                Log.e("My post", "my post");
-//                holder.delete.setVisibility(View.VISIBLE);
-//                holder.delete.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        pr.deletePost(mRibots.get(position).getPostId());
-//                        pr.replase();
-//
-//                    }
-//                });
-//            }
-//        }
-
-
         holder.mName.setText(mRibots.get(position).getName());
         holder.mReview.setText(mRibots.get(position).getText());
         holder.mRatingBar.setRating(mRibots.get(position).getRate());
@@ -87,15 +48,12 @@ public class DoctorReviewAdapter extends RecyclerView.Adapter<DoctorReviewAdapte
 
     }
 
-
     @Override
     public int getItemCount() {
         return mRibots.size();
     }
 
-
     class RibotViewHolder extends RecyclerView.ViewHolder {
-
 
         @BindView(R.id.name)
         TextView mName;
@@ -105,7 +63,6 @@ public class DoctorReviewAdapter extends RecyclerView.Adapter<DoctorReviewAdapte
         TextView mCountReview;
         @BindView(R.id.review)
         TextView mReview;
-
 
         public RibotViewHolder(View itemView) {
             super(itemView);
