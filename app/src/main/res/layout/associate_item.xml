@@ -78,6 +78,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_weight="1"
                     android:text="100 отзывов"
+                    android:layout_marginLeft="8dp"
                     style="@style/AppTheme.TextTitle"
                     android:textSize="12sp"
                     android:textColor="@color/blue"
@@ -92,7 +93,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            app:srcCompat="@drawable/arrow_right" />
+            app:srcCompat="@drawable/arrow_right"
+            android:visibility="gone"/>
 
 
     </RelativeLayout>

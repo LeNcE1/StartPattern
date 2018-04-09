@@ -31,7 +31,7 @@ public class DoctorReviewPresenter {
 
             @Override
             public void onFailure(Call<List<DoctorReviewsModel>> call, Throwable t) {
-
+                Log.e("Exception", call + " " + t);
             }
         });
     }

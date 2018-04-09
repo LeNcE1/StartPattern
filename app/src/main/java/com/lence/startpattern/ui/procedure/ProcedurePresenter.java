@@ -39,7 +39,7 @@ public class ProcedurePresenter {
 
             @Override
             public void onFailure(Call<List<ServicesModel>> call, Throwable t) {
-
+                Log.e("Exception", call + " " + t);
             }
         });
 
@@ -59,7 +59,7 @@ public class ProcedurePresenter {
 
             @Override
             public void onFailure(Call<List<AssociateServicesModel>> call, Throwable t) {
-
+                Log.e("Exception", call + " " + t);
             }
         });
     }

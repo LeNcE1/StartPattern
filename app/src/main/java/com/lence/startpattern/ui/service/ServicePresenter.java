@@ -33,7 +33,7 @@ public class ServicePresenter {
 
             @Override
             public void onFailure(Call<List<SectionsModel>> call, Throwable t) {
-
+                Log.e("Exception", call + " " + t);
             }
         });
 
